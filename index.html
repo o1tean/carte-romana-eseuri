@@ -1997,8 +1997,8 @@
 
     <!-- Desktop Action Buttons -->
     <div class="apple-nav-actions desktop-nav-actions">
-      <a href="./Carte_Romana_Eseuri_AppleBooks.epub" class="apple-btn-pill" title="Descarcă ediția optimizată Apple Books (.epub)">
-        <span>📖</span> Apple Books (.epub)
+      <a href="./Carte_Romana_Eseuri_AppleBooks.epub" class="apple-btn-pill" id="navEpubBtn" title="Descarcă ediția optimizată Apple Books (.epub)">
+        <span>📖</span> <span id="navEpubLabel">Apple Books (.epub)</span>
       </a>
       <a href="./Carte_Romana_Eseuri_GoogleDocs.docx" class="apple-btn-ghost" title="Descarcă versiunea Google Docs / Word">
         <span>📄</span> Word / Docs
@@ -2019,11 +2019,11 @@
   <div class="downloads-popover-overlay" id="downloadsPopoverOverlay" onclick="closeDownloadsMenu()">
     <div class="downloads-popover" id="downloadsPopover" onclick="event.stopPropagation()">
       <div class="popover-header">Descărcare Ediție Digitală</div>
-      <a href="./Carte_Romana_Eseuri_AppleBooks.epub" class="popover-item" onclick="closeDownloadsMenu()">
-        <div class="popover-item-icon">🍏</div>
+      <a href="./Carte_Romana_Eseuri_AppleBooks.epub" class="popover-item" id="popoverEpubItem" onclick="closeDownloadsMenu()">
+        <div class="popover-item-icon" id="popoverEpubIcon">🍏</div>
         <div class="popover-item-text">
-          <div class="popover-item-title">Apple Books (.epub)</div>
-          <div class="popover-item-sub">Optimizat iOS & Mac, 58 ilustrații</div>
+          <div class="popover-item-title" id="popoverEpubTitle">Apple Books (.epub)</div>
+          <div class="popover-item-sub" id="popoverEpubSub">Optimizat iOS & Mac, 58 ilustrații</div>
         </div>
       </a>
       <a href="./Carte_Romana_Eseuri_GoogleDocs.docx" class="popover-item" onclick="closeDownloadsMenu()">
@@ -2056,8 +2056,8 @@
         <span>Citește Eseurile Acum</span>
         <span>↓</span>
       </a>
-      <a href="./Carte_Romana_Eseuri_AppleBooks.epub" class="hero-btn-secondary">
-        <span>📖 Apple Books (.epub)</span>
+      <a href="./Carte_Romana_Eseuri_AppleBooks.epub" class="hero-btn-secondary" id="heroEpubBtn">
+        <span id="heroEpubLabel">📖 Apple Books (.epub)</span>
       </a>
       <a href="./Carte_Romana_Eseuri_GoogleDocs.docx" class="hero-btn-secondary">
         <span>Word / Docs (.docx)</span>
@@ -2084,10 +2084,10 @@
         <div class="bento-title">Rigoare Academică</div>
         <p class="bento-desc">Structuri complete conform baremului oficial de la Subiectul al III-lea: particularități de construcție, caracterizări de personaj și relații între personaje.</p>
       </div>
-      <div class="bento-card">
-        <div class="bento-icon">✨</div>
-        <div class="bento-title">Experiență Apple Native</div>
-        <p class="bento-desc">Tipografie impecabilă cu fonturi New York & SF Pro, evidențiere inteligentă a conceptelor literare și compatibilitate completă cu Apple Books pe Mac, iPad și iPhone.</p>
+      <div class="bento-card" id="bentoPlatformCard">
+        <div class="bento-icon" id="bentoPlatformIcon">✨</div>
+        <div class="bento-title" id="bentoPlatformTitle">Experiență Apple Native</div>
+        <p class="bento-desc" id="bentoPlatformDesc">Tipografie impecabilă cu fonturi New York & SF Pro, evidențiere inteligentă a conceptelor literare și compatibilitate completă cu Apple Books pe Mac, iPad și iPhone.</p>
       </div>
     </div>
   </header>
@@ -2221,10 +2221,10 @@
 
   <!-- Minimalist Footer -->
   <footer class="apple-footer">
-    <p>Carte Română Eseuri • Ediție Digitală Optimizată pentru Apple Books și Web.</p>
+    <p id="footerPlatformCopy">Carte Română Eseuri • Ediție Digitală Optimizată pentru Apple Books și Web.</p>
     <p>Conține toate cele 16 opere și ghiduri canonice pentru Bacalaureat, 33 de eseuri complete și 58 de scene ilustrate cadru cu cadru.</p>
     <p style="margin-top: 0.75rem;">
-      <a href="./Carte_Romana_Eseuri_AppleBooks.epub">Descarcă formatul .epub pentru Apple Books</a> • 
+      <a href="./Carte_Romana_Eseuri_AppleBooks.epub" id="footerEpubLink">Descarcă formatul .epub pentru Apple Books</a> • 
       <a href="./Carte_Romana_Eseuri_GoogleDocs.docx">Descarcă formatul .docx pentru Google Docs</a> • 
       <a href="./Carte_Romana_Eseuri_Original.pdf" target="_blank">PDF Original</a>
     </p>
@@ -2323,7 +2323,118 @@
       setTheme(next, true);
     }
 
+    // Device / OS Adaptive Copy Management
+    let currentPlatform = 'apple';
+    let platformSerifFont = 'New York Serif';
+    let platformSansFont = 'SF Pro';
+
+    function detectPlatform() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const forced = (urlParams.get('os') || '').toLowerCase();
+      if (forced === 'android' || forced === 'windows' || forced === 'apple') {
+        return forced;
+      }
+
+      const ua = (navigator.userAgent || '').toLowerCase();
+      const p = ((navigator.userAgentData && navigator.userAgentData.platform) || navigator.platform || '').toLowerCase();
+
+      if (ua.includes('android') || p.includes('android')) {
+        return 'android';
+      }
+      if (ua.includes('windows') || ua.includes('win32') || ua.includes('win64') || p.includes('win')) {
+        return 'windows';
+      }
+      if (ua.includes('macintosh') || ua.includes('mac os') || ua.includes('iphone') || ua.includes('ipad') || ua.includes('ipod') || p.includes('mac') || (p === 'macintel' && navigator.maxTouchPoints > 1)) {
+        return 'apple';
+      }
+      return 'apple';
+    }
+
+    function applyDeviceAdaptiveCopy() {
+      currentPlatform = detectPlatform();
+
+      const bentoTitle = document.getElementById('bentoPlatformTitle');
+      const bentoDesc = document.getElementById('bentoPlatformDesc');
+      const bentoIcon = document.getElementById('bentoPlatformIcon');
+      const navEpubLabel = document.getElementById('navEpubLabel');
+      const navEpubBtn = document.getElementById('navEpubBtn');
+      const heroEpubLabel = document.getElementById('heroEpubLabel');
+      const popoverIcon = document.getElementById('popoverEpubIcon');
+      const popoverTitle = document.getElementById('popoverEpubTitle');
+      const popoverSub = document.getElementById('popoverEpubSub');
+      const footerCopy = document.getElementById('footerPlatformCopy');
+      const footerLink = document.getElementById('footerEpubLink');
+      const searchInput = document.getElementById('workSearchInput');
+
+      if (currentPlatform === 'android') {
+        platformSerifFont = 'Noto Serif';
+        platformSansFont = 'Roboto';
+
+        if (bentoIcon) bentoIcon.innerText = '🤖';
+        if (bentoTitle) bentoTitle.innerText = 'Experiență Android Native';
+        if (bentoDesc) bentoDesc.innerText = 'Tipografie impecabilă cu fonturi Noto Serif & Roboto, feedback haptic la fiecare atingere, evidențiere inteligentă a conceptelor și compatibilitate completă cu telefonul și tableta ta Android.';
+
+        if (navEpubLabel) navEpubLabel.innerText = 'ePub / Play Books';
+        if (navEpubBtn) navEpubBtn.title = 'Descarcă formatul .epub pentru Google Play Books sau ReadEra';
+        if (heroEpubLabel) heroEpubLabel.innerText = '📖 ePub (Play Books)';
+
+        if (popoverIcon) popoverIcon.innerText = '🤖';
+        if (popoverTitle) popoverTitle.innerText = 'Google Play Books / ePub';
+        if (popoverSub) popoverSub.innerText = 'Optimizat Android (Play Books, ReadEra), 58 ilustrații';
+
+        if (footerCopy) footerCopy.innerText = 'Carte Română Eseuri • Ediție Digitală Optimizată pentru Android, Web și Google Play Books.';
+        if (footerLink) footerLink.innerText = 'Descarcă formatul .epub pentru Android (Play Books / ReadEra)';
+        if (searchInput) searchInput.placeholder = 'Caută operă, autor, temă... (apasă /)';
+      } else if (currentPlatform === 'windows') {
+        platformSerifFont = 'Georgia Serif';
+        platformSansFont = 'Segoe UI';
+
+        if (bentoIcon) bentoIcon.innerText = '🪟';
+        if (bentoTitle) bentoTitle.innerText = 'Experiență Windows Native';
+        if (bentoDesc) bentoDesc.innerText = 'Tipografie impecabilă cu fonturi Georgia & Segoe UI, navigare rapidă prin tastatură (Ctrl+K, J, K), bare de derulare fluide și compatibilitate nativă cu Microsoft Edge și Word.';
+
+        if (navEpubLabel) navEpubLabel.innerText = 'Format ePub (.epub)';
+        if (navEpubBtn) navEpubBtn.title = 'Descarcă ediția .epub pentru cititoare Windows (Calibre, Thorium)';
+        if (heroEpubLabel) heroEpubLabel.innerText = '📖 Format ePub (.epub)';
+
+        if (popoverIcon) popoverIcon.innerText = '🪟';
+        if (popoverTitle) popoverTitle.innerText = 'Format ePub (.epub)';
+        if (popoverSub) popoverSub.innerText = 'Compatibil cititoare Windows (Calibre, Thorium), 58 ilustrații';
+
+        if (footerCopy) footerCopy.innerText = 'Carte Română Eseuri • Ediție Digitală Optimizată pentru Windows, Edge și Web.';
+        if (footerLink) footerLink.innerText = 'Descarcă formatul .epub pentru cititoare Windows';
+        if (searchInput) {
+          searchInput.placeholder = 'Caută operă, autor, temă... (Ctrl+K sau /)';
+          searchInput.title = 'Caută operă, autor, temă... (Ctrl+K)';
+        }
+      } else {
+        // Apple / macOS / iOS (Default)
+        platformSerifFont = 'New York Serif';
+        platformSansFont = 'SF Pro';
+
+        if (bentoIcon) bentoIcon.innerText = '✨';
+        if (bentoTitle) bentoTitle.innerText = 'Experiență Apple Native';
+        if (bentoDesc) bentoDesc.innerText = 'Tipografie impecabilă cu fonturi New York & SF Pro, evidențiere inteligentă a conceptelor literare și compatibilitate completă cu Apple Books pe Mac, iPad și iPhone.';
+
+        if (navEpubLabel) navEpubLabel.innerText = 'Apple Books (.epub)';
+        if (navEpubBtn) navEpubBtn.title = 'Descarcă ediția optimizată Apple Books (.epub)';
+        if (heroEpubLabel) heroEpubLabel.innerText = '📖 Apple Books (.epub)';
+
+        if (popoverIcon) popoverIcon.innerText = '🍏';
+        if (popoverTitle) popoverTitle.innerText = 'Apple Books (.epub)';
+        if (popoverSub) popoverSub.innerText = 'Optimizat iOS & Mac, 58 ilustrații';
+
+        if (footerCopy) footerCopy.innerText = 'Carte Română Eseuri • Ediție Digitală Optimizată pentru Apple Books și Web.';
+        if (footerLink) footerLink.innerText = 'Descarcă formatul .epub pentru Apple Books';
+        if (searchInput) {
+          searchInput.placeholder = 'Caută operă, autor, temă... (Cmd+K sau /)';
+          searchInput.title = 'Caută operă, autor, temă... (Cmd+K)';
+        }
+      }
+    }
+
     function init() {
+      applyDeviceAdaptiveCopy();
       initTheme();
       loadMasteredState();
       renderSidebar();
@@ -3117,7 +3228,8 @@
         const mtdFontLabel = document.getElementById('mtdFontLabel');
         if (mtdFontBtn) mtdFontBtn.classList.toggle('font-sans-active', !serifFontEnabled);
         if (mtdFontLabel) mtdFontLabel.innerText = serifFontEnabled ? 'Serif' : 'Sans';
-        showToast(serifFontEnabled ? 'Font: New York Serif' : 'Font: SF Pro Sans', 'Aa');
+        const fontName = serifFontEnabled ? platformSerifFont : platformSansFont;
+        showToast(`Tipografie: ${fontName}`, 'Aa');
       });
 
       // Font Size Controls
