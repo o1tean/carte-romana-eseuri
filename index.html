@@ -1165,65 +1165,6 @@
       max-height: 60vh;
     }
 
-    /* Floating Reader Bottom Bar on Mobile */
-    .mobile-bottom-bar {
-      position: fixed;
-      bottom: max(14px, env(safe-area-inset-bottom));
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--bg-glass);
-      backdrop-filter: saturate(180%) blur(20px);
-      -webkit-backdrop-filter: saturate(180%) blur(20px);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-full);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
-      display: none;
-      align-items: center;
-      gap: 4px;
-      padding: 6px 10px;
-      z-index: 1500;
-      transition: transform 0.25s ease, opacity 0.25s ease;
-    }
-
-    .mbb-btn {
-      background: transparent;
-      border: none;
-      color: var(--text-primary);
-      font-size: 0.78rem;
-      font-weight: 500;
-      font-family: var(--font-sf);
-      padding: 8px 12px;
-      border-radius: var(--radius-full);
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      transition: background 0.15s ease, transform 0.1s ease;
-      white-space: nowrap;
-      min-height: 36px;
-    }
-
-    .mbb-btn:active {
-      background: rgba(255, 255, 255, 0.15);
-      transform: scale(0.96);
-    }
-
-    .mbb-btn-primary {
-      background: var(--apple-blue);
-      color: #FFF;
-      font-weight: 600;
-    }
-
-    .mbb-btn-primary:active {
-      background: var(--apple-blue-hover);
-    }
-
-    .mbb-divider {
-      width: 1px;
-      height: 18px;
-      background: var(--border-subtle);
-    }
-
     /* ==========================================================================
        RESPONSIVE DESIGN (Tablets & Phones)
        ========================================================================== */
@@ -1247,11 +1188,18 @@
         display: none;
       }
       .reader-layout {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
         gap: 1.25rem;
       }
       /* Mobile Sidebar & Horizontal Works Shelf */
       .reader-sidebar {
+        min-width: 0;
+        max-width: 100%;
+        width: 100%;
+        overflow: hidden;
         display: flex;
         flex-direction: column;
         gap: 0.65rem;
@@ -1265,8 +1213,13 @@
         width: 100%;
         margin-bottom: 0.4rem;
         padding: 0.75rem 1rem;
+        box-sizing: border-box;
       }
       #worksListContainer {
+        min-width: 0;
+        max-width: 100%;
+        width: 100%;
+        box-sizing: border-box;
         display: flex;
         flex-direction: row;
         overflow-x: auto;
@@ -1275,7 +1228,6 @@
         gap: 0.65rem;
         padding: 4px 2px 10px;
         scrollbar-width: none;
-        width: 100%;
       }
       #worksListContainer::-webkit-scrollbar {
         display: none;
@@ -1289,48 +1241,47 @@
       }
       /* Uncap reader viewport on mobile so no nested scroll */
       .reader-viewport {
+        min-width: 0;
+        max-width: 100%;
+        width: 100%;
+        box-sizing: border-box;
         max-height: none;
-        overflow: visible;
-        padding: 2rem 1.5rem;
+        overflow-x: hidden;
+        overflow-y: visible;
+        padding: 1.5rem 1.25rem 6.5rem;
         border-radius: var(--radius-md);
         box-shadow: none;
-      }
-      .mobile-bottom-bar {
-        display: flex;
       }
       .rt-btn-mobile-only {
         display: inline-flex;
       }
       .reader-toolbar {
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
+        flex-direction: column;
+        align-items: flex-start;
         gap: 0.75rem;
         margin-bottom: 1rem;
         padding-bottom: 0.85rem;
       }
       .rt-work-info {
+        width: 100%;
         min-width: 0;
-        flex: 1;
       }
       .rt-work-info h2 {
         font-size: 1.35rem;
         line-height: 1.2;
         margin-bottom: 2px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+        white-space: normal;
+        word-break: break-word;
       }
       .rt-work-info p {
         font-size: 0.78rem;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+        white-space: normal;
+        word-break: break-word;
       }
       .rt-actions {
-        width: auto;
-        flex-shrink: 0;
+        width: 100%;
         display: flex;
+        flex-wrap: wrap;
         align-items: center;
         gap: 0.4rem;
       }
@@ -1344,10 +1295,45 @@
         min-height: 34px;
         border-radius: var(--radius-full);
       }
+      .book-article {
+        max-width: 100%;
+        width: 100%;
+        box-sizing: border-box;
+        overflow-wrap: break-word;
+        word-break: break-word;
+      }
       .book-article p.essay-para {
         text-align: left;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
         hyphens: auto;
         -webkit-hyphens: auto;
+      }
+      .essay-tabs-bar {
+        min-width: 0;
+        max-width: 100%;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 0.6rem 0.25rem;
+        margin-bottom: 1.25rem;
+      }
+      .essay-bottom-pager {
+        flex-direction: column;
+        width: 100%;
+        gap: 0.75rem;
+      }
+      .pager-btn {
+        max-width: 100%;
+        width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
+      }
+      .caption-header {
+        flex-wrap: wrap;
+        gap: 4px;
+      }
+      .caption-zoom-hint {
+        flex-shrink: 0;
       }
     }
 
@@ -1418,6 +1404,10 @@
       }
       .studio-section {
         padding: 0 0.85rem 6.5rem;
+        max-width: 100%;
+        width: 100%;
+        box-sizing: border-box;
+        overflow-x: hidden;
       }
       .studio-controls {
         flex-direction: column;
@@ -1455,7 +1445,7 @@
         padding: 0.75rem 0.85rem;
       }
       .reader-viewport {
-        padding: 1.25rem 0.85rem;
+        padding: 1.25rem 0.85rem 6.5rem !important;
       }
       .book-article {
         font-size: 1rem;
@@ -1482,15 +1472,6 @@
       }
       .apple-lightbox {
         padding: 1rem;
-      }
-      .mobile-bottom-bar {
-        width: calc(100% - 24px);
-        justify-content: space-around;
-        padding: 6px 8px;
-      }
-      .mbb-btn {
-        padding: 7px 9px;
-        font-size: 0.75rem;
       }
       .footer-dedication {
         font-size: 0.92rem !important;
@@ -2094,16 +2075,7 @@
     </div>
   </div>
 
-  <!-- Floating Mobile Navigation Bar -->
-  <aside class="mobile-bottom-bar" id="mobileBottomBar">
-    <button class="mbb-btn" id="mbbPrevBtn" onclick="goToPrevWork()" title="Opera anterioară">← Înapoi</button>
-    <div class="mbb-divider"></div>
-    <button class="mbb-btn mbb-btn-primary" id="mbbIndexBtn" onclick="openMobileDrawer()" title="Toate operele">📚 Opere</button>
-    <div class="mbb-divider"></div>
-    <button class="mbb-btn" id="mbbNextBtn" onclick="goToNextWork()" title="Opera următoare">Înainte →</button>
-    <div class="mbb-divider"></div>
-    <button class="mbb-btn" id="mbbTopBtn" onclick="scrollToTop()" title="Mergi la început">↑</button>
-  </aside>
+
 
   <!-- Minimalist Footer -->
   <footer class="apple-footer">
