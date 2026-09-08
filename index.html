@@ -17,8 +17,8 @@
        APPLE DESIGN SYSTEM (macOS & iOS HIG Inspired)
        ========================================================================== */
     :root {
-      --font-sf: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
-      --font-serif: "New York", "Charter", "Lora", Georgia, serif;
+      --font-sf: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, system-ui;
+      --font-serif: "New York", "Charter", "Lora", Georgia, "Cambria", "Times New Roman", serif;
       --font-size-base: 1.08rem;
       
       /* Apple Dark Theme (Default) */
@@ -83,6 +83,35 @@
       margin: 0;
       padding: 0;
       -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+    }
+
+    [data-theme="light"] * {
+      scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+    }
+
+    /* Modern Slim Floating Scrollbars (Windows Chrome/Edge) */
+    ::-webkit-scrollbar {
+      width: 7px;
+      height: 7px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 255, 255, 0.35);
+    }
+    [data-theme="light"] ::-webkit-scrollbar-thumb {
+      background: rgba(0, 0, 0, 0.2);
+    }
+    [data-theme="light"] ::-webkit-scrollbar-thumb:hover {
+      background: rgba(0, 0, 0, 0.35);
     }
 
     body {
@@ -91,6 +120,7 @@
       color: var(--text-primary);
       line-height: 1.5;
       overflow-x: hidden;
+      text-rendering: optimizeLegibility;
       transition: background-color 0.3s ease, color 0.3s ease;
     }
 
