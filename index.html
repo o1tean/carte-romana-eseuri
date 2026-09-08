@@ -2,8 +2,13 @@
 <html lang="ro" data-theme="dark">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Carte Română Eseuri • Ediție Apple Books & Web</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <meta name="theme-color" content="#161617" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="format-detection" content="telephone=no">
+  <title>Carte Română Eseuri • Ediție Digitală Bacalaureat</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
@@ -747,19 +752,385 @@
       text-decoration: none;
     }
 
-    /* Responsive */
-    @media (max-width: 980px) {
-      .reader-layout {
-        grid-template-columns: 1fr;
-      }
-      .reader-sidebar {
-        max-height: 280px;
-      }
-      .reader-viewport {
-        padding: 2rem 1.5rem;
+    /* Lightbox Close Button */
+    .lightbox-close-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 44px;
+      height: 44px;
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 50%;
+      color: #FFF;
+      font-size: 1.25rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      z-index: 2100;
+      transition: background 0.15s ease, transform 0.15s ease;
+    }
+
+    .lightbox-close-btn:hover {
+      background: rgba(255, 255, 255, 0.35);
+      transform: scale(1.05);
+    }
+
+    .rt-btn-mobile-only {
+      display: none;
+    }
+
+    /* Mobile Drawer / Bottom Sheet */
+    .mobile-drawer-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      z-index: 2500;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+
+    .mobile-drawer-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .mobile-drawer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--bg-surface);
+      border-top: 1px solid var(--border-subtle);
+      border-radius: 20px 20px 0 0;
+      padding: 0.75rem 1.25rem calc(1.5rem + env(safe-area-inset-bottom));
+      max-height: 84vh;
+      display: flex;
+      flex-direction: column;
+      transform: translateY(100%);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 2600;
+      box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .mobile-drawer-overlay.active .mobile-drawer {
+      transform: translateY(0);
+    }
+
+    .drawer-handle {
+      width: 44px;
+      height: 5px;
+      background: var(--text-tertiary);
+      opacity: 0.45;
+      border-radius: 99px;
+      margin: 0 auto 0.75rem;
+    }
+
+    .drawer-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.75rem;
+    }
+
+    .drawer-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .drawer-close {
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .drawer-works-list {
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+      padding-top: 0.5rem;
+      -webkit-overflow-scrolling: touch;
+      max-height: 60vh;
+    }
+
+    /* Floating Reader Bottom Bar on Mobile */
+    .mobile-bottom-bar {
+      position: fixed;
+      bottom: max(14px, env(safe-area-inset-bottom));
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--bg-glass);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-full);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+      display: none;
+      align-items: center;
+      gap: 4px;
+      padding: 6px 10px;
+      z-index: 1500;
+      transition: transform 0.25s ease, opacity 0.25s ease;
+    }
+
+    .mbb-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-primary);
+      font-size: 0.78rem;
+      font-weight: 500;
+      font-family: var(--font-sf);
+      padding: 8px 12px;
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: background 0.15s ease, transform 0.1s ease;
+      white-space: nowrap;
+      min-height: 36px;
+    }
+
+    .mbb-btn:active {
+      background: rgba(255, 255, 255, 0.15);
+      transform: scale(0.96);
+    }
+
+    .mbb-btn-primary {
+      background: var(--apple-blue);
+      color: #FFF;
+      font-weight: 600;
+    }
+
+    .mbb-btn-primary:active {
+      background: var(--apple-blue-hover);
+    }
+
+    .mbb-divider {
+      width: 1px;
+      height: 18px;
+      background: var(--border-subtle);
+    }
+
+    /* ==========================================================================
+       RESPONSIVE DESIGN (Tablets & Phones)
+       ========================================================================== */
+    @media (max-width: 920px) {
+      .apple-nav {
+        padding: 0 1rem;
       }
       .apple-nav-menu {
         display: none;
+      }
+      .reader-layout {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+      }
+      /* Horizontal swipeable shelf for works */
+      .reader-sidebar {
+        display: flex;
+        flex-direction: row;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x mandatory;
+        gap: 0.75rem;
+        padding: 0.75rem 0.5rem;
+        max-height: none;
+        border-radius: var(--radius-md);
+        scrollbar-width: none;
+      }
+      .reader-sidebar::-webkit-scrollbar {
+        display: none;
+      }
+      .sidebar-work-card {
+        flex: 0 0 250px;
+        scroll-snap-align: start;
+        border: 1px solid var(--border-card);
+      }
+      /* Uncap reader viewport on mobile so no nested scroll */
+      .reader-viewport {
+        max-height: none;
+        overflow: visible;
+        padding: 2rem 1.5rem;
+        border-radius: var(--radius-md);
+        box-shadow: none;
+      }
+      .mobile-bottom-bar {
+        display: flex;
+      }
+      .rt-btn-mobile-only {
+        display: inline-flex;
+      }
+      .reader-toolbar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+        margin-bottom: 1.75rem;
+        padding-bottom: 1.25rem;
+      }
+      .rt-actions {
+        width: 100%;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+      .rt-btn {
+        padding: 7px 12px;
+        font-size: 0.8rem;
+        min-height: 38px;
+      }
+      .book-article p.essay-para {
+        text-align: left;
+        hyphens: auto;
+        -webkit-hyphens: auto;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .apple-nav {
+        padding: 0 0.75rem;
+      }
+      .apple-logo-link span {
+        font-size: 0.88rem;
+      }
+      .apple-btn-pill, .apple-btn-ghost {
+        padding: 5px 9px;
+        font-size: 0.72rem;
+      }
+      .apple-hero {
+        padding: 2.75rem 1rem 1.75rem;
+      }
+      .hero-title {
+        font-size: 2.3rem;
+        line-height: 1.12;
+      }
+      .hero-subtitle {
+        font-size: 0.98rem;
+        line-height: 1.48;
+        margin-bottom: 1.5rem;
+      }
+      .hero-cta-group {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        max-width: 320px;
+        gap: 0.75rem;
+        margin-bottom: 1.75rem;
+      }
+      .hero-btn-primary, .hero-btn-secondary {
+        width: 100%;
+        justify-content: center;
+        padding: 12px 18px;
+        min-height: 48px;
+        font-size: 0.92rem;
+      }
+      .hero-cover-img {
+        width: 175px;
+      }
+      .hero-cover-wrap {
+        margin: 0 auto 2.25rem;
+      }
+      .bento-grid {
+        grid-template-columns: 1fr;
+        gap: 0.85rem;
+        margin-bottom: 2.5rem;
+      }
+      .bento-card {
+        padding: 1.25rem;
+      }
+      .studio-section {
+        padding: 0 0.85rem 6.5rem;
+      }
+      .studio-controls {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.75rem;
+      }
+      .segmented-control {
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        display: flex;
+        padding: 4px;
+        gap: 4px;
+      }
+      .segmented-control::-webkit-scrollbar {
+        display: none;
+      }
+      .seg-btn {
+        flex: 1 0 auto;
+        padding: 7px 12px;
+        font-size: 0.76rem;
+        white-space: nowrap;
+        text-align: center;
+      }
+      .search-pill-box {
+        width: 100%;
+      }
+      .search-pill-input {
+        height: 40px;
+        font-size: 0.88rem;
+      }
+      .sidebar-work-card {
+        flex: 0 0 220px;
+        padding: 0.75rem 0.85rem;
+      }
+      .reader-viewport {
+        padding: 1.25rem 0.85rem;
+      }
+      .book-article {
+        font-size: 1rem;
+        line-height: 1.68;
+      }
+      .book-article h2.essay-h1 {
+        font-size: 1.15rem;
+        margin-top: 1.5rem;
+      }
+      .book-article h3.essay-h2 {
+        font-size: 0.96rem;
+      }
+      .book-article p.lead-para::first-letter {
+        font-size: 2.15rem;
+        padding-right: 0.15em;
+      }
+      .apple-comic-figure {
+        margin: 1.25rem 0;
+        border-radius: var(--radius-sm);
+      }
+      .apple-comic-caption {
+        font-size: 0.74rem;
+        padding: 6px 8px;
+      }
+      .apple-lightbox {
+        padding: 1rem;
+      }
+      .mobile-bottom-bar {
+        width: calc(100% - 24px);
+        justify-content: space-around;
+        padding: 6px 8px;
+      }
+      .mbb-btn {
+        padding: 7px 9px;
+        font-size: 0.75rem;
+      }
+      .footer-dedication {
+        font-size: 0.92rem !important;
       }
     }
   </style>
@@ -878,10 +1249,15 @@
           </div>
           <div class="rt-actions">
             <button id="btnHighlight" class="rt-btn" title="Comută evidențierea termenilor cheie">
-              <span>🖍️</span> Evidențiază concepte
+              <span>🖍️</span> Evidențiază
             </button>
             <button id="btnFontToggle" class="rt-btn" title="Comută font Serif / Sans-serif">
               <span>Aa</span> Font
+            </button>
+            <button id="btnFontDec" class="rt-btn" title="Micșorează textul">A−</button>
+            <button id="btnFontInc" class="rt-btn" title="Mărește textul">A+</button>
+            <button id="btnOpenDrawer" class="rt-btn rt-btn-mobile-only" onclick="openMobileDrawer()" title="Deschide lista completă de opere">
+              <span>📚</span> Opere
             </button>
           </div>
         </div>
@@ -896,8 +1272,38 @@
 
   <!-- Fullscreen Lightbox Zoom Modal -->
   <div class="apple-lightbox" id="appleLightbox" onclick="closeLightbox()">
+    <button class="lightbox-close-btn" onclick="closeLightbox()" aria-label="Închide">✕</button>
     <img id="lightboxImg" src="" alt="Ilustrație Mărită">
   </div>
+
+  <!-- Mobile Bottom Sheet Drawer for Works -->
+  <div class="mobile-drawer-overlay" id="mobileDrawerOverlay" onclick="closeMobileDrawer(event)">
+    <div class="mobile-drawer" id="mobileDrawer" onclick="event.stopPropagation()">
+      <div class="drawer-handle"></div>
+      <div class="drawer-header">
+        <h3 class="drawer-title">Opere Canonice (18)</h3>
+        <button class="drawer-close" onclick="closeMobileDrawer()">✕</button>
+      </div>
+      <div class="search-pill-box" style="width: 100%; margin-bottom: 0.75rem;">
+        <span class="search-pill-icon">🔍</span>
+        <input type="text" id="drawerSearchInput" class="search-pill-input" placeholder="Caută operă sau autor...">
+      </div>
+      <div class="drawer-works-list" id="drawerWorksList">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating Mobile Navigation Bar -->
+  <aside class="mobile-bottom-bar" id="mobileBottomBar">
+    <button class="mbb-btn" id="mbbPrevBtn" onclick="goToPrevWork()" title="Opera anterioară">← Înapoi</button>
+    <div class="mbb-divider"></div>
+    <button class="mbb-btn mbb-btn-primary" id="mbbIndexBtn" onclick="openMobileDrawer()" title="Toate operele">📚 Opere</button>
+    <div class="mbb-divider"></div>
+    <button class="mbb-btn" id="mbbNextBtn" onclick="goToNextWork()" title="Opera următoare">Înainte →</button>
+    <div class="mbb-divider"></div>
+    <button class="mbb-btn" id="mbbTopBtn" onclick="scrollToTop()" title="Mergi la început">↑</button>
+  </aside>
 
   <!-- Minimalist Footer -->
   <footer class="apple-footer">
@@ -955,6 +1361,33 @@
       setupEvents();
     }
 
+    function selectWork(workId) {
+      activeWorkId = workId;
+      document.querySelectorAll('.sidebar-work-card').forEach(c => {
+        c.classList.toggle('active', c.dataset.workId === workId);
+      });
+      renderWork(workId);
+      closeMobileDrawer();
+
+      // Scroll active card into view in horizontal shelf if mobile
+      const activeCard = document.querySelector(`.sidebar-work-card[data-work-id="${workId}"]`);
+      if (activeCard && activeCard.scrollIntoView) {
+        activeCard.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      }
+
+      // Scroll smoothly to the reader top on mobile
+      if (window.innerWidth <= 920) {
+        const studioElem = document.getElementById('studio');
+        if (studioElem) {
+          const topOffset = studioElem.offsetTop - 55;
+          window.scrollTo({ top: topOffset, behavior: 'smooth' });
+        }
+      } else {
+        const readerElem = document.getElementById('readerViewport');
+        if (readerElem) readerElem.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+
     function renderSidebar() {
       const container = document.getElementById('worksListContainer');
       container.innerHTML = '';
@@ -974,6 +1407,7 @@
 
         const card = document.createElement('div');
         card.className = `sidebar-work-card ${w.id === activeWorkId ? 'active' : ''}`;
+        card.dataset.workId = w.id;
         card.innerHTML = `
           <div class="sw-title-row">
             <span class="sw-title">${w.title}</span>
@@ -986,13 +1420,7 @@
           </div>
         `;
 
-        card.addEventListener('click', () => {
-          document.querySelectorAll('.sidebar-work-card').forEach(c => c.classList.remove('active'));
-          card.classList.add('active');
-          activeWorkId = w.id;
-          renderWork(w.id);
-        });
-
+        card.addEventListener('click', () => selectWork(w.id));
         container.appendChild(card);
       });
     }
@@ -1118,6 +1546,34 @@
         fontBtn.classList.toggle('active', !serifFontEnabled);
       });
 
+      // Font Size Controls (A- / A+)
+      let currentFontSize = 1.05;
+      const decBtn = document.getElementById('btnFontDec');
+      if (decBtn) {
+        decBtn.addEventListener('click', () => {
+          if (currentFontSize > 0.88) {
+            currentFontSize = Math.round((currentFontSize - 0.08) * 100) / 100;
+            document.getElementById('bookArticleContent').style.fontSize = currentFontSize + 'rem';
+          }
+        });
+      }
+
+      const incBtn = document.getElementById('btnFontInc');
+      if (incBtn) {
+        incBtn.addEventListener('click', () => {
+          if (currentFontSize < 1.45) {
+            currentFontSize = Math.round((currentFontSize + 0.08) * 100) / 100;
+            document.getElementById('bookArticleContent').style.fontSize = currentFontSize + 'rem';
+          }
+        });
+      }
+
+      // Drawer Search
+      const drawerInput = document.getElementById('drawerSearchInput');
+      if (drawerInput) {
+        drawerInput.addEventListener('input', renderDrawerWorks);
+      }
+
       // Dark / Light Theme Toggle
       const themeBtn = document.getElementById('themeToggleBtn');
       themeBtn.addEventListener('click', () => {
@@ -1125,6 +1581,102 @@
         const next = cur === 'dark' ? 'light' : 'dark';
         document.documentElement.setAttribute('data-theme', next);
       });
+
+      // Keyboard navigation
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          closeLightbox();
+          closeMobileDrawer();
+        }
+      });
+    }
+
+    // Drawer Logic
+    function renderDrawerWorks() {
+      const list = document.getElementById('drawerWorksList');
+      if (!list) return;
+      list.innerHTML = '';
+      const searchVal = document.getElementById('drawerSearchInput').value.trim().toLowerCase();
+
+      BOOK_DATA.works.forEach(w => {
+        if (searchVal) {
+          const match = (w.title + ' ' + w.author + ' ' + w.category).toLowerCase().includes(searchVal);
+          if (!match) return;
+        }
+
+        const pages = BOOK_DATA.pages.filter(p => p.work_id === w.id);
+        const illCount = pages.reduce((acc, p) => acc + (p.illustrations ? p.illustrations.length : 0), 0);
+
+        const item = document.createElement('div');
+        item.className = `sidebar-work-card ${w.id === activeWorkId ? 'active' : ''}`;
+        item.style.flex = 'none';
+        item.innerHTML = `
+          <div class="sw-title-row">
+            <span class="sw-title">${w.title}</span>
+            <span class="sw-badge">${w.badge}</span>
+          </div>
+          <div class="sw-author">${w.author} (${w.year})</div>
+          <div class="sw-meta">
+            <span>📄 ${pages.length} pagini</span>
+            ${illCount > 0 ? `<span>🎨 ${illCount} ilustrații</span>` : ''}
+          </div>
+        `;
+        item.addEventListener('click', () => {
+          selectWork(w.id);
+          closeMobileDrawer();
+        });
+        list.appendChild(item);
+      });
+    }
+
+    function openMobileDrawer() {
+      const overlay = document.getElementById('mobileDrawerOverlay');
+      if (overlay) {
+        overlay.classList.add('active');
+        renderDrawerWorks();
+        setTimeout(() => {
+          const input = document.getElementById('drawerSearchInput');
+          if (input) input.focus();
+        }, 150);
+      }
+    }
+
+    function closeMobileDrawer(e) {
+      if (e && e.target && e.target !== e.currentTarget && !e.target.classList.contains('drawer-close')) {
+        return;
+      }
+      const overlay = document.getElementById('mobileDrawerOverlay');
+      if (overlay) {
+        overlay.classList.remove('active');
+      }
+    }
+
+    // Navigation between Works
+    function goToPrevWork() {
+      const currentIndex = BOOK_DATA.works.findIndex(w => w.id === activeWorkId);
+      if (currentIndex > 0) {
+        selectWork(BOOK_DATA.works[currentIndex - 1].id);
+      } else {
+        selectWork(BOOK_DATA.works[BOOK_DATA.works.length - 1].id);
+      }
+    }
+
+    function goToNextWork() {
+      const currentIndex = BOOK_DATA.works.findIndex(w => w.id === activeWorkId);
+      if (currentIndex < BOOK_DATA.works.length - 1) {
+        selectWork(BOOK_DATA.works[currentIndex + 1].id);
+      } else {
+        selectWork(BOOK_DATA.works[0].id);
+      }
+    }
+
+    function scrollToTop() {
+      const studio = document.getElementById('studio');
+      if (studio) {
+        studio.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
     }
 
     // Lightbox
