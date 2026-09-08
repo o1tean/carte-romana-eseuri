@@ -1250,26 +1250,42 @@
         grid-template-columns: 1fr;
         gap: 1.25rem;
       }
-      /* Horizontal swipeable shelf for works */
+      /* Mobile Sidebar & Horizontal Works Shelf */
       .reader-sidebar {
+        display: flex;
+        flex-direction: column;
+        gap: 0.65rem;
+        padding: 0.25rem 0;
+        background: transparent;
+        border: none;
+        max-height: none;
+        box-shadow: none;
+      }
+      .bac-progress-widget {
+        width: 100%;
+        margin-bottom: 0.4rem;
+        padding: 0.75rem 1rem;
+      }
+      #worksListContainer {
         display: flex;
         flex-direction: row;
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
         scroll-snap-type: x mandatory;
-        gap: 0.75rem;
-        padding: 0.75rem 0.5rem;
-        max-height: none;
-        border-radius: var(--radius-md);
+        gap: 0.65rem;
+        padding: 4px 2px 10px;
         scrollbar-width: none;
+        width: 100%;
       }
-      .reader-sidebar::-webkit-scrollbar {
+      #worksListContainer::-webkit-scrollbar {
         display: none;
       }
       .sidebar-work-card {
-        flex: 0 0 250px;
+        flex: 0 0 240px;
+        min-width: 240px;
         scroll-snap-align: start;
         border: 1px solid var(--border-card);
+        background: var(--bg-surface);
       }
       /* Uncap reader viewport on mobile so no nested scroll */
       .reader-viewport {
@@ -1286,21 +1302,47 @@
         display: inline-flex;
       }
       .reader-toolbar {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 1rem;
-        margin-bottom: 1.75rem;
-        padding-bottom: 1.25rem;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.75rem;
+        margin-bottom: 1rem;
+        padding-bottom: 0.85rem;
+      }
+      .rt-work-info {
+        min-width: 0;
+        flex: 1;
+      }
+      .rt-work-info h2 {
+        font-size: 1.35rem;
+        line-height: 1.2;
+        margin-bottom: 2px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .rt-work-info p {
+        font-size: 0.78rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
       .rt-actions {
-        width: 100%;
-        flex-wrap: wrap;
-        gap: 0.5rem;
+        width: auto;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+      }
+      /* On mobile, hide controls that are already present in the bottom thumb dock */
+      #btnAudio, #btnMastered, #btnShare, #btnOpenDrawer, #btnFontDec, #btnFontInc, #btnFontToggle {
+        display: none !important;
       }
       .rt-btn {
-        padding: 7px 12px;
-        font-size: 0.8rem;
-        min-height: 38px;
+        padding: 6px 11px;
+        font-size: 0.78rem;
+        min-height: 34px;
+        border-radius: var(--radius-full);
       }
       .book-article p.essay-para {
         text-align: left;
@@ -1736,26 +1778,32 @@
     @media (max-width: 920px) {
       .mobile-thumb-dock {
         position: fixed;
-        bottom: 1.25rem;
+        bottom: calc(0.9rem + env(safe-area-inset-bottom, 0px));
         left: 50%;
-        transform: translateX(-50%);
-        background: rgba(22, 22, 23, 0.88);
-        border: 1px solid rgba(255, 255, 255, 0.14);
-        backdrop-filter: blur(25px);
-        -webkit-backdrop-filter: blur(25px);
+        transform: translateX(-50%) translateY(0);
+        background: rgba(22, 22, 23, 0.92);
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        backdrop-filter: blur(30px);
+        -webkit-backdrop-filter: blur(30px);
         border-radius: 999px;
-        padding: 6px 12px;
+        padding: 5px 12px;
         display: flex;
         align-items: center;
         gap: 6px;
-        box-shadow: 0 12px 36px rgba(0, 0, 0, 0.45);
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
         z-index: 1500;
-        max-width: 94vw;
+        max-width: calc(100vw - 32px);
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+      }
+      .mobile-thumb-dock.dock-hidden {
+        transform: translateX(-50%) translateY(120px) !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
       }
       [data-theme="light"] .mobile-thumb-dock {
-        background: rgba(255, 255, 255, 0.9);
+        background: rgba(255, 255, 255, 0.92);
         border: 1px solid rgba(0, 0, 0, 0.12);
-        box-shadow: 0 12px 36px rgba(0, 0, 0, 0.18);
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
       }
       .mtd-btn {
         background: transparent;
@@ -2292,6 +2340,12 @@
         }
       }
       updateMasteredUI();
+
+      // Auto-scroll active essay tab pill into view on mobile
+      const activeTab = document.querySelector('.essay-tab-pill.active');
+      if (activeTab && activeTab.scrollIntoView) {
+        activeTab.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      }
     }
 
     function renderEssay(essay, container, isAllMode) {
@@ -2807,6 +2861,22 @@
     }
 
     function setupEvents() {
+      // Mobile Thumb Dock Dynamic Autohide on Scroll
+      let lastScrollY = window.pageYOffset || document.documentElement.scrollTop;
+      window.addEventListener('scroll', () => {
+        if (window.innerWidth > 920) return;
+        const currentScrollY = window.pageYOffset || document.documentElement.scrollTop;
+        const dock = document.getElementById('mobileThumbDock');
+        if (!dock) return;
+
+        if (currentScrollY > lastScrollY + 20 && currentScrollY > 250) {
+          dock.classList.add('dock-hidden');
+        } else if (currentScrollY < lastScrollY - 12) {
+          dock.classList.remove('dock-hidden');
+        }
+        lastScrollY = currentScrollY;
+      }, { passive: true });
+
       // Search
       document.getElementById('workSearchInput').addEventListener('input', () => {
         renderSidebar();
