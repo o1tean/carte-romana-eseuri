@@ -27,7 +27,7 @@ Poți răsfoi întregul volum direct în browser cu un design inspirat din siste
 * **Filtrare pe Genuri Literare**: Proză, Roman, Dramaturgie, Poezie.
 * **Căutare Live**: Găsire instantă de termeni critici, citate și concepte de teorie literară.
 * **Galerie Vizuală**: Ilustrații comic integrate cu zoom tactil (Lightbox).
-* **Marcaje de Pagină Originale**: Fidelitate totală față de numerotarea ghidului tipărit (160 de pagini).
+* **Flux Editorial Continuu**: Fără întreruperi sau numere de pagină inutile; text fluid și structurat pe eseuri canonice.
 
 ---
 
