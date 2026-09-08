@@ -836,6 +836,163 @@
       font-family: var(--font-sf);
     }
 
+    .cdc-context {
+      font-size: 0.78rem;
+      color: var(--text-tertiary);
+      line-height: 1.4;
+      margin-top: 3px;
+    }
+
+    /* Scene Card for illustrations without bubbles */
+    .comic-scene-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-left: 3px solid #8E8E93;
+      border-radius: var(--radius-sm);
+      padding: 0.65rem 0.85rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .csc-badge {
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-secondary);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .csc-title {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .csc-desc {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      line-height: 1.45;
+    }
+
+    /* Essay Tabs Bar */
+    .essay-tabs-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0.85rem 1.5rem;
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border-subtle);
+      overflow-x: auto;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+    .essay-tabs-bar::-webkit-scrollbar {
+      display: none;
+    }
+
+    .essay-tab-pill {
+      font-family: var(--font-sf);
+      font-size: 0.82rem;
+      font-weight: 500;
+      padding: 0.45rem 0.95rem;
+      border-radius: 999px;
+      border: 1px solid var(--border-subtle);
+      background: var(--bg-card);
+      color: var(--text-secondary);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .essay-tab-pill:hover {
+      background: var(--bg-surface-hover);
+      color: var(--text-primary);
+    }
+    .essay-tab-pill.active {
+      background: var(--apple-blue);
+      color: #FFFFFF;
+      border-color: var(--apple-blue);
+      box-shadow: 0 2px 8px rgba(0, 113, 227, 0.25);
+    }
+
+    /* Essay Synopsis Rubric Card */
+    .essay-synopsis-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-md);
+      padding: 1.1rem 1.35rem;
+      margin-bottom: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      box-shadow: var(--shadow-sm);
+    }
+    .synopsis-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 0.5rem;
+    }
+    .synopsis-badge {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--apple-blue);
+    }
+    .synopsis-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 0.85rem;
+      font-size: 0.85rem;
+      line-height: 1.45;
+    }
+    .synopsis-item strong {
+      display: block;
+      color: var(--text-secondary);
+      font-size: 0.73rem;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      margin-bottom: 3px;
+    }
+    .synopsis-item span {
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    /* Chapter Divider Banner in "Toate eseurile" mode */
+    .chapter-divider-banner {
+      margin: 3.5rem 0 1.5rem 0;
+      padding-top: 2rem;
+      border-top: 2px solid var(--border-subtle);
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .chapter-divider-badge {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--apple-blue);
+    }
+    .chapter-divider-title {
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      font-family: var(--font-ny);
+      letter-spacing: -0.015em;
+    }
+
     /* Fullscreen Apple Zoom Lightbox */
     .apple-lightbox {
       position: fixed;
@@ -1484,6 +1641,9 @@
           </div>
         </div>
 
+        <!-- Apple Essay Switcher Bar -->
+        <div class="essay-tabs-bar" id="essayTabsBar" style="display: none;"></div>
+
         <article class="book-article" id="bookArticleContent">
           <!-- Rendered by JS -->
         </article>
@@ -1549,6 +1709,7 @@
   <script>
     // State
     let activeWorkId = 'moara';
+    let activeEssayId = null;
     let currentCategoryFilter = 'all';
     let highlightEnabled = false;
     let serifFontEnabled = true;
@@ -1582,15 +1743,23 @@
 
     function init() {
       renderSidebar();
-      renderWork(activeWorkId);
+      selectWork(activeWorkId);
       setupEvents();
     }
 
     function selectWork(workId) {
       activeWorkId = workId;
+      const work = BOOK_DATA.works.find(w => w.id === workId);
+      if (work && work.essays && work.essays.length > 0) {
+        activeEssayId = work.essays[0].id;
+      } else {
+        activeEssayId = 'all';
+      }
+
       document.querySelectorAll('.sidebar-work-card').forEach(c => {
         c.classList.toggle('active', c.dataset.workId === workId);
       });
+
       renderWork(workId);
       closeMobileDrawer();
 
@@ -1613,6 +1782,14 @@
       }
     }
 
+    function selectEssay(essayId) {
+      activeEssayId = essayId;
+      renderWork(activeWorkId);
+      
+      const readerElem = document.getElementById('readerViewport');
+      if (readerElem) readerElem.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
     function renderSidebar() {
       const container = document.getElementById('worksListContainer');
       container.innerHTML = '';
@@ -1627,8 +1804,8 @@
           if (!match) return;
         }
 
-        const pages = BOOK_DATA.pages.filter(p => p.work_id === w.id);
-        const illCount = pages.reduce((acc, p) => acc + (p.illustrations ? p.illustrations.length : 0), 0);
+        const essaysCount = w.essays ? w.essays.length : 1;
+        const illCount = (w.essays || []).reduce((acc, e) => acc + (e.illustrations ? e.illustrations.length : 0), 0);
 
         const card = document.createElement('div');
         card.className = `sidebar-work-card ${w.id === activeWorkId ? 'active' : ''}`;
@@ -1640,7 +1817,7 @@
           </div>
           <div class="sw-author">${w.author} (${w.year})</div>
           <div class="sw-meta">
-            <span>📄 ${pages.length} pagini</span>
+            <span>📚 ${essaysCount} ${essaysCount === 1 ? 'eseu' : 'eseuri'}</span>
             ${illCount > 0 ? `<span>🎨 ${illCount} ilustrații</span>` : ''}
           </div>
         `;
@@ -1657,97 +1834,195 @@
       document.getElementById('currentWorkTitle').innerText = work.title;
       document.getElementById('currentWorkMeta').innerText = `${work.author} • ${work.category} (${work.year})`;
 
+      // Render Essay Tabs Switcher
+      const tabsBar = document.getElementById('essayTabsBar');
+      tabsBar.innerHTML = '';
+      const essays = work.essays || [];
+
+      if (essays.length > 1) {
+        tabsBar.style.display = 'flex';
+        essays.forEach(e => {
+          const btn = document.createElement('button');
+          btn.className = `essay-tab-pill ${e.id === activeEssayId ? 'active' : ''}`;
+          btn.innerText = e.badge || e.title;
+          btn.addEventListener('click', () => selectEssay(e.id));
+          tabsBar.appendChild(btn);
+        });
+
+        const allBtn = document.createElement('button');
+        allBtn.className = `essay-tab-pill ${activeEssayId === 'all' ? 'active' : ''}`;
+        allBtn.innerText = `📚 Toate eseurile (${essays.length})`;
+        allBtn.addEventListener('click', () => selectEssay('all'));
+        tabsBar.appendChild(allBtn);
+      } else {
+        tabsBar.style.display = 'none';
+      }
+
+      // Render Article Content
       const article = document.getElementById('bookArticleContent');
       article.innerHTML = '';
 
-      const pages = BOOK_DATA.pages.filter(p => p.work_id === workId);
-
-      pages.forEach(p => {
-        if (p.is_title_page) return;
-
-        const pnum = p.page_num;
-        const headings = p.headings || [];
-        const paras = p.paragraphs || [];
-        const ills = p.illustrations || [];
-
-        // Page marker
-        if (pnum) {
-          const marker = document.createElement('div');
-          marker.className = 'book-page-marker';
-          marker.innerText = `Pagina ${pnum}`;
-          article.appendChild(marker);
-        }
-
-        // Headings
-        if (headings.length > 0) {
-          const h1 = document.createElement('h2');
-          h1.className = 'essay-h1';
-          h1.innerText = headings[0];
-          article.appendChild(h1);
-
-          for (let i = 1; i < headings.length; i++) {
-            const h2 = document.createElement('h3');
-            h2.className = 'essay-h2';
-            h2.innerText = headings[i];
-            article.appendChild(h2);
-          }
-        }
-
-        // Illustrations HTML
-        let illElements = [];
-        ills.forEach(ill => {
-          const fig = document.createElement('figure');
-          fig.className = 'apple-comic-figure';
-          const dialogHtml = ill.dialogue ? `
-            <div class="comic-dialog-card">
-              <div class="cdc-badge">💬 Text bule de dialog (transcriere clară)</div>
-              <div class="cdc-text">${ill.dialogue}</div>
-            </div>
-          ` : '';
-          fig.innerHTML = `
-            <img class="apple-comic-img" src="${ill.src}" alt="Scenă ilustrată">
-            <figcaption class="apple-comic-caption">
-              <div class="caption-header">
-                <span>🔍 Scenă ilustrată cadru cu cadru</span>
-                <span class="caption-zoom-hint">Apasă pentru mărire</span>
-              </div>
-              ${dialogHtml}
-            </figcaption>
-          `;
-          fig.addEventListener('click', () => openLightbox(ill.src, ill.dialogue));
-          illElements.push(fig);
+      if (activeEssayId === 'all') {
+        essays.forEach((essay, idx) => {
+          renderEssay(essay, article, true);
         });
-
-        // Paragraphs & Illustrations integration
-        if (illElements.length === 0) {
-          paras.forEach((para, idx) => {
-            const pElem = document.createElement('p');
-            pElem.className = `essay-para ${idx === 0 && headings.length > 0 ? 'lead-para' : ''}`;
-            pElem.innerHTML = formatText(para);
-            article.appendChild(pElem);
-          });
-        } else {
-          // If illustrations exist, place after first paragraph
-          if (paras.length > 0) {
-            const p1 = document.createElement('p');
-            p1.className = `essay-para ${headings.length > 0 ? 'lead-para' : ''}`;
-            p1.innerHTML = formatText(paras[0]);
-            article.appendChild(p1);
-          }
-
-          illElements.forEach(fig => article.appendChild(fig));
-
-          for (let i = 1; i < paras.length; i++) {
-            const pElem = document.createElement('p');
-            pElem.className = 'essay-para';
-            pElem.innerHTML = formatText(paras[i]);
-            article.appendChild(pElem);
-          }
+      } else {
+        const currentEssay = essays.find(e => e.id === activeEssayId) || essays[0];
+        if (currentEssay) {
+          renderEssay(currentEssay, article, false);
         }
+      }
+    }
+
+    function renderEssay(essay, container, isAllMode) {
+      if (isAllMode) {
+        const banner = document.createElement('div');
+        banner.className = 'chapter-divider-banner';
+        banner.innerHTML = `
+          <div class="chapter-divider-badge">${essay.badge || 'Capitol'}</div>
+          <h3 class="chapter-divider-title">${essay.title}</h3>
+        `;
+        container.appendChild(banner);
+      }
+
+      // Synopsis Card
+      if (essay.curent || essay.tema) {
+        const syn = document.createElement('div');
+        syn.className = 'essay-synopsis-card';
+        syn.innerHTML = `
+          <div class="synopsis-header">
+            <span class="synopsis-badge">${essay.badge || 'Structură Bacalaureat'}</span>
+            <span style="font-size: 0.78rem; color: var(--text-tertiary);">${essay.subtitle || ''}</span>
+          </div>
+          <div class="synopsis-grid">
+            ${essay.curent ? `<div class="synopsis-item"><strong>Curent / Specie</strong><span>${essay.curent}</span></div>` : ''}
+            ${essay.tema ? `<div class="synopsis-item"><strong>Temă & Viziune</strong><span>${essay.tema}</span></div>` : ''}
+            ${essay.scene_repere ? `<div class="synopsis-item" style="grid-column: 1 / -1;"><strong>Scene analizate în eseu</strong><span>${essay.scene_repere}</span></div>` : ''}
+          </div>
+        `;
+        container.appendChild(syn);
+      }
+
+      if (!isAllMode) {
+        const h1 = document.createElement('h2');
+        h1.className = 'essay-h1';
+        h1.innerText = essay.title;
+        container.appendChild(h1);
+      }
+
+      const paras = essay.paragraphs || [];
+      const ills = essay.illustrations || [];
+
+      // Create figure elements for illustrations
+      const figElements = ills.map(ill => {
+        const fig = document.createElement('figure');
+        fig.className = 'apple-comic-figure';
+
+        let cardHtml = '';
+        if (ill.has_speech_bubble && ill.dialogue) {
+          cardHtml = `
+            <div class="comic-dialog-card">
+              <div class="cdc-badge">💬 Replică originală din bulele de dialog</div>
+              <div class="cdc-text">${ill.dialogue.replace(/\n/g, '<br>')}</div>
+              ${ill.caption ? `<div class="cdc-context">${ill.caption}</div>` : ''}
+            </div>
+          `;
+        } else {
+          cardHtml = `
+            <div class="comic-scene-card">
+              <div class="csc-badge">🎨 Scenă cheie reprezentativă</div>
+              <div class="csc-title">${ill.scene_title}</div>
+              <div class="csc-desc">${ill.caption}</div>
+            </div>
+          `;
+        }
+
+        fig.innerHTML = `
+          <img class="apple-comic-img" src="${ill.src}" alt="${ill.scene_title}">
+          <figcaption class="apple-comic-caption">
+            <div class="caption-header">
+              <span>🔍 ${ill.scene_title}</span>
+              <span class="caption-zoom-hint">Apasă pentru mărire</span>
+            </div>
+            ${cardHtml}
+          </figcaption>
+        `;
+        fig.addEventListener('click', () => openLightbox(ill.src, ill.dialogue, ill.scene_title, ill.has_speech_bubble, ill.caption));
+        return fig;
       });
 
-      // Scroll reader viewport to top smoothly
-      document.getElementById('readerViewport').scrollTo({ top: 0, behavior: 'smooth' });
+      // Interleave illustrations logically into paragraphs
+      if (figElements.length === 0) {
+        paras.forEach((para, idx) => {
+          const pElem = document.createElement('p');
+          pElem.className = `essay-para ${idx === 0 ? 'lead-para' : ''}`;
+          pElem.innerHTML = formatText(para);
+          container.appendChild(pElem);
+        });
+      } else if (figElements.length === 1) {
+        paras.slice(0, 2).forEach((para, idx) => {
+          const pElem = document.createElement('p');
+          pElem.className = `essay-para ${idx === 0 ? 'lead-para' : ''}`;
+          pElem.innerHTML = formatText(para);
+          container.appendChild(pElem);
+        });
+        container.appendChild(figElements[0]);
+        paras.slice(2).forEach(para => {
+          const pElem = document.createElement('p');
+          pElem.className = 'essay-para';
+          pElem.innerHTML = formatText(para);
+          container.appendChild(pElem);
+        });
+      } else if (figElements.length === 2) {
+        // 1st figure after 2nd para
+        paras.slice(0, 2).forEach((para, idx) => {
+          const pElem = document.createElement('p');
+          pElem.className = `essay-para ${idx === 0 ? 'lead-para' : ''}`;
+          pElem.innerHTML = formatText(para);
+          container.appendChild(pElem);
+        });
+        container.appendChild(figElements[0]);
+
+        // next paras
+        const midPoint = Math.min(6, Math.max(3, paras.length - 2));
+        paras.slice(2, midPoint).forEach(para => {
+          const pElem = document.createElement('p');
+          pElem.className = 'essay-para';
+          pElem.innerHTML = formatText(para);
+          container.appendChild(pElem);
+        });
+        container.appendChild(figElements[1]);
+
+        // remaining paras
+        paras.slice(midPoint).forEach(para => {
+          const pElem = document.createElement('p');
+          pElem.className = 'essay-para';
+          pElem.innerHTML = formatText(para);
+          container.appendChild(pElem);
+        });
+      } else {
+        // 3 or more illustrations: distribute evenly
+        const interval = Math.max(2, Math.floor(paras.length / (figElements.length + 1)));
+        let pIdx = 0;
+        figElements.forEach((fig, fIdx) => {
+          const nextStop = (fIdx + 1) * interval;
+          while (pIdx < nextStop && pIdx < paras.length) {
+            const pElem = document.createElement('p');
+            pElem.className = `essay-para ${pIdx === 0 ? 'lead-para' : ''}`;
+            pElem.innerHTML = formatText(paras[pIdx]);
+            container.appendChild(pElem);
+            pIdx++;
+          }
+          container.appendChild(fig);
+        });
+        while (pIdx < paras.length) {
+          const pElem = document.createElement('p');
+          pElem.className = 'essay-para';
+          pElem.innerHTML = formatText(paras[pIdx]);
+          container.appendChild(pElem);
+          pIdx++;
+        }
+      }
     }
 
     function setupEvents() {
@@ -1766,57 +2041,44 @@
         });
       });
 
-      // Concept Highlighter
-      const highlightBtn = document.getElementById('btnHighlight');
-      highlightBtn.addEventListener('click', () => {
+      // Highlight Toggle
+      document.getElementById('btnHighlight').addEventListener('click', function() {
         highlightEnabled = !highlightEnabled;
-        document.getElementById('bookArticleContent').classList.toggle('highlight-enabled', highlightEnabled);
-        highlightBtn.classList.toggle('active', highlightEnabled);
+        this.classList.toggle('active', highlightEnabled);
+        document.getElementById('bookArticleContent').classList.toggle('highlight-active', highlightEnabled);
       });
 
-      // Font Toggle (Serif vs Sans)
-      const fontBtn = document.getElementById('btnFontToggle');
-      fontBtn.addEventListener('click', () => {
+      // Font Family Toggle (Serif vs Sans)
+      document.getElementById('btnFontToggle').addEventListener('click', function() {
         serifFontEnabled = !serifFontEnabled;
-        const article = document.getElementById('bookArticleContent');
-        article.style.fontFamily = serifFontEnabled ? 'var(--font-serif)' : 'var(--font-sf)';
-        fontBtn.classList.toggle('active', !serifFontEnabled);
+        this.classList.toggle('active', !serifFontEnabled);
+        document.getElementById('bookArticleContent').classList.toggle('sans-active', !serifFontEnabled);
       });
 
-      // Font Size Controls (A- / A+)
-      let currentFontSize = 1.05;
-      const decBtn = document.getElementById('btnFontDec');
-      if (decBtn) {
-        decBtn.addEventListener('click', () => {
-          if (currentFontSize > 0.88) {
-            currentFontSize = Math.round((currentFontSize - 0.08) * 100) / 100;
-            document.getElementById('bookArticleContent').style.fontSize = currentFontSize + 'rem';
-          }
-        });
+      // Font Size Controls
+      const FONT_SIZES = ['15px', '17px', '19px', '21px', '23px'];
+      let currentFontSizeIdx = 1; // default 17px
+
+      function updateFontSize() {
+        document.documentElement.style.setProperty('--font-size-base', FONT_SIZES[currentFontSizeIdx]);
       }
 
-      const incBtn = document.getElementById('btnFontInc');
-      if (incBtn) {
-        incBtn.addEventListener('click', () => {
-          if (currentFontSize < 1.45) {
-            currentFontSize = Math.round((currentFontSize + 0.08) * 100) / 100;
-            document.getElementById('bookArticleContent').style.fontSize = currentFontSize + 'rem';
-          }
-        });
-      }
+      document.getElementById('btnFontInc').addEventListener('click', () => {
+        if (currentFontSizeIdx < FONT_SIZES.length - 1) {
+          currentFontSizeIdx++;
+          updateFontSize();
+        }
+      });
 
-      // Drawer Search
-      const drawerInput = document.getElementById('drawerSearchInput');
-      if (drawerInput) {
-        drawerInput.addEventListener('input', renderDrawerWorks);
-      }
+      document.getElementById('btnFontDec').addEventListener('click', () => {
+        if (currentFontSizeIdx > 0) {
+          currentFontSizeIdx--;
+          updateFontSize();
+        }
+      });
 
-      // Dark / Light Theme Toggle
-      const themeBtn = document.getElementById('themeToggleBtn');
-      if (themeBtn) themeBtn.addEventListener('click', toggleTheme);
-
-      // Keyboard navigation
-      window.addEventListener('keydown', (e) => {
+      // Keyboard Esc to close Lightbox
+      document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
           closeLightbox();
           closeMobileDrawer();
@@ -1825,103 +2087,82 @@
       });
     }
 
-    // Global Theme Toggle
-    function toggleTheme() {
-      const cur = document.documentElement.getAttribute('data-theme');
-      const next = cur === 'dark' ? 'light' : 'dark';
-      document.documentElement.setAttribute('data-theme', next);
-    }
-
-    // Downloads Popover Menu
-    function toggleDownloadsMenu(e) {
-      if (e) e.stopPropagation();
-      const overlay = document.getElementById('downloadsPopoverOverlay');
-      if (overlay) overlay.classList.toggle('active');
-    }
-
-    function closeDownloadsMenu() {
-      const overlay = document.getElementById('downloadsPopoverOverlay');
-      if (overlay) overlay.classList.remove('active');
-    }
-
-    // Drawer Logic
-    function renderDrawerWorks() {
-      const list = document.getElementById('drawerWorksList');
-      if (!list) return;
-      list.innerHTML = '';
-      const searchVal = document.getElementById('drawerSearchInput').value.trim().toLowerCase();
-
+    function openMobileDrawer() {
+      const overlay = document.getElementById('mobileDrawerOverlay');
+      const drawer = document.getElementById('mobileDrawer');
+      const container = document.getElementById('drawerWorksList');
+      
+      container.innerHTML = '';
       BOOK_DATA.works.forEach(w => {
-        if (searchVal) {
-          const match = (w.title + ' ' + w.author + ' ' + w.category).toLowerCase().includes(searchVal);
-          if (!match) return;
-        }
+        const essaysCount = w.essays ? w.essays.length : 1;
+        const illCount = (w.essays || []).reduce((acc, e) => acc + (e.illustrations ? e.illustrations.length : 0), 0);
 
-        const pages = BOOK_DATA.pages.filter(p => p.work_id === w.id);
-        const illCount = pages.reduce((acc, p) => acc + (p.illustrations ? p.illustrations.length : 0), 0);
-
-        const item = document.createElement('div');
-        item.className = `sidebar-work-card ${w.id === activeWorkId ? 'active' : ''}`;
-        item.style.flex = 'none';
-        item.innerHTML = `
+        const card = document.createElement('div');
+        card.className = `sidebar-work-card ${w.id === activeWorkId ? 'active' : ''}`;
+        card.innerHTML = `
           <div class="sw-title-row">
             <span class="sw-title">${w.title}</span>
             <span class="sw-badge">${w.badge}</span>
           </div>
           <div class="sw-author">${w.author} (${w.year})</div>
           <div class="sw-meta">
-            <span>📄 ${pages.length} pagini</span>
+            <span>📚 ${essaysCount} ${essaysCount === 1 ? 'eseu' : 'eseuri'}</span>
             ${illCount > 0 ? `<span>🎨 ${illCount} ilustrații</span>` : ''}
           </div>
         `;
-        item.addEventListener('click', () => {
+        card.addEventListener('click', () => {
           selectWork(w.id);
           closeMobileDrawer();
         });
-        list.appendChild(item);
+        container.appendChild(card);
       });
-    }
 
-    function openMobileDrawer() {
-      const overlay = document.getElementById('mobileDrawerOverlay');
-      if (overlay) {
-        overlay.classList.add('active');
-        renderDrawerWorks();
-        setTimeout(() => {
-          const input = document.getElementById('drawerSearchInput');
-          if (input) input.focus();
-        }, 150);
-      }
+      overlay.classList.add('active');
+      drawer.classList.add('active');
+      document.body.style.overflow = 'hidden';
     }
 
     function closeMobileDrawer(e) {
-      if (e && e.target && e.target !== e.currentTarget && !e.target.classList.contains('drawer-close')) {
+      if (e && e.target && e.target !== document.getElementById('mobileDrawerOverlay') && !e.target.classList.contains('drawer-close')) {
         return;
       }
       const overlay = document.getElementById('mobileDrawerOverlay');
-      if (overlay) {
-        overlay.classList.remove('active');
+      const drawer = document.getElementById('mobileDrawer');
+      if (overlay) overlay.classList.remove('active');
+      if (drawer) drawer.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function toggleDownloadsMenu(e) {
+      if (e) e.stopPropagation();
+      const popover = document.getElementById('downloadsPopover');
+      const btn = document.getElementById('navDownloadsBtn');
+      const isOpen = popover.classList.contains('active');
+      
+      if (isOpen) {
+        closeDownloadsMenu();
+      } else {
+        popover.classList.add('active');
+        if (btn) btn.classList.add('active');
       }
     }
 
-    // Navigation between Works
-    function goToPrevWork() {
-      const currentIndex = BOOK_DATA.works.findIndex(w => w.id === activeWorkId);
-      if (currentIndex > 0) {
-        selectWork(BOOK_DATA.works[currentIndex - 1].id);
-      } else {
-        selectWork(BOOK_DATA.works[BOOK_DATA.works.length - 1].id);
-      }
+    function closeDownloadsMenu() {
+      const popover = document.getElementById('downloadsPopover');
+      const btn = document.getElementById('navDownloadsBtn');
+      if (popover) popover.classList.remove('active');
+      if (btn) btn.classList.remove('active');
     }
 
-    function goToNextWork() {
-      const currentIndex = BOOK_DATA.works.findIndex(w => w.id === activeWorkId);
-      if (currentIndex < BOOK_DATA.works.length - 1) {
-        selectWork(BOOK_DATA.works[currentIndex + 1].id);
-      } else {
-        selectWork(BOOK_DATA.works[0].id);
+    document.addEventListener('click', (e) => {
+      const popover = document.getElementById('downloadsPopover');
+      const btn = document.getElementById('navDownloadsBtn');
+      if (popover && popover.classList.contains('active')) {
+        if (!popover.contains(e.target) && e.target !== btn && !btn.contains(e.target)) {
+          closeDownloadsMenu();
+        }
       }
-    }
+    });
 
     function scrollToTop() {
       const studio = document.getElementById('studio');
@@ -1933,11 +2174,22 @@
     }
 
     // Lightbox
-    function openLightbox(src, dialogue) {
+    function openLightbox(src, dialogue, title, hasBubble, caption) {
       document.getElementById('lightboxImg').src = src;
       const dialogCard = document.getElementById('lightboxDialog');
-      if (dialogue) {
-        dialogCard.innerHTML = `<div style="font-size: 0.8rem; text-transform: uppercase; color: var(--apple-blue); font-weight: 600; margin-bottom: 5px; letter-spacing: 0.05em;">💬 Transcriere Bule de Dialog</div><div style="font-size: 0.95rem; line-height: 1.45;">${dialogue}</div>`;
+      if (hasBubble && dialogue) {
+        dialogCard.innerHTML = `
+          <div style="font-size: 0.75rem; text-transform: uppercase; color: var(--apple-blue); font-weight: 600; margin-bottom: 5px; letter-spacing: 0.05em;">💬 Replică originală din bulele de dialog</div>
+          <div style="font-size: 0.96rem; line-height: 1.5; font-weight: 500; margin-bottom: 5px;">${dialogue.replace(/\n/g, '<br>')}</div>
+          ${caption ? `<div style="font-size: 0.8rem; color: #A1A1A6; line-height: 1.4;">${caption}</div>` : ''}
+        `;
+        dialogCard.style.display = 'block';
+      } else if (title || caption) {
+        dialogCard.innerHTML = `
+          <div style="font-size: 0.75rem; text-transform: uppercase; color: #8E8E93; font-weight: 600; margin-bottom: 5px; letter-spacing: 0.05em;">🎨 Scenă cheie reprezentativă</div>
+          ${title ? `<div style="font-size: 0.98rem; font-weight: 600; color: #FFFFFF; margin-bottom: 5px;">${title}</div>` : ''}
+          ${caption ? `<div style="font-size: 0.84rem; color: #A1A1A6; line-height: 1.45;">${caption}</div>` : ''}
+        `;
         dialogCard.style.display = 'block';
       } else {
         dialogCard.style.display = 'none';
