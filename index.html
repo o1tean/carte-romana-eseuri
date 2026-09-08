@@ -19,12 +19,14 @@
     :root {
       --font-sf: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
       --font-serif: "New York", "Charter", "Lora", Georgia, serif;
+      --font-size-base: 1.08rem;
       
       /* Apple Dark Theme (Default) */
       --bg-body: #000000;
       --bg-surface: #161617;
       --bg-card: rgba(255, 255, 255, 0.04);
       --bg-card-hover: rgba(255, 255, 255, 0.07);
+      --bg-surface-hover: rgba(255, 255, 255, 0.1);
       --bg-glass: rgba(22, 22, 23, 0.75);
       --border-subtle: rgba(255, 255, 255, 0.12);
       --border-card: rgba(255, 255, 255, 0.08);
@@ -42,6 +44,7 @@
       
       --shadow-apple: 0 20px 40px rgba(0, 0, 0, 0.4);
       --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.25);
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.25);
       --radius-sm: 8px;
       --radius-md: 14px;
       --radius-lg: 20px;
@@ -49,11 +52,13 @@
     }
 
     [data-theme="light"] {
+      --font-size-base: 1.08rem;
       --bg-body: #F5F5F7;
       --bg-surface: #FFFFFF;
       --bg-card: #FFFFFF;
       --bg-card-hover: #F8F8F9;
-      --bg-glass: rgba(255, 255, 255, 0.8);
+      --bg-surface-hover: #E5E5EA;
+      --bg-glass: rgba(255, 255, 255, 0.85);
       --border-subtle: rgba(0, 0, 0, 0.08);
       --border-card: rgba(0, 0, 0, 0.06);
       
@@ -70,6 +75,7 @@
       
       --shadow-apple: 0 20px 40px rgba(0, 0, 0, 0.08);
       --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.05);
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
     }
 
     * {
@@ -174,8 +180,12 @@
       transform: scale(1.02);
     }
 
+    .apple-btn-pill:active {
+      transform: scale(0.95);
+    }
+
     .apple-btn-ghost {
-      background: rgba(255, 255, 255, 0.08);
+      background: var(--bg-card);
       color: var(--text-primary);
       font-size: 0.75rem;
       font-weight: 500;
@@ -187,11 +197,16 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      transition: background 0.15s ease;
+      transition: all 0.15s ease;
     }
 
     .apple-btn-ghost:hover {
-      background: rgba(255, 255, 255, 0.14);
+      background: var(--bg-card-hover);
+      border-color: var(--border-card);
+    }
+
+    .apple-btn-ghost:active {
+      transform: scale(0.95);
     }
 
     /* Desktop vs Mobile Nav Actions */
@@ -233,6 +248,10 @@
       transform: scale(0.95) translateY(-6px);
       opacity: 0;
       transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
+    }
+
+    [data-theme="light"] .downloads-popover {
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
     }
 
     .downloads-popover-overlay.active .downloads-popover {
@@ -350,7 +369,7 @@
       height: auto;
       border-radius: 12px;
       box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6), 0 0 35px rgba(41, 151, 255, 0.25);
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      border: 1px solid var(--border-subtle);
       transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
       display: block;
     }
@@ -380,8 +399,12 @@
       transform: translateY(-1px);
     }
 
+    .hero-btn-primary:active {
+      transform: scale(0.97);
+    }
+
     .hero-btn-secondary {
-      background: rgba(255, 255, 255, 0.08);
+      background: var(--bg-card);
       color: var(--text-primary);
       font-size: 0.95rem;
       font-weight: 500;
@@ -396,8 +419,13 @@
     }
 
     .hero-btn-secondary:hover {
-      background: rgba(255, 255, 255, 0.14);
+      background: var(--bg-card-hover);
+      border-color: var(--border-card);
       transform: translateY(-1px);
+    }
+
+    .hero-btn-secondary:active {
+      transform: scale(0.97);
     }
 
     /* Bento Grid Features */
@@ -489,6 +517,14 @@
       transition: all 0.15s ease;
     }
 
+    .seg-btn:hover {
+      color: var(--text-primary);
+    }
+
+    .seg-btn:active {
+      transform: scale(0.95);
+    }
+
     .seg-btn.active {
       background: var(--apple-blue);
       color: #FFF;
@@ -516,6 +552,12 @@
 
     .search-pill-input:focus {
       border-color: var(--apple-blue);
+      box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.15);
+    }
+
+    .search-pill-input::placeholder {
+      color: var(--text-tertiary);
+      opacity: 0.85;
     }
 
     .search-pill-icon {
@@ -564,10 +606,19 @@
       background: var(--bg-card-hover);
     }
 
+    .sidebar-work-card:active {
+      transform: scale(0.98);
+    }
+
     .sidebar-work-card.active {
       background: var(--bg-card-hover);
       border-color: var(--apple-blue);
       box-shadow: var(--shadow-card);
+    }
+
+    .sidebar-work-card.active .sw-badge {
+      background: var(--apple-blue);
+      color: #FFFFFF;
     }
 
     .sw-title-row {
@@ -662,6 +713,10 @@
       background: var(--bg-card-hover);
     }
 
+    .rt-btn:active {
+      transform: scale(0.95);
+    }
+
     .rt-btn.active {
       background: var(--apple-blue);
       color: #FFF;
@@ -675,7 +730,12 @@
       font-family: var(--font-serif);
       color: var(--text-primary);
       line-height: 1.75;
-      font-size: 1.08rem;
+      font-size: var(--font-size-base, 1.08rem);
+      transition: font-size 0.2s ease;
+    }
+
+    .book-article.sans-active {
+      font-family: var(--font-sf) !important;
     }
 
     .book-article h2.essay-h1 {
@@ -722,11 +782,15 @@
       color: var(--text-primary);
     }
 
-    .highlight-enabled strong.kw-bold {
+    .highlight-enabled strong.kw-bold,
+    .highlight-active strong.kw-bold,
+    .book-article.highlight-active strong.kw-bold,
+    .book-article.highlight-enabled strong.kw-bold {
       background-color: var(--highlight-bg);
       border-bottom: 2px solid var(--highlight-border);
       padding: 1px 3px;
       border-radius: 2px;
+      transition: background-color 0.2s ease, border-color 0.2s ease;
     }
 
     .book-article span.quote-italic {
@@ -776,6 +840,8 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
       font-size: 0.78rem;
       color: var(--text-tertiary);
     }
@@ -784,6 +850,8 @@
       color: var(--apple-blue);
       font-size: 0.75rem;
       font-weight: 500;
+      flex-shrink: 0;
+      white-space: nowrap;
     }
 
     .comic-dialog-card {
@@ -893,11 +961,25 @@
       background: var(--bg-surface-hover);
       color: var(--text-primary);
     }
+    .essay-tab-pill:active {
+      transform: scale(0.95);
+    }
     .essay-tab-pill.active {
       background: var(--apple-blue);
       color: #FFFFFF;
       border-color: var(--apple-blue);
       box-shadow: 0 2px 8px rgba(0, 113, 227, 0.25);
+    }
+    .essay-tab-pill.is-mastered:not(.active) {
+      border-color: rgba(52, 199, 89, 0.45);
+      color: #34C759;
+    }
+    .essay-tab-pill .tab-check {
+      font-weight: 700;
+      color: #34C759;
+    }
+    .essay-tab-pill.active .tab-check {
+      color: #FFFFFF;
     }
 
     /* Essay Synopsis Rubric Card */
@@ -1051,8 +1133,8 @@
     /* Lightbox Close Button */
     .lightbox-close-btn {
       position: absolute;
-      top: 20px;
-      right: 20px;
+      top: max(20px, env(safe-area-inset-top, 20px));
+      right: max(20px, env(safe-area-inset-right, 20px));
       width: 44px;
       height: 44px;
       background: rgba(255, 255, 255, 0.2);
@@ -1073,6 +1155,10 @@
     .lightbox-close-btn:hover {
       background: rgba(255, 255, 255, 0.35);
       transform: scale(1.05);
+    }
+
+    .lightbox-close-btn:active {
+      transform: scale(0.92);
     }
 
     .rt-btn-mobile-only {
@@ -1115,6 +1201,10 @@
       box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.5);
     }
 
+    [data-theme="light"] .mobile-drawer {
+      box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.12);
+    }
+
     .mobile-drawer-overlay.active .mobile-drawer {
       transform: translateY(0);
     }
@@ -1142,17 +1232,22 @@
     }
 
     .drawer-close {
-      background: rgba(255, 255, 255, 0.1);
-      border: none;
-      width: 32px;
-      height: 32px;
+      background: var(--bg-card-hover);
+      border: 1px solid var(--border-subtle);
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
-      color: var(--text-secondary);
+      color: var(--text-primary);
       font-size: 1.1rem;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
+      transition: all 0.15s ease;
+    }
+
+    .drawer-close:active {
+      transform: scale(0.92);
     }
 
     .drawer-works-list {
@@ -1286,7 +1381,7 @@
         gap: 0.4rem;
       }
       /* On mobile, hide controls that are already present in the bottom thumb dock */
-      #btnAudio, #btnMastered, #btnShare, #btnOpenDrawer, #btnFontDec, #btnFontInc, #btnFontToggle {
+      #btnAudio, #btnMastered, #btnShare, #btnOpenDrawer, #btnFontToggle {
         display: none !important;
       }
       .rt-btn {
@@ -1448,7 +1543,7 @@
         padding: 1.25rem 0.85rem 6.5rem !important;
       }
       .book-article {
-        font-size: 1rem;
+        font-size: var(--font-size-base, 1.02rem);
         line-height: 1.68;
       }
       .book-article h2.essay-h1 {
@@ -1579,6 +1674,9 @@
       border-color: var(--apple-blue);
       transform: translateY(-2px);
       box-shadow: var(--shadow-sm);
+    }
+    .pager-btn:active {
+      transform: scale(0.98);
     }
     .pager-btn.next {
       text-align: right;
@@ -1800,6 +1898,7 @@
         cursor: pointer;
         transition: all 0.15s ease;
         -webkit-tap-highlight-color: transparent;
+        min-width: 48px;
       }
       .mtd-btn:active {
         transform: scale(0.92);
@@ -1817,7 +1916,20 @@
       }
       .mtd-btn.is-mastered .mtd-icon,
       .mtd-btn.is-mastered .mtd-label {
-        color: #34C759;
+        color: #34C759 !important;
+        font-weight: 600;
+      }
+      .mtd-btn.audio-active .mtd-icon,
+      .mtd-btn.audio-active .mtd-label {
+        color: var(--apple-blue) !important;
+        font-weight: 600;
+      }
+      .mtd-btn.audio-active .mtd-icon {
+        animation: pulseWave 1s infinite ease-in-out;
+      }
+      .mtd-btn.font-sans-active .mtd-icon,
+      .mtd-btn.font-sans-active .mtd-label {
+        color: var(--apple-blue) !important;
         font-weight: 600;
       }
       /* Extra padding at bottom of reader viewport so bottom dock doesn't obscure pager */
@@ -1906,7 +2018,7 @@
     <div class="hero-eyebrow">Ediție Digitală 2026 • Pregătire Bacalaureat</div>
     <h1 class="hero-title">Carte Română Eseuri.</h1>
     <p class="hero-subtitle">
-      18 opere canonice din programa națională. Toate eseurile structurate pas cu pas. Peste 50 de scene ilustrate cadru cu cadru pentru memorie vizuală.
+      16 opere și ghiduri canonice din programa națională. Toate cele 33 de eseuri structurate pas cu pas. 58 de scene ilustrate cadru cu cadru pentru memorie vizuală.
     </p>
 
     <div class="hero-cta-group">
@@ -1954,11 +2066,11 @@
   <section class="studio-section" id="studio">
     <div class="studio-controls">
       <div class="segmented-control">
-        <button class="seg-btn active" data-filter="all">Toate (16)</button>
-        <button class="seg-btn" data-filter="Proză">Proză</button>
-        <button class="seg-btn" data-filter="Roman">Roman</button>
-        <button class="seg-btn" data-filter="Dramaturgie">Teatru</button>
-        <button class="seg-btn" data-filter="Poezie">Poezie</button>
+        <button class="seg-btn active" data-filter="all" title="Toate operele canonice">Toate (16)</button>
+        <button class="seg-btn" data-filter="Proză" title="Filtru nuvele și proză scurtă">Proză</button>
+        <button class="seg-btn" data-filter="Roman" title="Filtru romane canonice">Roman</button>
+        <button class="seg-btn" data-filter="Dramaturgie" title="Filtru piese de teatru">Teatru</button>
+        <button class="seg-btn" data-filter="Poezie" title="Filtru poezii canonice">Poezie</button>
       </div>
 
       <div class="search-pill-box">
@@ -2062,7 +2174,7 @@
     <div class="mobile-drawer" id="mobileDrawer" onclick="event.stopPropagation()">
       <div class="drawer-handle"></div>
       <div class="drawer-header">
-        <h3 class="drawer-title">Opere Canonice (18)</h3>
+        <h3 class="drawer-title">Opere Canonice (16)</h3>
         <button class="drawer-close" onclick="closeMobileDrawer()">✕</button>
       </div>
       <div class="search-pill-box" style="width: 100%; margin-bottom: 0.75rem;">
@@ -2080,7 +2192,7 @@
   <!-- Minimalist Footer -->
   <footer class="apple-footer">
     <p>Carte Română Eseuri • Ediție Digitală Optimizată pentru Apple Books și Web.</p>
-    <p>Conține toate cele 18 opere canonice pentru Bacalaureat și 58 de scene ilustrate cadru cu cadru.</p>
+    <p>Conține toate cele 16 opere și ghiduri canonice pentru Bacalaureat, 33 de eseuri complete și 58 de scene ilustrate cadru cu cadru.</p>
     <p style="margin-top: 0.75rem;">
       <a href="./Carte_Romana_Eseuri_AppleBooks.epub">Descarcă formatul .epub pentru Apple Books</a> • 
       <a href="./Carte_Romana_Eseuri_GoogleDocs.docx">Descarcă formatul .docx pentru Google Docs</a> • 
@@ -2142,7 +2254,47 @@
       }, 2400);
     }
 
+    // Theme Management
+    const THEME_STORAGE_KEY = 'bac_reader_theme_v1';
+
+    function initTheme() {
+      let saved = null;
+      try { saved = localStorage.getItem(THEME_STORAGE_KEY); } catch (e) {}
+      if (saved) {
+        setTheme(saved, false);
+      } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+        setTheme('light', false);
+      } else {
+        setTheme('dark', false);
+      }
+    }
+
+    function setTheme(theme, notify = true) {
+      document.documentElement.setAttribute('data-theme', theme);
+      try { localStorage.setItem(THEME_STORAGE_KEY, theme); } catch (e) {}
+      const icon = theme === 'light' ? '☀️' : '🌙';
+      const btn1 = document.getElementById('themeToggleBtn');
+      const btn2 = document.getElementById('themeToggleBtnMobile');
+      if (btn1) btn1.innerText = icon;
+      if (btn2) btn2.innerText = icon;
+
+      const metaTheme = document.querySelector('meta[name="theme-color"]');
+      if (metaTheme) metaTheme.content = theme === 'light' ? '#FFFFFF' : '#161617';
+
+      if (notify) {
+        showToast(theme === 'light' ? 'Mod Luminos activat' : 'Mod Întunecat activat', icon);
+      }
+    }
+
+    function toggleTheme() {
+      triggerHaptic(15);
+      const current = document.documentElement.getAttribute('data-theme') || 'dark';
+      const next = current === 'dark' ? 'light' : 'dark';
+      setTheme(next, true);
+    }
+
     function init() {
+      initTheme();
       loadMasteredState();
       renderSidebar();
       selectWork(activeWorkId);
@@ -2280,8 +2432,10 @@
         tabsBar.style.display = 'flex';
         essays.forEach(e => {
           const btn = document.createElement('button');
-          btn.className = `essay-tab-pill ${e.id === activeEssayId ? 'active' : ''}`;
-          btn.innerText = e.badge || e.title;
+          const isM = masteredEssays.has(e.id);
+          btn.className = `essay-tab-pill ${e.id === activeEssayId ? 'active' : ''} ${isM ? 'is-mastered' : ''}`;
+          btn.dataset.essayId = e.id;
+          btn.innerHTML = `${isM ? '<span class="tab-check">✓</span> ' : ''}${e.badge || e.title}`;
           btn.addEventListener('click', () => selectEssay(e.id));
           tabsBar.appendChild(btn);
         });
@@ -2505,29 +2659,39 @@
       } else {
         const eIdx = essays.findIndex(e => e.id === currentEssay.id);
         if (eIdx > 0) {
-          prevTarget = { workId: work.id, label: essays[eIdx - 1].badge, essayId: essays[eIdx - 1].id };
+          prevTarget = { workId: work.id, label: essays[eIdx - 1].badge || essays[eIdx - 1].title, essayId: essays[eIdx - 1].id };
         } else if (workIdx > 0) {
           const prevWork = BOOK_DATA.works[workIdx - 1];
           const prevWorkEssays = prevWork.essays || [];
           const lastEssay = prevWorkEssays.length > 0 ? prevWorkEssays[prevWorkEssays.length - 1] : null;
-          prevTarget = { workId: prevWork.id, label: `${prevWork.title} (${lastEssay ? lastEssay.badge : ''})`, essayId: lastEssay ? lastEssay.id : null };
+          const badgeSuffix = (lastEssay && lastEssay.badge) ? ` • ${lastEssay.badge}` : '';
+          prevTarget = { workId: prevWork.id, label: `${prevWork.title}${badgeSuffix}`, essayId: lastEssay ? lastEssay.id : null };
         }
 
         if (eIdx < essays.length - 1) {
-          nextTarget = { workId: work.id, label: essays[eIdx + 1].badge, essayId: essays[eIdx + 1].id };
+          nextTarget = { workId: work.id, label: essays[eIdx + 1].badge || essays[eIdx + 1].title, essayId: essays[eIdx + 1].id };
         } else if (workIdx < BOOK_DATA.works.length - 1) {
           const nextWork = BOOK_DATA.works[workIdx + 1];
           const nextWorkEssays = nextWork.essays || [];
           const firstEssay = nextWorkEssays.length > 0 ? nextWorkEssays[0] : null;
-          nextTarget = { workId: nextWork.id, label: `${nextWork.title} (${firstEssay ? firstEssay.badge : ''})`, essayId: firstEssay ? firstEssay.id : null };
+          const badgeSuffix = (firstEssay && firstEssay.badge) ? ` • ${firstEssay.badge}` : '';
+          nextTarget = { workId: nextWork.id, label: `${nextWork.title}${badgeSuffix}`, essayId: firstEssay ? firstEssay.id : null };
         }
       }
 
       if (prevTarget) {
         const btn = document.createElement('div');
         btn.className = 'pager-btn prev';
+        btn.setAttribute('role', 'button');
+        btn.setAttribute('tabindex', '0');
         btn.innerHTML = `<span class="pager-hint">← Înapoi</span><span class="pager-title">${prevTarget.label}</span>`;
         btn.addEventListener('click', () => selectWork(prevTarget.workId, prevTarget.essayId));
+        btn.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            btn.click();
+          }
+        });
         pager.appendChild(btn);
       } else {
         const spacer = document.createElement('div');
@@ -2538,9 +2702,48 @@
       if (nextTarget) {
         const btn = document.createElement('div');
         btn.className = 'pager-btn next';
+        btn.setAttribute('role', 'button');
+        btn.setAttribute('tabindex', '0');
         btn.innerHTML = `<span class="pager-hint">Înainte →</span><span class="pager-title">${nextTarget.label}</span>`;
         btn.addEventListener('click', () => selectWork(nextTarget.workId, nextTarget.essayId));
+        btn.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            btn.click();
+          }
+        });
         pager.appendChild(btn);
+      }
+    }
+
+    function setAudioUIState(state) {
+      // state: 'playing' | 'paused' | 'stopped'
+      const btn = document.getElementById('btnAudio');
+      const label = document.getElementById('audioBtnLabel');
+      const mtdBtn = document.getElementById('mtdAudioBtn');
+      const mtdLabel = document.getElementById('mtdAudioLabel');
+      const mtdIcon = document.getElementById('mtdAudioIcon');
+
+      if (state === 'playing') {
+        isSpeaking = true;
+        if (btn) btn.classList.add('audio-active');
+        if (label) label.innerText = 'Pauză';
+        if (mtdBtn) mtdBtn.classList.add('audio-active');
+        if (mtdLabel) mtdLabel.innerText = 'Pauză';
+        if (mtdIcon) mtdIcon.innerText = '⏸️';
+      } else if (state === 'paused') {
+        if (btn) btn.classList.remove('audio-active');
+        if (label) label.innerText = 'Continuă';
+        if (mtdBtn) mtdBtn.classList.remove('audio-active');
+        if (mtdLabel) mtdLabel.innerText = 'Continuă';
+        if (mtdIcon) mtdIcon.innerText = '▶️';
+      } else {
+        isSpeaking = false;
+        if (btn) btn.classList.remove('audio-active');
+        if (label) label.innerText = 'Ascultă';
+        if (mtdBtn) mtdBtn.classList.remove('audio-active');
+        if (mtdLabel) mtdLabel.innerText = 'Ascultă';
+        if (mtdIcon) mtdIcon.innerText = '🔊';
       }
     }
 
@@ -2551,19 +2754,14 @@
         return;
       }
 
-      const btn = document.getElementById('btnAudio');
-      const label = document.getElementById('audioBtnLabel');
-
       if (window.speechSynthesis.speaking) {
         if (window.speechSynthesis.paused) {
           window.speechSynthesis.resume();
-          btn.classList.add('audio-active');
-          label.innerText = 'Pauză';
+          setAudioUIState('playing');
           showToast('Redare reluată', '▶️');
         } else {
           window.speechSynthesis.pause();
-          btn.classList.remove('audio-active');
-          label.innerText = 'Continuă';
+          setAudioUIState('paused');
           showToast('Redare pusă pe pauză', '⏸️');
         }
         return;
@@ -2579,9 +2777,7 @@
       currentUtterance.rate = 0.95;
 
       currentUtterance.onstart = () => {
-        isSpeaking = true;
-        btn.classList.add('audio-active');
-        label.innerText = 'Pauză';
+        setAudioUIState('playing');
         showToast('Lectură audio pornită...', '🔊');
       };
 
@@ -2598,12 +2794,12 @@
     }
 
     function resetAudioButton() {
-      isSpeaking = false;
-      const btn = document.getElementById('btnAudio');
-      const label = document.getElementById('audioBtnLabel');
-      if (btn) btn.classList.remove('audio-active');
-      if (label) label.innerText = 'Ascultă';
+      setAudioUIState('stopped');
     }
+
+    window.addEventListener('beforeunload', () => {
+      if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+    });
 
     // Copy Essay Text
     function copyEssayText() {
@@ -2730,6 +2926,16 @@
             tagEl.style.display = 'none';
           }
         }
+      });
+
+      // Update essay tab pills
+      document.querySelectorAll('.essay-tab-pill[data-essay-id]').forEach(pill => {
+        const eId = pill.dataset.essayId;
+        const e = (work && work.essays) ? work.essays.find(item => item.id === eId) : null;
+        if (!e) return;
+        const isM = masteredEssays.has(eId);
+        pill.classList.toggle('is-mastered', isM);
+        pill.innerHTML = `${isM ? '<span class="tab-check">✓</span> ' : ''}${e.badge || e.title}`;
       });
     }
 
@@ -2877,16 +3083,21 @@
         serifFontEnabled = !serifFontEnabled;
         this.classList.toggle('active', !serifFontEnabled);
         document.getElementById('bookArticleContent').classList.toggle('sans-active', !serifFontEnabled);
+        const mtdFontBtn = document.getElementById('mtdFontBtn');
+        const mtdFontLabel = document.getElementById('mtdFontLabel');
+        if (mtdFontBtn) mtdFontBtn.classList.toggle('font-sans-active', !serifFontEnabled);
+        if (mtdFontLabel) mtdFontLabel.innerText = serifFontEnabled ? 'Serif' : 'Sans';
         showToast(serifFontEnabled ? 'Font: New York Serif' : 'Font: SF Pro Sans', 'Aa');
       });
 
       // Font Size Controls
-      const FONT_SIZES = ['15px', '17px', '19px', '21px', '23px'];
-      let currentFontSizeIdx = 1; // default 17px
+      const FONT_SIZES = ['0.92rem', '1.0rem', '1.08rem', '1.18rem', '1.28rem'];
+      const FONT_LABELS = ['Mică', 'Medie', 'Standard', 'Mare', 'Foarte Mare'];
+      let currentFontSizeIdx = 2; // default 1.08rem
 
       function updateFontSize() {
         document.documentElement.style.setProperty('--font-size-base', FONT_SIZES[currentFontSizeIdx]);
-        showToast(`Mărime font: ${FONT_SIZES[currentFontSizeIdx]}`, '🔤');
+        showToast(`Mărime text: ${FONT_LABELS[currentFontSizeIdx]}`, '🔤');
       }
 
       document.getElementById('btnFontInc').addEventListener('click', () => {
@@ -2903,9 +3114,25 @@
         }
       });
 
+      // Mobile Drawer Search Input
+      const drawerSearchInput = document.getElementById('drawerSearchInput');
+      if (drawerSearchInput) {
+        drawerSearchInput.addEventListener('input', (e) => {
+          renderDrawerWorks(e.target.value);
+        });
+      }
+
       // Global Keyboard Shortcuts
       document.addEventListener('keydown', (e) => {
-        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
+          if (e.key === 'Escape') {
+            e.target.value = '';
+            renderSidebar();
+            renderDrawerWorks('');
+            e.target.blur();
+          }
+          return;
+        }
 
         if (e.key === 'Escape') {
           closeLightbox();
@@ -2918,10 +3145,16 @@
         } else if (e.key === '/' && !e.metaKey && !e.ctrlKey) {
           e.preventDefault();
           document.getElementById('workSearchInput').focus();
+        } else if (e.key === 't' || e.key === 'T') {
+          toggleTheme();
         } else if (e.key === 'f' || e.key === 'F') {
           document.getElementById('btnFontToggle').click();
         } else if (e.key === 'h' || e.key === 'H') {
           document.getElementById('btnHighlight').click();
+        } else if (e.key === 'm' || e.key === 'M') {
+          toggleEssayMastered();
+        } else if (e.key === 's' || e.key === 'S') {
+          toggleAudioSpeech();
         } else if (e.key === 'z' || e.key === 'Z') {
           toggleFocusMode();
         } else if (e.key === 'ArrowRight' || e.key === 'j') {
@@ -2934,18 +3167,37 @@
       });
     }
 
-    function openMobileDrawer() {
-      const overlay = document.getElementById('mobileDrawerOverlay');
-      const drawer = document.getElementById('mobileDrawer');
+    function renderDrawerWorks(searchQuery = '') {
       const container = document.getElementById('drawerWorksList');
-      
+      if (!container) return;
       container.innerHTML = '';
-      BOOK_DATA.works.forEach(w => {
+      const q = searchQuery.toLowerCase().trim();
+
+      const filtered = BOOK_DATA.works.filter(w => {
+        if (!q) return true;
+        return (w.title + ' ' + w.author + ' ' + (w.badge || '') + ' ' + (w.category || '')).toLowerCase().includes(q);
+      });
+
+      if (filtered.length === 0) {
+        const empty = document.createElement('div');
+        empty.style.padding = '2rem 1rem';
+        empty.style.textAlign = 'center';
+        empty.style.color = 'var(--text-tertiary)';
+        empty.style.fontSize = '0.9rem';
+        empty.innerText = 'Nicio operă găsită conform căutării.';
+        container.appendChild(empty);
+        return;
+      }
+
+      filtered.forEach(w => {
         const essaysCount = w.essays ? w.essays.length : 1;
         const illCount = (w.essays || []).reduce((acc, e) => acc + (e.illustrations ? e.illustrations.length : 0), 0);
+        const wEssays = w.essays || [];
+        const masteredInWork = wEssays.filter(e => masteredEssays.has(e.id)).length;
 
         const card = document.createElement('div');
         card.className = `sidebar-work-card ${w.id === activeWorkId ? 'active' : ''}`;
+        card.dataset.workId = w.id;
         card.innerHTML = `
           <div class="sw-title-row">
             <span class="sw-title">${w.title}</span>
@@ -2955,7 +3207,7 @@
           <div class="sw-meta">
             <span>📚 ${essaysCount} ${essaysCount === 1 ? 'eseu' : 'eseuri'}</span>
             ${illCount > 0 ? `<span>🎨 ${illCount} ilustrații</span>` : ''}
-            <span class="sw-mastered-tag" style="display: none;"></span>
+            <span class="sw-mastered-tag" style="${masteredInWork > 0 ? 'display: inline-flex;' : 'display: none;'}">${masteredInWork > 0 ? `✓ ${masteredInWork}/${wEssays.length}` : ''}</span>
           </div>
         `;
         card.addEventListener('click', () => {
@@ -2964,14 +3216,26 @@
         });
         container.appendChild(card);
       });
+    }
 
-      overlay.classList.add('active');
-      drawer.classList.add('active');
+    function openMobileDrawer() {
+      const overlay = document.getElementById('mobileDrawerOverlay');
+      const drawer = document.getElementById('mobileDrawer');
+      const searchInput = document.getElementById('drawerSearchInput');
+      if (searchInput) searchInput.value = '';
+
+      const title = document.querySelector('.drawer-title');
+      if (title) title.innerText = `Opere Canonice (${BOOK_DATA.works.length})`;
+
+      renderDrawerWorks('');
+
+      if (overlay) overlay.classList.add('active');
+      if (drawer) drawer.classList.add('active');
       document.body.style.overflow = 'hidden';
     }
 
     function closeMobileDrawer(e) {
-      if (e && e.target && e.target !== document.getElementById('mobileDrawerOverlay') && !e.target.classList.contains('drawer-close')) {
+      if (e && e.target && e.target !== document.getElementById('mobileDrawerOverlay') && !e.target.closest('.drawer-close')) {
         return;
       }
       const overlay = document.getElementById('mobileDrawerOverlay');
@@ -2983,30 +3247,30 @@
 
     function toggleDownloadsMenu(e) {
       if (e) e.stopPropagation();
-      const popover = document.getElementById('downloadsPopover');
-      const btn = document.getElementById('navDownloadsBtn');
-      const isOpen = popover.classList.contains('active');
+      const overlay = document.getElementById('downloadsPopoverOverlay');
+      const btn = document.getElementById('mobileDownloadsBtn');
+      const isOpen = overlay && overlay.classList.contains('active');
       
       if (isOpen) {
         closeDownloadsMenu();
       } else {
-        popover.classList.add('active');
+        if (overlay) overlay.classList.add('active');
         if (btn) btn.classList.add('active');
       }
     }
 
     function closeDownloadsMenu() {
-      const popover = document.getElementById('downloadsPopover');
-      const btn = document.getElementById('navDownloadsBtn');
-      if (popover) popover.classList.remove('active');
+      const overlay = document.getElementById('downloadsPopoverOverlay');
+      const btn = document.getElementById('mobileDownloadsBtn');
+      if (overlay) overlay.classList.remove('active');
       if (btn) btn.classList.remove('active');
     }
 
     document.addEventListener('click', (e) => {
-      const popover = document.getElementById('downloadsPopover');
-      const btn = document.getElementById('navDownloadsBtn');
-      if (popover && popover.classList.contains('active')) {
-        if (!popover.contains(e.target) && e.target !== btn && !btn.contains(e.target)) {
+      const overlay = document.getElementById('downloadsPopoverOverlay');
+      const btn = document.getElementById('mobileDownloadsBtn');
+      if (overlay && overlay.classList.contains('active')) {
+        if (!overlay.contains(e.target) && e.target !== btn && (!btn || !btn.contains(e.target))) {
           closeDownloadsMenu();
         }
       }
@@ -3043,10 +3307,12 @@
         dialogCard.style.display = 'none';
       }
       document.getElementById('appleLightbox').classList.add('active');
+      document.body.style.overflow = 'hidden';
     }
 
     function closeLightbox() {
       document.getElementById('appleLightbox').classList.remove('active');
+      document.body.style.overflow = '';
     }
 
     init();
@@ -3058,7 +3324,7 @@
       <span class="mtd-label">Opere</span>
     </button>
     <button class="mtd-btn" onclick="toggleAudioSpeech()" id="mtdAudioBtn" title="Ascultă">
-      <span class="mtd-icon">🔊</span>
+      <span class="mtd-icon" id="mtdAudioIcon">🔊</span>
       <span class="mtd-label" id="mtdAudioLabel">Ascultă</span>
     </button>
     <button class="mtd-btn" onclick="toggleEssayMastered()" id="mtdMasterBtn" title="Marchează ca învățat">
@@ -3069,9 +3335,9 @@
       <span class="mtd-icon">↗</span>
       <span class="mtd-label">Trimite</span>
     </button>
-    <button class="mtd-btn" onclick="document.getElementById('btnFontToggle').click()" title="Font">
+    <button class="mtd-btn" onclick="document.getElementById('btnFontToggle').click()" id="mtdFontBtn" title="Font Serif / Sans">
       <span class="mtd-icon">Aa</span>
-      <span class="mtd-label">Font</span>
+      <span class="mtd-label" id="mtdFontLabel">Serif</span>
     </button>
   </div>
 </body>
