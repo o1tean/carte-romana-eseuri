@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html lang="ro" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carte Română Eseuri • Ediție Apple Books & Web</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+  <style>
+    /* ==========================================================================
+       APPLE DESIGN SYSTEM (macOS & iOS HIG Inspired)
+       ========================================================================== */
+    :root {
+      --font-sf: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "New York", "Charter", "Lora", Georgia, serif;
+      
+      /* Apple Dark Theme (Default) */
+      --bg-body: #000000;
+      --bg-surface: #161617;
+      --bg-card: rgba(255, 255, 255, 0.04);
+      --bg-card-hover: rgba(255, 255, 255, 0.07);
+      --bg-glass: rgba(22, 22, 23, 0.75);
+      --border-subtle: rgba(255, 255, 255, 0.12);
+      --border-card: rgba(255, 255, 255, 0.08);
+      
+      --text-primary: #F5F5F7;
+      --text-secondary: #A1A1A6;
+      --text-tertiary: #6E6E73;
+      
+      --apple-blue: #2997FF;
+      --apple-blue-hover: #0077ED;
+      --apple-accent-gradient: linear-gradient(135deg, #2997FF 0%, #A855F7 100%);
+      
+      --highlight-bg: rgba(234, 179, 8, 0.25);
+      --highlight-border: #EAB308;
+      
+      --shadow-apple: 0 20px 40px rgba(0, 0, 0, 0.4);
+      --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.25);
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-full: 9999px;
+    }
+
+    [data-theme="light"] {
+      --bg-body: #F5F5F7;
+      --bg-surface: #FFFFFF;
+      --bg-card: #FFFFFF;
+      --bg-card-hover: #F8F8F9;
+      --bg-glass: rgba(255, 255, 255, 0.8);
+      --border-subtle: rgba(0, 0, 0, 0.08);
+      --border-card: rgba(0, 0, 0, 0.06);
+      
+      --text-primary: #1D1D1F;
+      --text-secondary: #6E6E73;
+      --text-tertiary: #86868B;
+      
+      --apple-blue: #0071E3;
+      --apple-blue-hover: #0077ED;
+      --apple-accent-gradient: linear-gradient(135deg, #0071E3 0%, #8B5CF6 100%);
+      
+      --highlight-bg: rgba(254, 240, 138, 0.7);
+      --highlight-border: #CA8A04;
+      
+      --shadow-apple: 0 20px 40px rgba(0, 0, 0, 0.08);
+      --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      font-family: var(--font-sf);
+      background-color: var(--bg-body);
+      color: var(--text-primary);
+      line-height: 1.5;
+      overflow-x: hidden;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    /* ==========================================================================
+       APPLE GLOBAL NAVIGATION
+       ========================================================================== */
+    .apple-nav {
+      position: sticky;
+      top: 0;
+      width: 100%;
+      height: 48px;
+      background: var(--bg-glass);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1.5rem;
+      z-index: 1000;
+    }
+
+    .apple-nav-left {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .apple-logo-link {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+      color: var(--text-primary);
+      font-weight: 600;
+      font-size: 0.95rem;
+      letter-spacing: -0.01em;
+    }
+
+    .apple-icon-svg {
+      width: 17px;
+      height: 17px;
+      fill: currentColor;
+    }
+
+    .apple-nav-menu {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .apple-nav-menu a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.8rem;
+      transition: color 0.15s ease;
+    }
+
+    .apple-nav-menu a:hover {
+      color: var(--text-primary);
+    }
+
+    .apple-nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .apple-btn-pill {
+      background: var(--apple-blue);
+      color: #FFFFFF;
+      font-size: 0.75rem;
+      font-weight: 500;
+      padding: 4px 14px;
+      border-radius: var(--radius-full);
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.15s ease, transform 0.15s ease;
+    }
+
+    .apple-btn-pill:hover {
+      background: var(--apple-blue-hover);
+      transform: scale(1.02);
+    }
+
+    .apple-btn-ghost {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-primary);
+      font-size: 0.75rem;
+      font-weight: 500;
+      padding: 4px 12px;
+      border-radius: var(--radius-full);
+      text-decoration: none;
+      border: 1px solid var(--border-subtle);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.15s ease;
+    }
+
+    .apple-btn-ghost:hover {
+      background: rgba(255, 255, 255, 0.14);
+    }
+
+    /* ==========================================================================
+       APPLE HERO SECTION
+       ========================================================================== */
+    .apple-hero {
+      padding: 5rem 1.5rem 3.5rem;
+      text-align: center;
+      max-width: 980px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--apple-blue);
+      margin-bottom: 0.75rem;
+    }
+
+    .hero-title {
+      font-size: clamp(2.8rem, 6vw, 4.5rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.08;
+      margin-bottom: 1rem;
+      background: linear-gradient(180deg, var(--text-primary) 20%, var(--text-secondary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1.1rem, 2.2vw, 1.35rem);
+      color: var(--text-secondary);
+      max-width: 680px;
+      font-weight: 400;
+      line-height: 1.45;
+      margin-bottom: 2rem;
+      letter-spacing: -0.01em;
+    }
+
+    .hero-cta-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      margin-bottom: 2rem;
+    }
+
+    .hero-cover-wrap {
+      margin: 0.5rem auto 3rem;
+      perspective: 1000px;
+    }
+
+    .hero-cover-img {
+      width: 220px;
+      max-width: 80vw;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6), 0 0 35px rgba(41, 151, 255, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+      display: block;
+    }
+
+    .hero-cover-img:hover {
+      transform: translateY(-6px) scale(1.03);
+      box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.75), 0 0 50px rgba(41, 151, 255, 0.4);
+    }
+
+    .hero-btn-primary {
+      background: var(--apple-blue);
+      color: #FFF;
+      font-size: 0.95rem;
+      font-weight: 500;
+      padding: 12px 26px;
+      border-radius: var(--radius-full);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 14px rgba(41, 151, 255, 0.35);
+    }
+
+    .hero-btn-primary:hover {
+      background: var(--apple-blue-hover);
+      transform: translateY(-1px);
+    }
+
+    .hero-btn-secondary {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-primary);
+      font-size: 0.95rem;
+      font-weight: 500;
+      padding: 12px 24px;
+      border-radius: var(--radius-full);
+      text-decoration: none;
+      border: 1px solid var(--border-subtle);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .hero-btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.14);
+      transform: translateY(-1px);
+    }
+
+    /* Bento Grid Features */
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+      width: 100%;
+      margin-bottom: 4rem;
+    }
+
+    .bento-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      backdrop-filter: blur(10px);
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .bento-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--border-subtle);
+    }
+
+    .bento-icon {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .bento-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 0.4rem;
+      letter-spacing: -0.01em;
+    }
+
+    .bento-desc {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* ==========================================================================
+       APPLE STUDIO READER (MASTER-DETAIL WORKSPACE)
+       ========================================================================== */
+    .studio-section {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 0 1.5rem 5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    /* Segmented Control Filter */
+    .studio-controls {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .segmented-control {
+      display: inline-flex;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      padding: 3px;
+      border-radius: var(--radius-full);
+    }
+
+    .seg-btn {
+      padding: 6px 16px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      background: transparent;
+      border: none;
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .seg-btn.active {
+      background: var(--apple-blue);
+      color: #FFF;
+      box-shadow: 0 2px 8px rgba(0, 113, 227, 0.3);
+    }
+
+    .search-pill-box {
+      position: relative;
+      width: 240px;
+    }
+
+    .search-pill-input {
+      width: 100%;
+      height: 34px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-full);
+      padding: 0 1rem 0 2rem;
+      font-size: 0.85rem;
+      color: var(--text-primary);
+      font-family: var(--font-sf);
+      outline: none;
+      transition: border-color 0.15s ease;
+    }
+
+    .search-pill-input:focus {
+      border-color: var(--apple-blue);
+    }
+
+    .search-pill-icon {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-tertiary);
+      font-size: 0.8rem;
+      pointer-events: none;
+    }
+
+    /* Reader Main Layout */
+    .reader-layout {
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      gap: 2rem;
+      min-height: 750px;
+    }
+
+    /* Left Sidebar List */
+    .reader-sidebar {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-lg);
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      max-height: 800px;
+      overflow-y: auto;
+    }
+
+    .sidebar-work-card {
+      padding: 0.85rem 1rem;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.15s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .sidebar-work-card:hover {
+      background: var(--bg-card-hover);
+    }
+
+    .sidebar-work-card.active {
+      background: var(--bg-card-hover);
+      border-color: var(--apple-blue);
+      box-shadow: var(--shadow-card);
+    }
+
+    .sw-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .sw-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .sw-badge {
+      font-size: 0.65rem;
+      padding: 2px 7px;
+      border-radius: var(--radius-full);
+      font-weight: 600;
+      background: rgba(41, 151, 255, 0.12);
+      color: var(--apple-blue);
+    }
+
+    .sw-author {
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+    }
+
+    .sw-meta {
+      display: flex;
+      gap: 10px;
+      font-size: 0.72rem;
+      color: var(--text-tertiary);
+      margin-top: 2px;
+    }
+
+    /* Right Reader Canvas */
+    .reader-viewport {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-lg);
+      padding: 3rem 3.5rem;
+      overflow-y: auto;
+      max-height: 800px;
+      box-shadow: var(--shadow-apple);
+    }
+
+    /* Reader Toolbar inside Viewport */
+    .reader-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border-subtle);
+      margin-bottom: 2.5rem;
+    }
+
+    .rt-work-info h2 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: -0.01em;
+    }
+
+    .rt-work-info p {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    .rt-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .rt-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      font-size: 0.8rem;
+      padding: 5px 12px;
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .rt-btn:hover {
+      color: var(--text-primary);
+      background: var(--bg-card-hover);
+    }
+
+    .rt-btn.active {
+      background: var(--apple-blue);
+      color: #FFF;
+      border-color: var(--apple-blue);
+    }
+
+    /* Apple Books Typography */
+    .book-article {
+      max-width: 720px;
+      margin: 0 auto;
+      font-family: var(--font-serif);
+      color: var(--text-primary);
+      line-height: 1.75;
+      font-size: 1.08rem;
+    }
+
+    .book-article h2.essay-h1 {
+      font-family: var(--font-sf);
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--text-primary);
+      margin: 2rem 0 0.4rem;
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 0.4rem;
+    }
+
+    .book-article h3.essay-h2 {
+      font-family: var(--font-sf);
+      font-size: 1.05rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      color: var(--apple-blue);
+      margin: 0.3rem 0 1.2rem;
+    }
+
+    .book-article p.essay-para {
+      margin-bottom: 1.15rem;
+      text-align: justify;
+      color: var(--text-primary);
+      opacity: 0.95;
+    }
+
+    .book-article p.lead-para::first-letter {
+      font-size: 2.6rem;
+      float: left;
+      line-height: 0.85;
+      padding-right: 0.2em;
+      color: var(--apple-blue);
+      font-family: var(--font-serif);
+      font-weight: 600;
+    }
+
+    .book-article strong.kw-bold {
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .highlight-enabled strong.kw-bold {
+      background-color: var(--highlight-bg);
+      border-bottom: 2px solid var(--highlight-border);
+      padding: 1px 3px;
+      border-radius: 2px;
+    }
+
+    .book-article span.quote-italic {
+      font-style: italic;
+      color: var(--text-primary);
+    }
+
+    .book-page-marker {
+      text-align: center;
+      font-family: var(--font-sf);
+      font-size: 0.75rem;
+      color: var(--text-tertiary);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin: 3rem 0 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .book-page-marker::before,
+    .book-page-marker::after {
+      content: "";
+      height: 1px;
+      width: 40px;
+      background: var(--border-subtle);
+    }
+
+    /* Comic Illustration Showcase inside Apple Reader */
+    .apple-comic-figure {
+      margin: 2rem auto;
+      text-align: center;
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-card);
+      cursor: zoom-in;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .apple-comic-figure:hover {
+      transform: scale(1.01);
+      box-shadow: var(--shadow-apple);
+    }
+
+    .apple-comic-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: contain;
+      max-height: 440px;
+    }
+
+    .apple-comic-caption {
+      font-family: var(--font-sf);
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      padding: 0.6rem 1rem;
+      background: var(--bg-surface);
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    /* Fullscreen Apple Zoom Lightbox */
+    .apple-lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.9);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      padding: 2rem;
+      cursor: zoom-out;
+    }
+
+    .apple-lightbox.active {
+      display: flex;
+      animation: appleFadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes appleFadeIn {
+      from { opacity: 0; transform: scale(0.97); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .apple-lightbox img {
+      max-width: 92vw;
+      max-height: 90vh;
+      border-radius: var(--radius-sm);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
+    }
+
+    /* Apple Footer */
+    .apple-footer {
+      background: var(--bg-surface);
+      border-top: 1px solid var(--border-subtle);
+      padding: 3rem 1.5rem 2.5rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-tertiary);
+    }
+
+    .apple-footer p {
+      margin-bottom: 0.5rem;
+    }
+
+    .apple-footer a {
+      color: var(--apple-blue);
+      text-decoration: none;
+    }
+
+    /* Responsive */
+    @media (max-width: 980px) {
+      .reader-layout {
+        grid-template-columns: 1fr;
+      }
+      .reader-sidebar {
+        max-height: 280px;
+      }
+      .reader-viewport {
+        padding: 2rem 1.5rem;
+      }
+      .apple-nav-menu {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Global Navigation -->
+  <nav class="apple-nav">
+    <div class="apple-nav-left">
+      <a href="#" class="apple-logo-link">
+        <svg class="apple-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+          <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+        </svg>
+        <span>Carte Română Eseuri</span>
+      </a>
+      <ul class="apple-nav-menu">
+        <li><a href="#studio">Opere</a></li>
+        <li><a href="#studio">Eseuri</a></li>
+        <li><a href="#studio">Benzi Desenate</a></li>
+        <li><a href="#studio">Metodologie</a></li>
+      </ul>
+    </div>
+
+    <div class="apple-nav-actions">
+      <a href="./Carte_Romana_Eseuri_AppleBooks.epub" class="apple-btn-pill" title="Descarcă ediția optimizată Apple Books (.epub)">
+        <span>📖</span> Apple Books (.epub)
+      </a>
+      <a href="./Carte_Romana_Eseuri_GoogleDocs.docx" class="apple-btn-ghost" title="Descarcă versiunea Google Docs / Word">
+        <span>📄</span> Word / Docs
+      </a>
+      <button id="themeToggleBtn" class="apple-btn-ghost" title="Schimbă modul Luminos / Întunecat">🌓</button>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="apple-hero">
+    <div class="hero-eyebrow">Ediție Digitală 2026 • Pregătire Bacalaureat</div>
+    <h1 class="hero-title">Carte Română Eseuri.</h1>
+    <p class="hero-subtitle">
+      18 opere canonice din programa națională. Toate eseurile structurate pas cu pas. Peste 50 de scene ilustrate cadru cu cadru pentru memorie vizuală.
+    </p>
+
+    <div class="hero-cta-group">
+      <a href="#studio" class="hero-btn-primary">
+        <span>Citește Eseurile Acum</span>
+        <span>↓</span>
+      </a>
+      <a href="./Carte_Romana_Eseuri_AppleBooks.epub" class="hero-btn-secondary">
+        <span>📖 Apple Books (.epub)</span>
+      </a>
+      <a href="./Carte_Romana_Eseuri_GoogleDocs.docx" class="hero-btn-secondary">
+        <span>Word / Docs (.docx)</span>
+      </a>
+      <a href="./Carte_Romana_Eseuri_Original.pdf" class="hero-btn-secondary" target="_blank">
+        <span>PDF Original</span>
+      </a>
+    </div>
+
+    <!-- Book Cover Showcase -->
+    <div class="hero-cover-wrap">
+      <img src="images/cover.jpg" alt="Copertă Carte Română Eseuri Bacalaureat" class="hero-cover-img" />
+    </div>
+
+    <!-- Bento Features Grid -->
+    <div class="bento-grid">
+      <div class="bento-card">
+        <div class="bento-icon">🎨</div>
+        <div class="bento-title">Memorie Vizuală</div>
+        <p class="bento-desc">58 de benzi desenate originale ce ilustrează scenele decisive din opere (întâlnirea lui Ion cu pământul, Lică și Ghiță la han, Harap-Alb și furnicile etc.).</p>
+      </div>
+      <div class="bento-card">
+        <div class="bento-icon">📚</div>
+        <div class="bento-title">Rigoare Academică</div>
+        <p class="bento-desc">Structuri complete conform baremului oficial de la Subiectul al III-lea: particularități de construcție, caracterizări de personaj și relații între personaje.</p>
+      </div>
+      <div class="bento-card">
+        <div class="bento-icon">✨</div>
+        <div class="bento-title">Experiență Apple Native</div>
+        <p class="bento-desc">Tipografie impecabilă cu fonturi New York & SF Pro, evidențiere inteligentă a conceptelor literare și compatibilitate completă cu Apple Books pe Mac, iPad și iPhone.</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- Interactive Studio Reader Section -->
+  <section class="studio-section" id="studio">
+    <div class="studio-controls">
+      <div class="segmented-control">
+        <button class="seg-btn active" data-filter="all">Toate (16)</button>
+        <button class="seg-btn" data-filter="Proză">Proză</button>
+        <button class="seg-btn" data-filter="Roman">Roman</button>
+        <button class="seg-btn" data-filter="Dramaturgie">Teatru</button>
+        <button class="seg-btn" data-filter="Poezie">Poezie</button>
+      </div>
+
+      <div class="search-pill-box">
+        <span class="search-pill-icon">🔍</span>
+        <input type="text" id="workSearchInput" class="search-pill-input" placeholder="Caută operă, autor, temă...">
+      </div>
+    </div>
+
+    <!-- Master-Detail Layout -->
+    <div class="reader-layout">
+      
+      <!-- Left Works Sidebar -->
+      <aside class="reader-sidebar" id="worksListContainer">
+        <!-- Rendered by JS -->
+      </aside>
+
+      <!-- Right Reading Canvas -->
+      <main class="reader-viewport" id="readerViewport">
+        <div class="reader-toolbar">
+          <div class="rt-work-info">
+            <h2 id="currentWorkTitle">Moara cu noroc</h2>
+            <p id="currentWorkMeta">Ioan Slavici • Nuvelă realistă / psihologică (1881)</p>
+          </div>
+          <div class="rt-actions">
+            <button id="btnHighlight" class="rt-btn" title="Comută evidențierea termenilor cheie">
+              <span>🖍️</span> Evidențiază concepte
+            </button>
+            <button id="btnFontToggle" class="rt-btn" title="Comută font Serif / Sans-serif">
+              <span>Aa</span> Font
+            </button>
+          </div>
+        </div>
+
+        <article class="book-article" id="bookArticleContent">
+          <!-- Rendered by JS -->
+        </article>
+      </main>
+
+    </div>
+  </section>
+
+  <!-- Fullscreen Lightbox Zoom Modal -->
+  <div class="apple-lightbox" id="appleLightbox" onclick="closeLightbox()">
+    <img id="lightboxImg" src="" alt="Ilustrație Mărită">
+  </div>
+
+  <!-- Apple Minimalist Footer -->
+  <footer class="apple-footer">
+    <p>Carte Română Eseuri • Ediție Digitală Optimizată pentru Apple Books și Web.</p>
+    <p>Conține toate cele 18 opere canonice pentru Bacalaureat și 58 de scene ilustrate cadru cu cadru.</p>
+    <p style="margin-top: 1rem;">
+      <a href="/Users/o1tean/Downloads/Carte_Romana_Eseuri_AppleBooks.epub">Descarcă formatul .epub pentru Apple Books</a> • 
+      <a href="/Users/o1tean/Downloads/Carte_Romana_Eseuri_GoogleDocs.docx">Descarcă formatul .docx pentru Google Docs</a>
+    </p>
+  </footer>
+
+  <!-- Load Data -->
+  <script src="data.js"></script>
+  <script>
+    // State
+    let activeWorkId = 'moara';
+    let currentCategoryFilter = 'all';
+    let highlightEnabled = false;
+    let serifFontEnabled = true;
+
+    // Key literary terms for highlighting
+    const BOLD_TERMS = [
+      'conflictul central', 'conflictul interior', 'conflictul exterior', 'conflictul',
+      'simetria incipit-final', 'simetria dintre incipit și final', 'incipitul', 'finalul',
+      'statutul social', 'statutul moral', 'statutul psihologic', 'statutul inițial',
+      'perspectiva narativă', 'perspectivă narativă', 'perspectiva obiectivă',
+      'naratorul obiectiv', 'naratorul heterodiegetic', 'omniprezent și omniscient',
+      'focalizare zero', 'personajele-tip', 'personaj rotund', 'personaj complex',
+      'tema textului', 'tema', 'titlul operei', 'titlul',
+      'relația dintre cele două personaje', 'relația de tip stăpân-slugă',
+      'motive literare', 'simboluri', 'metafora',
+      'O primă trăsătură', 'O a două trăsătură', 'O a doua trăsătură',
+      'Un prim element', 'Un al doilea element',
+      'O primă scenă relevantă', 'O a doua scenă relevantă', 'O altă scenă relevantă',
+      'În concluzie', 'Scena sărutării pământului', 'Secvența nunții lui',
+      'Venirea lui Lică la cârciumă', 'Finalul nuvelei', 'Întâlnirea cu furnicile',
+      'Tabloul I', 'Tabloul al II-lea', 'Tabloul al III-lea'
+    ];
+    const BOLD_REGEX = new RegExp('(' + BOLD_TERMS.join('|') + ')', 'gi');
+    const QUOTE_REGEX = /(„[^”]+”|"[^"]+")/g;
+
+    function formatText(text) {
+      let t = text.replace(QUOTE_REGEX, '<span class="quote-italic">$1</span>');
+      t = t.replace(BOLD_REGEX, '<strong class="kw-bold">$1</strong>');
+      return t;
+    }
+
+    function init() {
+      renderSidebar();
+      renderWork(activeWorkId);
+      setupEvents();
+    }
+
+    function renderSidebar() {
+      const container = document.getElementById('worksListContainer');
+      container.innerHTML = '';
+      const searchVal = document.getElementById('workSearchInput').value.trim().toLowerCase();
+
+      BOOK_DATA.works.forEach(w => {
+        if (currentCategoryFilter !== 'all' && !w.category.includes(currentCategoryFilter)) {
+          return;
+        }
+        if (searchVal) {
+          const match = (w.title + ' ' + w.author + ' ' + w.desc).toLowerCase().includes(searchVal);
+          if (!match) return;
+        }
+
+        const pages = BOOK_DATA.pages.filter(p => p.work_id === w.id);
+        const illCount = pages.reduce((acc, p) => acc + (p.illustrations ? p.illustrations.length : 0), 0);
+
+        const card = document.createElement('div');
+        card.className = `sidebar-work-card ${w.id === activeWorkId ? 'active' : ''}`;
+        card.innerHTML = `
+          <div class="sw-title-row">
+            <span class="sw-title">${w.title}</span>
+            <span class="sw-badge">${w.badge}</span>
+          </div>
+          <div class="sw-author">${w.author} (${w.year})</div>
+          <div class="sw-meta">
+            <span>📄 ${pages.length} pagini</span>
+            ${illCount > 0 ? `<span>🎨 ${illCount} ilustrații</span>` : ''}
+          </div>
+        `;
+
+        card.addEventListener('click', () => {
+          document.querySelectorAll('.sidebar-work-card').forEach(c => c.classList.remove('active'));
+          card.classList.add('active');
+          activeWorkId = w.id;
+          renderWork(w.id);
+        });
+
+        container.appendChild(card);
+      });
+    }
+
+    function renderWork(workId) {
+      const work = BOOK_DATA.works.find(w => w.id === workId);
+      if (!work) return;
+
+      document.getElementById('currentWorkTitle').innerText = work.title;
+      document.getElementById('currentWorkMeta').innerText = `${work.author} • ${work.category} (${work.year})`;
+
+      const article = document.getElementById('bookArticleContent');
+      article.innerHTML = '';
+
+      const pages = BOOK_DATA.pages.filter(p => p.work_id === workId);
+
+      pages.forEach(p => {
+        if (p.is_title_page) return;
+
+        const pnum = p.page_num;
+        const headings = p.headings || [];
+        const paras = p.paragraphs || [];
+        const ills = p.illustrations || [];
+
+        // Page marker
+        if (pnum) {
+          const marker = document.createElement('div');
+          marker.className = 'book-page-marker';
+          marker.innerText = `Pagina ${pnum}`;
+          article.appendChild(marker);
+        }
+
+        // Headings
+        if (headings.length > 0) {
+          const h1 = document.createElement('h2');
+          h1.className = 'essay-h1';
+          h1.innerText = headings[0];
+          article.appendChild(h1);
+
+          for (let i = 1; i < headings.length; i++) {
+            const h2 = document.createElement('h3');
+            h2.className = 'essay-h2';
+            h2.innerText = headings[i];
+            article.appendChild(h2);
+          }
+        }
+
+        // Illustrations HTML
+        let illElements = [];
+        ills.forEach(ill => {
+          const fig = document.createElement('figure');
+          fig.className = 'apple-comic-figure';
+          fig.innerHTML = `
+            <img class="apple-comic-img" src="${ill.src}" alt="Scenă ilustrată">
+            <figcaption class="apple-comic-caption">🔍 Scenă ilustrată cadru cu cadru (clic pentru mărire)</figcaption>
+          `;
+          fig.addEventListener('click', () => openLightbox(ill.src));
+          illElements.push(fig);
+        });
+
+        // Paragraphs & Illustrations integration
+        if (illElements.length === 0) {
+          paras.forEach((para, idx) => {
+            const pElem = document.createElement('p');
+            pElem.className = `essay-para ${idx === 0 && headings.length > 0 ? 'lead-para' : ''}`;
+            pElem.innerHTML = formatText(para);
+            article.appendChild(pElem);
+          });
+        } else {
+          // If illustrations exist, place after first paragraph
+          if (paras.length > 0) {
+            const p1 = document.createElement('p');
+            p1.className = `essay-para ${headings.length > 0 ? 'lead-para' : ''}`;
+            p1.innerHTML = formatText(paras[0]);
+            article.appendChild(p1);
+          }
+
+          illElements.forEach(fig => article.appendChild(fig));
+
+          for (let i = 1; i < paras.length; i++) {
+            const pElem = document.createElement('p');
+            pElem.className = 'essay-para';
+            pElem.innerHTML = formatText(paras[i]);
+            article.appendChild(pElem);
+          }
+        }
+      });
+
+      // Scroll reader viewport to top smoothly
+      document.getElementById('readerViewport').scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function setupEvents() {
+      // Search
+      document.getElementById('workSearchInput').addEventListener('input', () => {
+        renderSidebar();
+      });
+
+      // Category Segmented Control
+      document.querySelectorAll('.seg-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          document.querySelectorAll('.seg-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          currentCategoryFilter = btn.dataset.filter;
+          renderSidebar();
+        });
+      });
+
+      // Concept Highlighter
+      const highlightBtn = document.getElementById('btnHighlight');
+      highlightBtn.addEventListener('click', () => {
+        highlightEnabled = !highlightEnabled;
+        document.getElementById('bookArticleContent').classList.toggle('highlight-enabled', highlightEnabled);
+        highlightBtn.classList.toggle('active', highlightEnabled);
+      });
+
+      // Font Toggle (Serif vs Sans)
+      const fontBtn = document.getElementById('btnFontToggle');
+      fontBtn.addEventListener('click', () => {
+        serifFontEnabled = !serifFontEnabled;
+        const article = document.getElementById('bookArticleContent');
+        article.style.fontFamily = serifFontEnabled ? 'var(--font-serif)' : 'var(--font-sf)';
+        fontBtn.classList.toggle('active', !serifFontEnabled);
+      });
+
+      // Dark / Light Theme Toggle
+      const themeBtn = document.getElementById('themeToggleBtn');
+      themeBtn.addEventListener('click', () => {
+        const cur = document.documentElement.getAttribute('data-theme');
+        const next = cur === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', next);
+      });
+    }
+
+    // Lightbox
+    function openLightbox(src) {
+      document.getElementById('lightboxImg').src = src;
+      document.getElementById('appleLightbox').classList.add('active');
+    }
+
+    function closeLightbox() {
+      document.getElementById('appleLightbox').classList.remove('active');
+    }
+
+    init();
+  </script>
+</body>
+</html>
