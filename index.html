@@ -1454,9 +1454,205 @@
         font-size: 0.92rem !important;
       }
     }
+
+    /* Reading Progress Bar */
+    .reader-progress-track {
+      width: 100%;
+      height: 3px;
+      background: var(--border-subtle);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      overflow: hidden;
+    }
+    .reader-progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--apple-blue), #5E5CE6);
+      transition: width 0.12s ease-out;
+      border-radius: 0 2px 2px 0;
+    }
+
+    /* Apple Dynamic Toast Pill */
+    .apple-toast {
+      position: fixed;
+      top: 1.5rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(-30px);
+      background: rgba(22, 22, 23, 0.92);
+      color: #FFF;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: 0.65rem 1.25rem;
+      border-radius: var(--radius-full);
+      font-family: var(--font-sf);
+      font-size: 0.88rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      z-index: 9999;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .apple-toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+    [data-theme="light"] .apple-toast {
+      background: rgba(255, 255, 255, 0.95);
+      color: #1D1D1F;
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Focus (Zen) Mode */
+    body.focus-mode-active .reader-sidebar,
+    body.focus-mode-active .apple-hero,
+    body.focus-mode-active .studio-controls {
+      display: none !important;
+    }
+    body.focus-mode-active .reader-layout {
+      grid-template-columns: 1fr !important;
+    }
+    body.focus-mode-active .reader-viewport {
+      max-width: 820px;
+      margin: 1rem auto;
+      box-shadow: none;
+    }
+
+    /* Bottom Pager */
+    .essay-bottom-pager {
+      margin: 3.5rem 0 2rem 0;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .pager-btn {
+      flex: 1;
+      min-width: 220px;
+      max-width: 340px;
+      padding: 0.9rem 1.25rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-md);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      font-family: var(--font-sf);
+      text-align: left;
+    }
+    .pager-btn:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--apple-blue);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-sm);
+    }
+    .pager-btn.next {
+      text-align: right;
+      margin-left: auto;
+    }
+    .pager-hint {
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--apple-blue);
+    }
+    .pager-title {
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* Audio Active State */
+    .audio-active {
+      background: rgba(0, 113, 227, 0.15) !important;
+      color: var(--apple-blue) !important;
+      border-color: var(--apple-blue) !important;
+    }
+    @keyframes pulseWave {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.15); }
+      100% { transform: scale(1); }
+    }
+    .audio-active span:first-child {
+      display: inline-block;
+      animation: pulseWave 1s infinite ease-in-out;
+    }
+
+    /* Reading Metrics Tag */
+    .reading-metrics-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.76rem;
+      color: var(--text-tertiary);
+      background: var(--bg-surface);
+      padding: 0.25rem 0.65rem;
+      border-radius: 999px;
+      border: 1px solid var(--border-subtle);
+    }
+
+    /* Keyboard Shortcuts Modal / Hint */
+    .kbd-hint {
+      font-family: var(--font-sf);
+      font-size: 0.7rem;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 4px;
+      padding: 1px 5px;
+      color: var(--text-secondary);
+      margin-left: 4px;
+    }
+
+    /* Print Styles */
+    @media print {
+      .apple-nav, .apple-hero, .studio-controls, .reader-sidebar, .reader-toolbar,
+      .essay-tabs-bar, .essay-bottom-pager, .apple-footer, .mobile-drawer-overlay,
+      .downloads-popover-overlay, .apple-lightbox, .reader-progress-track, .apple-toast {
+        display: none !important;
+      }
+      body, .studio-section, .reader-layout, .reader-viewport, .book-article {
+        background: #FFF !important;
+        color: #000 !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        max-width: 100% !important;
+        box-shadow: none !important;
+        overflow: visible !important;
+      }
+      .essay-para {
+        font-size: 11pt !important;
+        line-height: 1.5 !important;
+        color: #111 !important;
+      }
+      .apple-comic-figure {
+        page-break-inside: avoid;
+        break-inside: avoid;
+      }
+    }
+
   </style>
 </head>
 <body>
+  <!-- Apple Floating Toast Notification -->
+  <div class="apple-toast" id="appleToast">
+    <span id="toastIcon">✓</span>
+    <span id="toastMsg">Notificare</span>
+  </div>
 
   <!-- Global Navigation -->
   <nav class="apple-nav">
@@ -1606,6 +1802,15 @@
             <p id="currentWorkMeta">Ioan Slavici • Nuvelă realistă / psihologică (1881)</p>
           </div>
           <div class="rt-actions">
+            <button id="btnAudio" class="rt-btn" onclick="toggleAudioSpeech()" title="Ascultă eseul citit cu voce tare">
+              <span>🔊</span> <span id="audioBtnLabel">Ascultă</span>
+            </button>
+            <button id="btnCopyEssay" class="rt-btn" onclick="copyEssayText()" title="Copiază textul eseului (Cmd+C)">
+              <span>📋</span> Copiază
+            </button>
+            <button id="btnFocusMode" class="rt-btn" onclick="toggleFocusMode()" title="Mod focalizare lectură">
+              <span>📖</span> Focus
+            </button>
             <button id="btnHighlight" class="rt-btn" title="Comută evidențierea termenilor cheie">
               <span>🖍️</span> Evidențiază
             </button>
@@ -1620,12 +1825,20 @@
           </div>
         </div>
 
+        <!-- Reading Progress Bar -->
+        <div class="reader-progress-track">
+          <div class="reader-progress-bar" id="readerProgressBar"></div>
+        </div>
+
         <!-- Apple Essay Switcher Bar -->
         <div class="essay-tabs-bar" id="essayTabsBar" style="display: none;"></div>
 
         <article class="book-article" id="bookArticleContent">
           <!-- Rendered by JS -->
         </article>
+
+        <!-- Ergonomic Bottom Essay Pager -->
+        <nav class="essay-bottom-pager" id="essayBottomPager" style="display: none;"></nav>
       </main>
 
     </div>
@@ -1692,6 +1905,9 @@
     let currentCategoryFilter = 'all';
     let highlightEnabled = false;
     let serifFontEnabled = true;
+    let isSpeaking = false;
+    let currentUtterance = null;
+    let toastTimeout = null;
 
     // Key literary terms for highlighting
     const BOLD_TERMS = [
@@ -1720,16 +1936,50 @@
       return t;
     }
 
+    function showToast(msg, icon = '✓') {
+      const toast = document.getElementById('appleToast');
+      document.getElementById('toastIcon').innerText = icon;
+      document.getElementById('toastMsg').innerText = msg;
+      toast.classList.add('show');
+      if (toastTimeout) clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2400);
+    }
+
     function init() {
       renderSidebar();
       selectWork(activeWorkId);
       setupEvents();
+      setupScrollProgress();
     }
 
-    function selectWork(workId) {
+    function setupScrollProgress() {
+      const viewport = document.getElementById('readerViewport');
+      const progressBar = document.getElementById('readerProgressBar');
+
+      function updateProgress() {
+        let scrollEl = (window.innerWidth <= 920) ? document.documentElement : viewport;
+        const top = (window.innerWidth <= 920) ? (window.pageYOffset || document.documentElement.scrollTop) : viewport.scrollTop;
+        const height = (window.innerWidth <= 920) ? (document.documentElement.scrollHeight - window.innerHeight) : (viewport.scrollHeight - viewport.clientHeight);
+        const pct = height > 0 ? Math.min(100, Math.max(0, (top / height) * 100)) : 0;
+        if (progressBar) progressBar.style.width = pct + '%';
+      }
+
+      window.addEventListener('scroll', updateProgress, { passive: true });
+      if (viewport) viewport.addEventListener('scroll', updateProgress, { passive: true });
+    }
+
+    function selectWork(workId, targetEssayId = null) {
+      // Stop speech if speaking
+      if (window.speechSynthesis) window.speechSynthesis.cancel();
+      resetAudioButton();
+
       activeWorkId = workId;
       const work = BOOK_DATA.works.find(w => w.id === workId);
-      if (work && work.essays && work.essays.length > 0) {
+      if (targetEssayId) {
+        activeEssayId = targetEssayId;
+      } else if (work && work.essays && work.essays.length > 0) {
         activeEssayId = work.essays[0].id;
       } else {
         activeEssayId = 'all';
@@ -1748,7 +1998,7 @@
         activeCard.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
       }
 
-      // Scroll smoothly to the reader top on mobile
+      // Scroll smoothly to reader top
       if (window.innerWidth <= 920) {
         const studioElem = document.getElementById('studio');
         if (studioElem) {
@@ -1762,11 +2012,20 @@
     }
 
     function selectEssay(essayId) {
+      if (window.speechSynthesis) window.speechSynthesis.cancel();
+      resetAudioButton();
+
       activeEssayId = essayId;
       renderWork(activeWorkId);
       
       const readerElem = document.getElementById('readerViewport');
       if (readerElem) readerElem.scrollTo({ top: 0, behavior: 'smooth' });
+      if (window.innerWidth <= 920) {
+        const studioElem = document.getElementById('studio');
+        if (studioElem) {
+          window.scrollTo({ top: studioElem.offsetTop - 55, behavior: 'smooth' });
+        }
+      }
     }
 
     function renderSidebar() {
@@ -1842,13 +2101,15 @@
       article.innerHTML = '';
 
       if (activeEssayId === 'all') {
-        essays.forEach((essay, idx) => {
+        essays.forEach((essay) => {
           renderEssay(essay, article, true);
         });
+        renderBottomPager(work, null);
       } else {
         const currentEssay = essays.find(e => e.id === activeEssayId) || essays[0];
         if (currentEssay) {
           renderEssay(currentEssay, article, false);
+          renderBottomPager(work, currentEssay);
         }
       }
     }
@@ -1864,14 +2125,25 @@
         container.appendChild(banner);
       }
 
+      const paras = essay.paragraphs || [];
+      const wordCount = paras.join(' ').split(/\s+/).filter(Boolean).length;
+      const readMins = Math.max(1, Math.ceil(wordCount / 190));
+
       // Synopsis Card
       if (essay.curent || essay.tema) {
         const syn = document.createElement('div');
         syn.className = 'essay-synopsis-card';
         syn.innerHTML = `
           <div class="synopsis-header">
-            <span class="synopsis-badge">${essay.badge || 'Structură Bacalaureat'}</span>
-            <span style="font-size: 0.78rem; color: var(--text-tertiary);">${essay.subtitle || ''}</span>
+            <div>
+              <span class="synopsis-badge">${essay.badge || 'Structură Bacalaureat'}</span>
+              <span style="font-size: 0.78rem; color: var(--text-tertiary); margin-left: 8px;">${essay.subtitle || ''}</span>
+            </div>
+            <div class="reading-metrics-pill">
+              <span>⏱️ ~${readMins} min lectură</span>
+              <span>•</span>
+              <span>📝 ${wordCount} cuvinte</span>
+            </div>
           </div>
           <div class="synopsis-grid">
             ${essay.curent ? `<div class="synopsis-item"><strong>Curent / Specie</strong><span>${essay.curent}</span></div>` : ''}
@@ -1889,7 +2161,6 @@
         container.appendChild(h1);
       }
 
-      const paras = essay.paragraphs || [];
       const ills = essay.illustrations || [];
 
       // Create figure elements for illustrations
@@ -2004,6 +2275,167 @@
       }
     }
 
+    function renderBottomPager(work, currentEssay) {
+      const pager = document.getElementById('essayBottomPager');
+      if (!pager) return;
+
+      const essays = work.essays || [];
+      if (essays.length <= 1 && !currentEssay) {
+        pager.style.display = 'none';
+        return;
+      }
+
+      pager.style.display = 'flex';
+      pager.innerHTML = '';
+
+      const workIdx = BOOK_DATA.works.findIndex(w => w.id === work.id);
+      let prevTarget = null;
+      let nextTarget = null;
+
+      if (!currentEssay) {
+        // All mode: previous work and next work
+        if (workIdx > 0) prevTarget = { workId: BOOK_DATA.works[workIdx - 1].id, label: BOOK_DATA.works[workIdx - 1].title, essayId: null };
+        if (workIdx < BOOK_DATA.works.length - 1) nextTarget = { workId: BOOK_DATA.works[workIdx + 1].id, label: BOOK_DATA.works[workIdx + 1].title, essayId: null };
+      } else {
+        const eIdx = essays.findIndex(e => e.id === currentEssay.id);
+        if (eIdx > 0) {
+          prevTarget = { workId: work.id, label: essays[eIdx - 1].badge, essayId: essays[eIdx - 1].id };
+        } else if (workIdx > 0) {
+          const prevWork = BOOK_DATA.works[workIdx - 1];
+          const prevWorkEssays = prevWork.essays || [];
+          const lastEssay = prevWorkEssays.length > 0 ? prevWorkEssays[prevWorkEssays.length - 1] : null;
+          prevTarget = { workId: prevWork.id, label: `${prevWork.title} (${lastEssay ? lastEssay.badge : ''})`, essayId: lastEssay ? lastEssay.id : null };
+        }
+
+        if (eIdx < essays.length - 1) {
+          nextTarget = { workId: work.id, label: essays[eIdx + 1].badge, essayId: essays[eIdx + 1].id };
+        } else if (workIdx < BOOK_DATA.works.length - 1) {
+          const nextWork = BOOK_DATA.works[workIdx + 1];
+          const nextWorkEssays = nextWork.essays || [];
+          const firstEssay = nextWorkEssays.length > 0 ? nextWorkEssays[0] : null;
+          nextTarget = { workId: nextWork.id, label: `${nextWork.title} (${firstEssay ? firstEssay.badge : ''})`, essayId: firstEssay ? firstEssay.id : null };
+        }
+      }
+
+      if (prevTarget) {
+        const btn = document.createElement('div');
+        btn.className = 'pager-btn prev';
+        btn.innerHTML = `<span class="pager-hint">← Înapoi</span><span class="pager-title">${prevTarget.label}</span>`;
+        btn.addEventListener('click', () => selectWork(prevTarget.workId, prevTarget.essayId));
+        pager.appendChild(btn);
+      } else {
+        const spacer = document.createElement('div');
+        spacer.style.flex = '1';
+        pager.appendChild(spacer);
+      }
+
+      if (nextTarget) {
+        const btn = document.createElement('div');
+        btn.className = 'pager-btn next';
+        btn.innerHTML = `<span class="pager-hint">Înainte →</span><span class="pager-title">${nextTarget.label}</span>`;
+        btn.addEventListener('click', () => selectWork(nextTarget.workId, nextTarget.essayId));
+        pager.appendChild(btn);
+      }
+    }
+
+    // Audio Text-to-Speech
+    function toggleAudioSpeech() {
+      if (!('speechSynthesis' in window)) {
+        showToast('Sistemul audio nu este suportat de browser.', '⚠️');
+        return;
+      }
+
+      const btn = document.getElementById('btnAudio');
+      const label = document.getElementById('audioBtnLabel');
+
+      if (window.speechSynthesis.speaking) {
+        if (window.speechSynthesis.paused) {
+          window.speechSynthesis.resume();
+          btn.classList.add('audio-active');
+          label.innerText = 'Pauză';
+          showToast('Redare reluată', '▶️');
+        } else {
+          window.speechSynthesis.pause();
+          btn.classList.remove('audio-active');
+          label.innerText = 'Continuă';
+          showToast('Redare pusă pe pauză', '⏸️');
+        }
+        return;
+      }
+
+      // Collect paragraphs
+      const paras = Array.from(document.querySelectorAll('#bookArticleContent .essay-para')).map(p => p.innerText);
+      if (paras.length === 0) return;
+
+      const fullText = paras.join('. ');
+      currentUtterance = new SpeechSynthesisUtterance(fullText);
+      currentUtterance.lang = 'ro-RO';
+      currentUtterance.rate = 0.95;
+
+      currentUtterance.onstart = () => {
+        isSpeaking = true;
+        btn.classList.add('audio-active');
+        label.innerText = 'Pauză';
+        showToast('Lectură audio pornită...', '🔊');
+      };
+
+      currentUtterance.onend = () => {
+        resetAudioButton();
+        showToast('Lectură audio finalizată', '✓');
+      };
+
+      currentUtterance.onerror = () => {
+        resetAudioButton();
+      };
+
+      window.speechSynthesis.speak(currentUtterance);
+    }
+
+    function resetAudioButton() {
+      isSpeaking = false;
+      const btn = document.getElementById('btnAudio');
+      const label = document.getElementById('audioBtnLabel');
+      if (btn) btn.classList.remove('audio-active');
+      if (label) label.innerText = 'Ascultă';
+    }
+
+    // Copy Essay Text
+    function copyEssayText() {
+      const paras = Array.from(document.querySelectorAll('#bookArticleContent .essay-para')).map(p => p.innerText);
+      if (paras.length === 0) return;
+
+      const title = document.getElementById('currentWorkTitle').innerText;
+      const fullText = `${title}\n\n` + paras.join('\n\n');
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(fullText).then(() => {
+          showToast('Eseu copiat integral în clipboard!', '📋');
+        }).catch(() => {
+          fallbackCopy(fullText);
+        });
+      } else {
+        fallbackCopy(fullText);
+      }
+    }
+
+    function fallbackCopy(text) {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      showToast('Eseu copiat în clipboard!', '📋');
+    }
+
+    // Focus Mode
+    function toggleFocusMode() {
+      const isActive = document.body.classList.toggle('focus-mode-active');
+      const btn = document.getElementById('btnFocusMode');
+      if (btn) btn.classList.toggle('active', isActive);
+      showToast(isActive ? 'Mod Focalizare Activat' : 'Mod Normal Restabilit', '📖');
+    }
+
     function setupEvents() {
       // Search
       document.getElementById('workSearchInput').addEventListener('input', () => {
@@ -2025,6 +2457,7 @@
         highlightEnabled = !highlightEnabled;
         this.classList.toggle('active', highlightEnabled);
         document.getElementById('bookArticleContent').classList.toggle('highlight-active', highlightEnabled);
+        showToast(highlightEnabled ? 'Termeni critici evidențiați' : 'Evidențiere oprită', '🖍️');
       });
 
       // Font Family Toggle (Serif vs Sans)
@@ -2032,6 +2465,7 @@
         serifFontEnabled = !serifFontEnabled;
         this.classList.toggle('active', !serifFontEnabled);
         document.getElementById('bookArticleContent').classList.toggle('sans-active', !serifFontEnabled);
+        showToast(serifFontEnabled ? 'Font: New York Serif' : 'Font: SF Pro Sans', 'Aa');
       });
 
       // Font Size Controls
@@ -2040,6 +2474,7 @@
 
       function updateFontSize() {
         document.documentElement.style.setProperty('--font-size-base', FONT_SIZES[currentFontSizeIdx]);
+        showToast(`Mărime font: ${FONT_SIZES[currentFontSizeIdx]}`, '🔤');
       }
 
       document.getElementById('btnFontInc').addEventListener('click', () => {
@@ -2056,12 +2491,33 @@
         }
       });
 
-      // Keyboard Esc to close Lightbox
+      // Global Keyboard Shortcuts
       document.addEventListener('keydown', (e) => {
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
         if (e.key === 'Escape') {
           closeLightbox();
           closeMobileDrawer();
           closeDownloadsMenu();
+          if (document.body.classList.contains('focus-mode-active')) toggleFocusMode();
+        } else if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+          e.preventDefault();
+          document.getElementById('workSearchInput').focus();
+        } else if (e.key === '/' && !e.metaKey && !e.ctrlKey) {
+          e.preventDefault();
+          document.getElementById('workSearchInput').focus();
+        } else if (e.key === 'f' || e.key === 'F') {
+          document.getElementById('btnFontToggle').click();
+        } else if (e.key === 'h' || e.key === 'H') {
+          document.getElementById('btnHighlight').click();
+        } else if (e.key === 'z' || e.key === 'Z') {
+          toggleFocusMode();
+        } else if (e.key === 'ArrowRight' || e.key === 'j') {
+          const nextBtn = document.querySelector('.pager-btn.next');
+          if (nextBtn) nextBtn.click();
+        } else if (e.key === 'ArrowLeft' || e.key === 'k') {
+          const prevBtn = document.querySelector('.pager-btn.prev');
+          if (prevBtn) prevBtn.click();
         }
       });
     }
