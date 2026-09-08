@@ -194,6 +194,100 @@
       background: rgba(255, 255, 255, 0.14);
     }
 
+    /* Desktop vs Mobile Nav Actions */
+    .mobile-nav-actions {
+      display: none;
+    }
+
+    /* Downloads Popover Dropdown */
+    .downloads-popover-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      z-index: 1800;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+
+    .downloads-popover-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .downloads-popover {
+      position: absolute;
+      top: 54px;
+      right: 14px;
+      width: min(300px, calc(100vw - 28px));
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 0.75rem 0.5rem;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      transform: scale(0.95) translateY(-6px);
+      opacity: 0;
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
+    }
+
+    .downloads-popover-overlay.active .downloads-popover {
+      transform: scale(1) translateY(0);
+      opacity: 1;
+    }
+
+    .popover-header {
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-tertiary);
+      padding: 0.35rem 0.75rem 0.55rem;
+      border-bottom: 1px solid var(--border-card);
+      margin-bottom: 0.25rem;
+    }
+
+    .popover-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 0.65rem 0.75rem;
+      border-radius: var(--radius-md);
+      text-decoration: none;
+      color: var(--text-primary);
+      transition: background 0.15s ease;
+    }
+
+    .popover-item:hover, .popover-item:active {
+      background: var(--bg-card-hover);
+    }
+
+    .popover-item-icon {
+      font-size: 1.35rem;
+      flex-shrink: 0;
+    }
+
+    .popover-item-text {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+
+    .popover-item-title {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .popover-item-sub {
+      font-size: 0.72rem;
+      color: var(--text-secondary);
+    }
+
     /* ==========================================================================
        APPLE HERO SECTION
        ========================================================================== */
@@ -934,8 +1028,20 @@
     @media (max-width: 920px) {
       .apple-nav {
         padding: 0 1rem;
+        height: 52px;
       }
       .apple-nav-menu {
+        display: none;
+      }
+      .desktop-nav-actions {
+        display: none !important;
+      }
+      .mobile-nav-actions {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .nav-title-suffix {
         display: none;
       }
       .reader-layout {
@@ -1003,14 +1109,27 @@
 
     @media (max-width: 640px) {
       .apple-nav {
-        padding: 0 0.75rem;
+        padding: 0 0.85rem;
+        height: 50px;
       }
-      .apple-logo-link span {
-        font-size: 0.88rem;
+      .apple-logo-link {
+        font-size: 0.95rem;
+        gap: 0.45rem;
       }
-      .apple-btn-pill, .apple-btn-ghost {
-        padding: 5px 9px;
-        font-size: 0.72rem;
+      .apple-logo-link svg {
+        width: 19px;
+        height: 19px;
+      }
+      .mobile-nav-actions .apple-btn-pill {
+        padding: 6px 13px;
+        font-size: 0.78rem;
+        min-height: 34px;
+        gap: 4px;
+      }
+      .mobile-nav-actions .apple-btn-ghost {
+        padding: 6px 10px;
+        font-size: 0.85rem;
+        min-height: 34px;
       }
       .apple-hero {
         padding: 2.75rem 1rem 1.75rem;
@@ -1145,7 +1264,7 @@
           <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
           <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
         </svg>
-        <span>Carte Română Eseuri</span>
+        <span class="nav-title-text">Carte Română <span class="nav-title-suffix">Eseuri</span></span>
       </a>
       <ul class="apple-nav-menu">
         <li><a href="#studio">Opere</a></li>
@@ -1155,16 +1274,53 @@
       </ul>
     </div>
 
-    <div class="apple-nav-actions">
+    <!-- Desktop Action Buttons -->
+    <div class="apple-nav-actions desktop-nav-actions">
       <a href="./Carte_Romana_Eseuri_AppleBooks.epub" class="apple-btn-pill" title="Descarcă ediția optimizată Apple Books (.epub)">
         <span>📖</span> Apple Books (.epub)
       </a>
       <a href="./Carte_Romana_Eseuri_GoogleDocs.docx" class="apple-btn-ghost" title="Descarcă versiunea Google Docs / Word">
         <span>📄</span> Word / Docs
       </a>
-      <button id="themeToggleBtn" class="apple-btn-ghost" title="Schimbă modul Luminos / Întunecat">🌓</button>
+      <button id="themeToggleBtn" class="apple-btn-ghost" onclick="toggleTheme()" title="Schimbă modul Luminos / Întunecat">🌓</button>
+    </div>
+
+    <!-- Clean Mobile Action Buttons (Never Crammed) -->
+    <div class="apple-nav-actions mobile-nav-actions">
+      <button id="mobileDownloadsBtn" class="apple-btn-pill" onclick="toggleDownloadsMenu(event)" title="Opțiuni de descărcare">
+        <span>📥</span> Descarcă ▾
+      </button>
+      <button id="themeToggleBtnMobile" class="apple-btn-ghost" onclick="toggleTheme()" title="Schimbă modul Luminos / Întunecat">🌓</button>
     </div>
   </nav>
+
+  <!-- iOS-style Mobile Downloads Dropdown Popover -->
+  <div class="downloads-popover-overlay" id="downloadsPopoverOverlay" onclick="closeDownloadsMenu()">
+    <div class="downloads-popover" id="downloadsPopover" onclick="event.stopPropagation()">
+      <div class="popover-header">Descărcare Ediție Digitală</div>
+      <a href="./Carte_Romana_Eseuri_AppleBooks.epub" class="popover-item" onclick="closeDownloadsMenu()">
+        <div class="popover-item-icon">🍏</div>
+        <div class="popover-item-text">
+          <div class="popover-item-title">Apple Books (.epub)</div>
+          <div class="popover-item-sub">Optimizat iOS & Mac, 58 ilustrații</div>
+        </div>
+      </a>
+      <a href="./Carte_Romana_Eseuri_GoogleDocs.docx" class="popover-item" onclick="closeDownloadsMenu()">
+        <div class="popover-item-icon">📄</div>
+        <div class="popover-item-text">
+          <div class="popover-item-title">Google Docs / Word (.docx)</div>
+          <div class="popover-item-sub">Format pagină-cu-pagină editabil</div>
+        </div>
+      </a>
+      <a href="./Carte_Romana_Eseuri_Original.pdf" target="_blank" class="popover-item" onclick="closeDownloadsMenu()">
+        <div class="popover-item-icon">📕</div>
+        <div class="popover-item-text">
+          <div class="popover-item-title">PDF Original Scanat</div>
+          <div class="popover-item-sub">Ghidul tipărit de Bacalaureat</div>
+        </div>
+      </a>
+    </div>
+  </div>
 
   <!-- Hero Section -->
   <header class="apple-hero">
@@ -1576,19 +1732,35 @@
 
       // Dark / Light Theme Toggle
       const themeBtn = document.getElementById('themeToggleBtn');
-      themeBtn.addEventListener('click', () => {
-        const cur = document.documentElement.getAttribute('data-theme');
-        const next = cur === 'dark' ? 'light' : 'dark';
-        document.documentElement.setAttribute('data-theme', next);
-      });
+      if (themeBtn) themeBtn.addEventListener('click', toggleTheme);
 
       // Keyboard navigation
       window.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
           closeLightbox();
           closeMobileDrawer();
+          closeDownloadsMenu();
         }
       });
+    }
+
+    // Global Theme Toggle
+    function toggleTheme() {
+      const cur = document.documentElement.getAttribute('data-theme');
+      const next = cur === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+    }
+
+    // Downloads Popover Menu
+    function toggleDownloadsMenu(e) {
+      if (e) e.stopPropagation();
+      const overlay = document.getElementById('downloadsPopoverOverlay');
+      if (overlay) overlay.classList.toggle('active');
+    }
+
+    function closeDownloadsMenu() {
+      const overlay = document.getElementById('downloadsPopoverOverlay');
+      if (overlay) overlay.classList.remove('active');
     }
 
     // Drawer Logic
