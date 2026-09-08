@@ -1645,6 +1645,158 @@
       }
     }
 
+
+    /* Apple Progress Ring Widget */
+    .bac-progress-widget {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-md);
+      padding: 0.85rem 1.15rem;
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      box-shadow: var(--shadow-sm);
+    }
+    .bpw-ring-box {
+      position: relative;
+      width: 48px;
+      height: 48px;
+      flex-shrink: 0;
+    }
+    .bpw-svg {
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+    }
+    .bpw-circle-bg {
+      fill: none;
+      stroke: var(--border-subtle);
+      stroke-width: 3.6;
+    }
+    .bpw-circle-val {
+      fill: none;
+      stroke: #34C759; /* Apple Green */
+      stroke-width: 3.6;
+      stroke-linecap: round;
+      transition: stroke-dasharray 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .bpw-pct {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      font-family: var(--font-sf);
+      color: var(--text-primary);
+    }
+    .bpw-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+    }
+    .bpw-title {
+      font-size: 0.84rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      font-family: var(--font-sf);
+    }
+    .bpw-count {
+      font-size: 0.76rem;
+      color: var(--text-secondary);
+      font-family: var(--font-sf);
+    }
+
+    /* Mastered State Button */
+    .rt-btn-mastered.is-mastered {
+      background: rgba(52, 199, 89, 0.15) !important;
+      color: #34C759 !important;
+      border-color: rgba(52, 199, 89, 0.4) !important;
+      font-weight: 600;
+    }
+    .sw-mastered-tag {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: #34C759;
+      background: rgba(52, 199, 89, 0.12);
+      border-radius: 999px;
+      padding: 1px 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+    }
+
+    /* Mobile Bottom Thumb Dock */
+    .mobile-thumb-dock {
+      display: none;
+    }
+    @media (max-width: 920px) {
+      .mobile-thumb-dock {
+        position: fixed;
+        bottom: 1.25rem;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(22, 22, 23, 0.88);
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        backdrop-filter: blur(25px);
+        -webkit-backdrop-filter: blur(25px);
+        border-radius: 999px;
+        padding: 6px 12px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        box-shadow: 0 12px 36px rgba(0, 0, 0, 0.45);
+        z-index: 1500;
+        max-width: 94vw;
+      }
+      [data-theme="light"] .mobile-thumb-dock {
+        background: rgba(255, 255, 255, 0.9);
+        border: 1px solid rgba(0, 0, 0, 0.12);
+        box-shadow: 0 12px 36px rgba(0, 0, 0, 0.18);
+      }
+      .mtd-btn {
+        background: transparent;
+        border: none;
+        color: var(--text-primary);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2px;
+        padding: 6px 10px;
+        border-radius: 999px;
+        font-family: var(--font-sf);
+        cursor: pointer;
+        transition: all 0.15s ease;
+        -webkit-tap-highlight-color: transparent;
+      }
+      .mtd-btn:active {
+        transform: scale(0.92);
+        background: var(--bg-surface-hover);
+      }
+      .mtd-icon {
+        font-size: 1.15rem;
+        line-height: 1;
+      }
+      .mtd-label {
+        font-size: 0.65rem;
+        font-weight: 500;
+        color: var(--text-secondary);
+        letter-spacing: 0.02em;
+      }
+      .mtd-btn.is-mastered .mtd-icon,
+      .mtd-btn.is-mastered .mtd-label {
+        color: #34C759;
+        font-weight: 600;
+      }
+      /* Extra padding at bottom of reader viewport so bottom dock doesn't obscure pager */
+      .reader-viewport {
+        padding-bottom: 5.5rem !important;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -1790,8 +1942,25 @@
     <div class="reader-layout">
       
       <!-- Left Works Sidebar -->
-      <aside class="reader-sidebar" id="worksListContainer">
-        <!-- Rendered by JS -->
+      <aside class="reader-sidebar">
+        <!-- Apple Progress Ring Widget -->
+        <div class="bac-progress-widget">
+          <div class="bpw-ring-box">
+            <svg class="bpw-svg" viewBox="0 0 36 36">
+              <path class="bpw-circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+              <path class="bpw-circle-val" id="bpwCircle" stroke-dasharray="0, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+            </svg>
+            <span class="bpw-pct" id="bpwPctText">0%</span>
+          </div>
+          <div class="bpw-text">
+            <div class="bpw-title">Pregătire Bacalaureat</div>
+            <div class="bpw-count" id="bpwCountText">0 / 33 eseuri stăpânite</div>
+          </div>
+        </div>
+
+        <div id="worksListContainer">
+          <!-- Rendered by JS -->
+        </div>
       </aside>
 
       <!-- Right Reading Canvas -->
@@ -1802,6 +1971,12 @@
             <p id="currentWorkMeta">Ioan Slavici • Nuvelă realistă / psihologică (1881)</p>
           </div>
           <div class="rt-actions">
+            <button id="btnMastered" class="rt-btn rt-btn-mastered" onclick="toggleEssayMastered()" title="Marchează acest eseu ca stăpânit">
+              <span id="masteredIcon">○</span> <span id="masteredLabel">Învață</span>
+            </button>
+            <button id="btnShare" class="rt-btn" onclick="shareCurrentEssay()" title="Partajează eseul (WhatsApp, AirDrop)">
+              <span>↗</span> Trimite
+            </button>
             <button id="btnAudio" class="rt-btn" onclick="toggleAudioSpeech()" title="Ascultă eseul citit cu voce tare">
               <span>🔊</span> <span id="audioBtnLabel">Ascultă</span>
             </button>
@@ -1948,10 +2123,13 @@
     }
 
     function init() {
+      loadMasteredState();
       renderSidebar();
       selectWork(activeWorkId);
       setupEvents();
       setupScrollProgress();
+      setupSwipeGestures();
+      requestWakeLock();
     }
 
     function setupScrollProgress() {
@@ -2057,6 +2235,7 @@
           <div class="sw-meta">
             <span>📚 ${essaysCount} ${essaysCount === 1 ? 'eseu' : 'eseuri'}</span>
             ${illCount > 0 ? `<span>🎨 ${illCount} ilustrații</span>` : ''}
+            <span class="sw-mastered-tag" style="display: none;"></span>
           </div>
         `;
 
@@ -2112,6 +2291,7 @@
           renderBottomPager(work, currentEssay);
         }
       }
+      updateMasteredUI();
     }
 
     function renderEssay(essay, container, isAllMode) {
@@ -2436,6 +2616,196 @@
       showToast(isActive ? 'Mod Focalizare Activat' : 'Mod Normal Restabilit', '📖');
     }
 
+    // Study Tracker State (localStorage)
+    const MASTERED_STORAGE_KEY = 'bac_mastered_essays_v1';
+    let masteredEssays = new Set();
+
+    function loadMasteredState() {
+      try {
+        const saved = localStorage.getItem(MASTERED_STORAGE_KEY);
+        if (saved) {
+          masteredEssays = new Set(JSON.parse(saved));
+        }
+      } catch (e) {}
+    }
+
+    function toggleEssayMastered() {
+      triggerHaptic(20);
+      const work = BOOK_DATA.works.find(w => w.id === activeWorkId);
+      const essay = (work && work.essays) ? (work.essays.find(e => e.id === activeEssayId) || work.essays[0]) : null;
+      if (!essay) return;
+
+      if (masteredEssays.has(essay.id)) {
+        masteredEssays.delete(essay.id);
+        showToast('Marcat ca neînvățat', '○');
+      } else {
+        masteredEssays.add(essay.id);
+        showToast('Felicitări! Eseu stăpânit ✓', '🎉');
+      }
+
+      try {
+        localStorage.setItem(MASTERED_STORAGE_KEY, JSON.stringify(Array.from(masteredEssays)));
+      } catch (e) {}
+
+      updateMasteredUI();
+    }
+
+    function updateMasteredUI() {
+      let totalEssays = 0;
+      BOOK_DATA.works.forEach(w => {
+        totalEssays += (w.essays ? w.essays.length : 1);
+      });
+
+      const masteredCount = masteredEssays.size;
+      const pct = totalEssays > 0 ? Math.round((masteredCount / totalEssays) * 100) : 0;
+
+      const circle = document.getElementById('bpwCircle');
+      const pctText = document.getElementById('bpwPctText');
+      const countText = document.getElementById('bpwCountText');
+      if (circle) circle.setAttribute('stroke-dasharray', `${pct}, 100`);
+      if (pctText) pctText.innerText = `${pct}%`;
+      if (countText) countText.innerText = `${masteredCount} / ${totalEssays} eseuri stăpânite`;
+
+      const work = BOOK_DATA.works.find(w => w.id === activeWorkId);
+      const essay = (work && work.essays) ? (work.essays.find(e => e.id === activeEssayId) || work.essays[0]) : null;
+      const isMastered = essay ? masteredEssays.has(essay.id) : false;
+
+      const btn = document.getElementById('btnMastered');
+      const icon = document.getElementById('masteredIcon');
+      const label = document.getElementById('masteredLabel');
+      const mtdBtn = document.getElementById('mtdMasterBtn');
+      const mtdIcon = document.getElementById('mtdMasterIcon');
+      const mtdLabel = document.getElementById('mtdMasterLabel');
+
+      if (btn) {
+        btn.classList.toggle('is-mastered', isMastered);
+        if (icon) icon.innerText = isMastered ? '✓' : '○';
+        if (label) label.innerText = isMastered ? 'Stăpânit' : 'Învață';
+      }
+      if (mtdBtn) {
+        mtdBtn.classList.toggle('is-mastered', isMastered);
+        if (mtdIcon) mtdIcon.innerText = isMastered ? '✓' : '○';
+        if (mtdLabel) mtdLabel.innerText = isMastered ? 'Stăpânit' : 'Învață';
+      }
+
+      // Update sidebar mastery tags
+      document.querySelectorAll('.sidebar-work-card').forEach(card => {
+        const wId = card.dataset.workId;
+        const w = BOOK_DATA.works.find(item => item.id === wId);
+        if (!w) return;
+        const wEssays = w.essays || [];
+        const masteredInWork = wEssays.filter(e => masteredEssays.has(e.id)).length;
+        const tagEl = card.querySelector('.sw-mastered-tag');
+        if (tagEl) {
+          if (masteredInWork > 0) {
+            tagEl.innerHTML = `✓ ${masteredInWork}/${wEssays.length}`;
+            tagEl.style.display = 'inline-flex';
+          } else {
+            tagEl.style.display = 'none';
+          }
+        }
+      });
+    }
+
+    // Web Share API
+    function shareCurrentEssay() {
+      triggerHaptic(15);
+      const work = BOOK_DATA.works.find(w => w.id === activeWorkId);
+      const essay = (work && work.essays) ? (work.essays.find(e => e.id === activeEssayId) || work.essays[0]) : null;
+      const title = essay ? `${work.title} - ${essay.title}` : (work ? work.title : 'Carte Română Eseuri');
+      const shareUrl = window.location.href;
+
+      if (navigator.share) {
+        navigator.share({
+          title: title,
+          text: `Eseu complet Bacalaureat: ${title} de ${work ? work.author : ''}`,
+          url: shareUrl
+        }).then(() => {
+          showToast('Partajat cu succes!', '↗');
+        }).catch((err) => {
+          if (err.name !== 'AbortError') {
+            copyEssayText();
+          }
+        });
+      } else {
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText(shareUrl).then(() => {
+            showToast('Link copiat în clipboard!', '🔗');
+          });
+        } else {
+          showToast(shareUrl, '🔗');
+        }
+      }
+    }
+
+    // Haptic Feedback
+    function triggerHaptic(duration = 10) {
+      if (navigator.vibrate) {
+        try { navigator.vibrate(duration); } catch (e) {}
+      }
+    }
+
+    // Screen Wake Lock API (keeps display awake while reading)
+    let wakeLockObj = null;
+    async function requestWakeLock() {
+      if ('wakeLock' in navigator) {
+        try {
+          wakeLockObj = await navigator.wakeLock.request('screen');
+        } catch (err) {}
+      }
+    }
+    document.addEventListener('visibilitychange', async () => {
+      if (wakeLockObj !== null && document.visibilityState === 'visible') {
+        await requestWakeLock();
+      }
+    });
+
+    // Mobile Touch Swipe Gestures
+    function setupSwipeGestures() {
+      let touchStartX = 0;
+      let touchStartY = 0;
+      let touchEndX = 0;
+      let touchEndY = 0;
+
+      const viewportEl = document.getElementById('readerViewport');
+      const articleEl = document.getElementById('bookArticleContent');
+      const target = (window.innerWidth <= 920) ? document.body : viewportEl;
+
+      target.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+        touchStartY = e.changedTouches[0].screenY;
+      }, { passive: true });
+
+      target.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        touchEndY = e.changedTouches[0].screenY;
+        handleSwipe();
+      }, { passive: true });
+
+      function handleSwipe() {
+        const dx = touchEndX - touchStartX;
+        const dy = touchEndY - touchStartY;
+        // Horizontal swipe must be > 65px and dominant over vertical
+        if (Math.abs(dx) > 65 && Math.abs(dx) > Math.abs(dy) * 1.6) {
+          if (dx < 0) {
+            // Swipe Left -> Next essay
+            const nextBtn = document.querySelector('.pager-btn.next');
+            if (nextBtn) {
+              triggerHaptic(15);
+              nextBtn.click();
+            }
+          } else {
+            // Swipe Right -> Prev essay
+            const prevBtn = document.querySelector('.pager-btn.prev');
+            if (prevBtn) {
+              triggerHaptic(15);
+              prevBtn.click();
+            }
+          }
+        }
+      }
+    }
+
     function setupEvents() {
       // Search
       document.getElementById('workSearchInput').addEventListener('input', () => {
@@ -2543,6 +2913,7 @@
           <div class="sw-meta">
             <span>📚 ${essaysCount} ${essaysCount === 1 ? 'eseu' : 'eseuri'}</span>
             ${illCount > 0 ? `<span>🎨 ${illCount} ilustrații</span>` : ''}
+            <span class="sw-mastered-tag" style="display: none;"></span>
           </div>
         `;
         card.addEventListener('click', () => {
@@ -2638,5 +3009,28 @@
 
     init();
   </script>
+  <!-- Mobile Floating Thumb Dock -->
+  <div class="mobile-thumb-dock" id="mobileThumbDock">
+    <button class="mtd-btn" onclick="openMobileDrawer()" title="Opere">
+      <span class="mtd-icon">📚</span>
+      <span class="mtd-label">Opere</span>
+    </button>
+    <button class="mtd-btn" onclick="toggleAudioSpeech()" id="mtdAudioBtn" title="Ascultă">
+      <span class="mtd-icon">🔊</span>
+      <span class="mtd-label" id="mtdAudioLabel">Ascultă</span>
+    </button>
+    <button class="mtd-btn" onclick="toggleEssayMastered()" id="mtdMasterBtn" title="Marchează ca învățat">
+      <span class="mtd-icon" id="mtdMasterIcon">○</span>
+      <span class="mtd-label" id="mtdMasterLabel">Învață</span>
+    </button>
+    <button class="mtd-btn" onclick="shareCurrentEssay()" title="Partajează">
+      <span class="mtd-icon">↗</span>
+      <span class="mtd-label">Trimite</span>
+    </button>
+    <button class="mtd-btn" onclick="document.getElementById('btnFontToggle').click()" title="Font">
+      <span class="mtd-icon">Aa</span>
+      <span class="mtd-label">Font</span>
+    </button>
+  </div>
 </body>
 </html>
