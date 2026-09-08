@@ -784,35 +784,101 @@
 
     .apple-comic-caption {
       font-family: var(--font-sf);
-      font-size: 0.8rem;
-      color: var(--text-secondary);
-      padding: 0.6rem 1rem;
+      padding: 0.85rem 1.25rem;
       background: var(--bg-surface);
       border-top: 1px solid var(--border-subtle);
       display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      text-align: left;
+    }
+
+    .caption-header {
+      display: flex;
       align-items: center;
-      justify-content: center;
-      gap: 6px;
+      justify-content: space-between;
+      font-size: 0.78rem;
+      color: var(--text-tertiary);
+    }
+
+    .caption-zoom-hint {
+      color: var(--apple-blue);
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+
+    .comic-dialog-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-left: 3px solid var(--apple-blue);
+      border-radius: var(--radius-sm);
+      padding: 0.65rem 0.85rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .cdc-badge {
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--apple-blue);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .cdc-text {
+      font-size: 0.88rem;
+      color: var(--text-primary);
+      line-height: 1.5;
+      font-family: var(--font-sf);
     }
 
     /* Fullscreen Apple Zoom Lightbox */
     .apple-lightbox {
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.9);
+      background: rgba(0, 0, 0, 0.92);
       backdrop-filter: blur(15px);
       -webkit-backdrop-filter: blur(15px);
       display: none;
       align-items: center;
       justify-content: center;
       z-index: 2000;
-      padding: 2rem;
+      padding: 2rem 1.5rem;
       cursor: zoom-out;
     }
 
     .apple-lightbox.active {
       display: flex;
       animation: appleFadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .lightbox-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 92vw;
+      max-height: 92vh;
+      gap: 0.85rem;
+    }
+
+    .lightbox-dialog-card {
+      background: rgba(22, 22, 23, 0.88);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: var(--radius-md);
+      padding: 0.85rem 1.25rem;
+      color: #FFF;
+      max-width: 720px;
+      width: 100%;
+      text-align: center;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
     }
 
     @keyframes appleFadeIn {
@@ -1429,7 +1495,10 @@
   <!-- Fullscreen Lightbox Zoom Modal -->
   <div class="apple-lightbox" id="appleLightbox" onclick="closeLightbox()">
     <button class="lightbox-close-btn" onclick="closeLightbox()" aria-label="Închide">✕</button>
-    <img id="lightboxImg" src="" alt="Ilustrație Mărită">
+    <div class="lightbox-inner" onclick="event.stopPropagation()">
+      <img id="lightboxImg" src="" alt="Ilustrație Mărită">
+      <div class="lightbox-dialog-card" id="lightboxDialog" style="display: none;"></div>
+    </div>
   </div>
 
   <!-- Mobile Bottom Sheet Drawer for Works -->
@@ -1629,11 +1698,23 @@
         ills.forEach(ill => {
           const fig = document.createElement('figure');
           fig.className = 'apple-comic-figure';
+          const dialogHtml = ill.dialogue ? `
+            <div class="comic-dialog-card">
+              <div class="cdc-badge">💬 Text bule de dialog (transcriere clară)</div>
+              <div class="cdc-text">${ill.dialogue}</div>
+            </div>
+          ` : '';
           fig.innerHTML = `
             <img class="apple-comic-img" src="${ill.src}" alt="Scenă ilustrată">
-            <figcaption class="apple-comic-caption">🔍 Scenă ilustrată cadru cu cadru (clic pentru mărire)</figcaption>
+            <figcaption class="apple-comic-caption">
+              <div class="caption-header">
+                <span>🔍 Scenă ilustrată cadru cu cadru</span>
+                <span class="caption-zoom-hint">Apasă pentru mărire</span>
+              </div>
+              ${dialogHtml}
+            </figcaption>
           `;
-          fig.addEventListener('click', () => openLightbox(ill.src));
+          fig.addEventListener('click', () => openLightbox(ill.src, ill.dialogue));
           illElements.push(fig);
         });
 
@@ -1852,8 +1933,15 @@
     }
 
     // Lightbox
-    function openLightbox(src) {
+    function openLightbox(src, dialogue) {
       document.getElementById('lightboxImg').src = src;
+      const dialogCard = document.getElementById('lightboxDialog');
+      if (dialogue) {
+        dialogCard.innerHTML = `<div style="font-size: 0.8rem; text-transform: uppercase; color: var(--apple-blue); font-weight: 600; margin-bottom: 5px; letter-spacing: 0.05em;">💬 Transcriere Bule de Dialog</div><div style="font-size: 0.95rem; line-height: 1.45;">${dialogue}</div>`;
+        dialogCard.style.display = 'block';
+      } else {
+        dialogCard.style.display = 'none';
+      }
       document.getElementById('appleLightbox').classList.add('active');
     }
 

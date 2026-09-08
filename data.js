@@ -238,11 +238,13 @@ const BOOK_DATA = {
       "illustrations": [
         {
           "src": "images/pdf_6_R_ill_1.png",
-          "alt": "Ilustrație pagina 21"
+          "alt": "Ilustrație pagina 21",
+          "dialogue": "Lică Sămădăul către Ghiță: „Eu voiesc să știu totdeauna cine umblă pe drum, cine trece pe aici, cine ce zice și cine ce face, și voiesc ca nimeni afară de mine să nu știe!”"
         },
         {
           "src": "images/pdf_6_R_ill_2.png",
-          "alt": "Ilustrație pagina 21"
+          "alt": "Ilustrație pagina 21",
+          "dialogue": "Lică către Ghiță: „Adu-mi cheile de la sertarul mesei, de la dulap, de la orice lădiță. Cel ce vine aici vine să-și facă bani, ți-ai făcut și tu de când ești aici... Atunci îți dau, dar fii cuminte și mai lasă ce... să nu simtă nevasta.”"
         }
       ],
       "work_id": "moara"
@@ -261,11 +263,13 @@ const BOOK_DATA = {
       "illustrations": [
         {
           "src": "images/pdf_7_L_ill_1.png",
-          "alt": "Ilustrație pagina 22"
+          "alt": "Ilustrație pagina 22",
+          "dialogue": "Ana în pragul morții, implorându-l pe Ghiță la han: „Nu vreau să mor, Ghiță!”"
         },
         {
           "src": "images/pdf_7_L_ill_2.png",
-          "alt": "Ilustrație pagina 22"
+          "alt": "Ilustrație pagina 22",
+          "dialogue": "Sfârșitul tragic al lui Lică: „Lică se izbește cu capul de stejar pentru a nu cădea viu în mâinile jandarmilor.”"
         }
       ],
       "work_id": "moara"
@@ -324,7 +328,8 @@ const BOOK_DATA = {
       "illustrations": [
         {
           "src": "images/pdf_9_L_ill_1.png",
-          "alt": "Ilustrație pagina 26"
+          "alt": "Ilustrație pagina 26",
+          "dialogue": "Bătrâna (mama Anei) către Ghiță: „Ghiță! Eu nu știu cum te-ai făcut tu de o bucată de vreme... Nu mai ești omul pe care-l știam.”"
         }
       ],
       "work_id": "moara"
@@ -342,11 +347,13 @@ const BOOK_DATA = {
       "illustrations": [
         {
           "src": "images/pdf_9_R_ill_1.png",
-          "alt": "Ilustrație pagina 27"
+          "alt": "Ilustrație pagina 27",
+          "dialogue": "Ana în pragul morții, implorându-l pe Ghiță la han: „Nu vreau să mor, Ghiță!”"
         },
         {
           "src": "images/pdf_9_R_ill_2.png",
-          "alt": "Ilustrație pagina 27"
+          "alt": "Ilustrație pagina 27",
+          "dialogue": "Sfârșitul tragic al lui Lică: „Lică se izbește cu capul de stejar pentru a nu cădea viu în mâinile jandarmilor.”"
         }
       ],
       "work_id": "moara"
@@ -420,11 +427,13 @@ const BOOK_DATA = {
       "illustrations": [
         {
           "src": "images/pdf_13_L_ill_1.png",
-          "alt": "Ilustrație pagina 32"
+          "alt": "Ilustrație pagina 32",
+          "dialogue": "Lică Sămădăul către Ghiță: „Eu voiesc să știu totdeauna cine umblă pe drum, cine trece pe aici, cine ce zice și cine ce face, și voiesc ca nimeni afară de mine să nu știe!”"
         },
         {
           "src": "images/pdf_13_L_ill_2.png",
-          "alt": "Ilustrație pagina 32"
+          "alt": "Ilustrație pagina 32",
+          "dialogue": "Lică către Ghiță: „Adu-mi cheile de la sertarul mesei, de la dulap, de la orice lădiță. Cel ce vine aici vine să-și facă bani, ți-ai făcut și tu de când ești aici... Atunci îți dau, dar fii cuminte și mai lasă ce... să nu simtă nevasta.”"
         }
       ],
       "work_id": "moara"
@@ -441,11 +450,13 @@ const BOOK_DATA = {
       "illustrations": [
         {
           "src": "images/pdf_13_R_ill_1.png",
-          "alt": "Ilustrație pagina 33"
+          "alt": "Ilustrație pagina 33",
+          "dialogue": "Ana în pragul morții, implorându-l pe Ghiță la han: „Nu vreau să mor, Ghiță!”"
         },
         {
           "src": "images/pdf_13_R_ill_2.png",
-          "alt": "Ilustrație pagina 33"
+          "alt": "Ilustrație pagina 33",
+          "dialogue": "Sfârșitul tragic al lui Lică: „Lică se izbește cu capul de stejar pentru a nu cădea viu în mâinile jandarmilor.”"
         }
       ],
       "work_id": "moara"
@@ -524,11 +535,13 @@ const BOOK_DATA = {
       "illustrations": [
         {
           "src": "images/pdf_17_L_ill_1.png",
-          "alt": "Ilustrație pagina 40"
+          "alt": "Ilustrație pagina 40",
+          "dialogue": "Scena horei din sat: Ion o privește pe Florica, deși dansează cu Ana, pregătindu-și planul de seducție pentru pământ."
         },
         {
           "src": "images/pdf_17_L_ill_2.png",
-          "alt": "Ilustrație pagina 40"
+          "alt": "Ilustrație pagina 40",
+          "dialogue": "Sărutarea pământului: Ion îngenuncheat în brazdă, stăpânit de patima uriașă pentru pământ: „Îl cuprinse o poftă sălbatică să îmbrățișeze huma...”"
         }
       ],
       "work_id": "ion"
@@ -586,11 +599,13 @@ const BOOK_DATA = {
       "illustrations": [
         {
           "src": "images/pdf_19_L_ill_1.png",
-          "alt": "Ilustrație pagina 44"
+          "alt": "Ilustrație pagina 44",
+          "dialogue": "Scena horei din sat: Ion o privește pe Florica, deși dansează cu Ana, pregătindu-și planul de seducție pentru pământ."
         },
         {
           "src": "images/pdf_19_L_ill_2.png",
-          "alt": "Ilustrație pagina 44"
+          "alt": "Ilustrație pagina 44",
+          "dialogue": "Sărutarea pământului: Ion îngenuncheat în brazdă, stăpânit de patima uriașă pentru pământ: „Îl cuprinse o poftă sălbatică să îmbrățișeze huma...”"
         }
       ],
       "work_id": "ion"
@@ -656,7 +671,8 @@ const BOOK_DATA = {
       "illustrations": [
         {
           "src": "images/pdf_21_L_ill_1.png",
-          "alt": "Ilustrație pagina 48"
+          "alt": "Ilustrație pagina 48",
+          "dialogue": "Confruntarea dintre Ion și Vasile Baciu la cârciumă pentru zestrea Anei."
         }
       ],
       "work_id": "ion"
@@ -674,7 +690,8 @@ const BOOK_DATA = {
       "illustrations": [
         {
           "src": "images/pdf_21_R_ill_1.png",
-          "alt": "Ilustrație pagina 49"
+          "alt": "Ilustrație pagina 49",
+          "dialogue": "Ana, bătută și alungată, plângându-și soarta: „Ce-ndur eu să ferească Dumnezeu pe toată lumea. Acu' tata și-a pus în gând să mă mărite cu George-al Tomii...”"
         }
       ],
       "work_id": "ion"
@@ -745,7 +762,8 @@ const BOOK_DATA = {
       "illustrations": [
         {
           "src": "images/pdf_24_R_ill_1.png",
-          "alt": "Ilustrație pagina 55"
+          "alt": "Ilustrație pagina 55",
+          "dialogue": "Gerilă dârdâind în căsuța de aramă înroșită în foc: „Ia vâră-te și d-ta oleacă, să vezi cum ai să te răcorești!”"
         }
       ],
       "work_id": "harap-alb"
@@ -766,15 +784,18 @@ const BOOK_DATA = {
       "illustrations": [
         {
           "src": "images/pdf_25_L_ill_1.png",
-          "alt": "Ilustrație pagina 56"
+          "alt": "Ilustrație pagina 56",
+          "dialogue": "Proba podului: Craiul deghizat în urs îl pune la încercare pe fiul cel mic (Harap-Alb)."
         },
         {
           "src": "images/pdf_25_L_ill_2.png",
-          "alt": "Ilustrație pagina 56"
+          "alt": "Ilustrație pagina 56",
+          "dialogue": "Întâlnirea cu Spânul la fântână: naivitatea fiului de crai și jurământul de supunere pe paloș."
         },
         {
           "src": "images/pdf_25_L_ill_3.png",
-          "alt": "Ilustrație pagina 56"
+          "alt": "Ilustrație pagina 56",
+          "dialogue": "Regina furnicilor oferindu-i aripa: „Harap-Alb, fiindcă ești așa de bun de ți-a fost milă de viața noastră, vreau să-ți fac și eu un bine: na-ți aripa asta, și când îi avea vrodată nevoie de mine, să dai foc aripei, și atunci eu împreună cu tot neamul meu avem să-ți venim în ajutor!”"
         }
       ],
       "work_id": "harap-alb"
@@ -838,7 +859,8 @@ const BOOK_DATA = {
       "illustrations": [
         {
           "src": "images/pdf_27_L_ill_1.png",
-          "alt": "Ilustrație pagina 60"
+          "alt": "Ilustrație pagina 60",
+          "dialogue": "Harap-Alb miluind bătrâna cerșetoare (Sfânta Duminică): „Ține, mătușă, de la mine puțin și de la Dumnezeu mult.”"
         }
       ],
       "work_id": "harap-alb"
@@ -855,7 +877,8 @@ const BOOK_DATA = {
       "illustrations": [
         {
           "src": "images/pdf_27_R_ill_1.png",
-          "alt": "Ilustrație pagina 61"
+          "alt": "Ilustrație pagina 61",
+          "dialogue": "Regina furnicilor oferindu-i aripa: „Harap-Alb, fiindcă ești așa de bun de ți-a fost milă de viața noastră, vreau să-ți fac și eu un bine: na-ți aripa asta, și când îi avea vrodată nevoie de mine, să dai foc aripei, și atunci eu împreună cu tot neamul meu avem să-ți venim în ajutor!”"
         }
       ],
       "work_id": "harap-alb"
@@ -902,7 +925,8 @@ const BOOK_DATA = {
       "illustrations": [
         {
           "src": "images/pdf_29_L_ill_1.png",
-          "alt": "Ilustrație pagina 64"
+          "alt": "Ilustrație pagina 64",
+          "dialogue": "Trecerea podului peste furnici: Harap-Alb alege să treacă prin apă pentru a nu strivi furnicile."
         }
       ],
       "work_id": "harap-alb"
@@ -922,7 +946,8 @@ const BOOK_DATA = {
       "illustrations": [
         {
           "src": "images/pdf_29_R_ill_1.png",
-          "alt": "Ilustrație pagina 65"
+          "alt": "Ilustrație pagina 65",
+          "dialogue": "Gerilă dârdâind în căsuța de aramă înroșită în foc: „Ia vâră-te și d-ta oleacă, să vezi cum ai să te răcorești!”"
         }
       ],
       "work_id": "harap-alb"
@@ -980,7 +1005,8 @@ const BOOK_DATA = {
       "illustrations": [
         {
           "src": "images/pdf_32_R_ill_1.png",
-          "alt": "Ilustrație pagina 71"
+          "alt": "Ilustrație pagina 71",
+          "dialogue": "Jocul de cărți în salonul din strada Antim: Moș Costache, Pascalopol, Aglae și clanul Tulea."
         }
       ],
       "work_id": "enigma-otiliei"
@@ -999,7 +1025,8 @@ const BOOK_DATA = {
       "illustrations": [
         {
           "src": "images/pdf_33_L_ill_1.png",
-          "alt": "Ilustrație pagina 72"
+          "alt": "Ilustrație pagina 72",
+          "dialogue": "Felix și Otilia în odaia fetei: Felix: „Ca să-ți dau o dovadă că te iubesc, am venit la tine. Putem fi bărbat și soție și fără binecuvântarea lui popa Țuică.” / Otilia: „Cred că vei fi odată soția mea și te voi aștepta oricând...”"
         }
       ],
       "work_id": "enigma-otiliei"
@@ -1057,7 +1084,8 @@ const BOOK_DATA = {
       "illustrations": [
         {
           "src": "images/pdf_35_L_ill_1.png",
-          "alt": "Ilustrație pagina 76"
+          "alt": "Ilustrație pagina 76",
+          "dialogue": "Felix și Otilia la pian: portretul adolescentei enigmatice și inocente."
         }
       ],
       "work_id": "enigma-otiliei"
@@ -1077,7 +1105,8 @@ const BOOK_DATA = {
       "illustrations": [
         {
           "src": "images/pdf_35_R_ill_1.png",
-          "alt": "Ilustrație pagina 77"
+          "alt": "Ilustrație pagina 77",
+          "dialogue": "Felix și Otilia: Felix: „Ca să-ți dau o dovadă că te iubesc, am venit la tine...” / Otilia: „Te voi aștepta oricând...”"
         }
       ],
       "work_id": "enigma-otiliei"
@@ -1149,7 +1178,8 @@ const BOOK_DATA = {
       "illustrations": [
         {
           "src": "images/pdf_39_L_ill_1.png",
-          "alt": "Ilustrație pagina 82"
+          "alt": "Ilustrație pagina 82",
+          "dialogue": "Moartea lui Moș Costache: Stănică Rațiu îi smulge pachetul cu bani de sub saltea."
         }
       ],
       "work_id": "enigma-otiliei"
@@ -1167,7 +1197,8 @@ const BOOK_DATA = {
       "illustrations": [
         {
           "src": "images/pdf_39_R_ill_1.png",
-          "alt": "Ilustrație pagina 83"
+          "alt": "Ilustrație pagina 83",
+          "dialogue": "Felix și Otilia: declarația de dragoste și ezitarea Otiliei de a se lega definitiv."
         }
       ],
       "work_id": "enigma-otiliei"
@@ -1226,7 +1257,8 @@ const BOOK_DATA = {
       "illustrations": [
         {
           "src": "images/pdf_42_R_ill_1.png",
-          "alt": "Ilustrație pagina 89"
+          "alt": "Ilustrație pagina 89",
+          "dialogue": "Șantajul politic: Nae Cațavencu îi arată scrisoarea de amor lui Tipătescu și Zoei."
         }
       ],
       "work_id": "scrisoarea-pierduta"
@@ -1244,7 +1276,8 @@ const BOOK_DATA = {
       "illustrations": [
         {
           "src": "images/pdf_43_L_ill_1.png",
-          "alt": "Ilustrație pagina 90"
+          "alt": "Ilustrație pagina 90",
+          "dialogue": "Discursul electoral din sala Primăriei: Farfuridi: „Ba eu merg mai departe și zic, cum ziceam lui amicul meu Brânzovenescu: mă tem de trădare!” / Brânzovenescu: „Cum trădare?”"
         }
       ],
       "work_id": "scrisoarea-pierduta"
@@ -1303,7 +1336,8 @@ const BOOK_DATA = {
       "illustrations": [
         {
           "src": "images/pdf_45_L_ill_1.png",
-          "alt": "Ilustrație pagina 94"
+          "alt": "Ilustrație pagina 94",
+          "dialogue": "Șantajul lui Cațavencu în redacția ziarului „Răcnetul Carpaților”."
         }
       ],
       "work_id": "scrisoarea-pierduta"
@@ -1320,7 +1354,8 @@ const BOOK_DATA = {
       "illustrations": [
         {
           "src": "images/pdf_45_R_ill_1.png",
-          "alt": "Ilustrație pagina 95"
+          "alt": "Ilustrație pagina 95",
+          "dialogue": "Farfuridi și Brânzovenescu: Farfuridi: „Mă tem de trădare!” / Brânzovenescu: „Cum trădare?”"
         }
       ],
       "work_id": "scrisoarea-pierduta"
@@ -1371,7 +1406,8 @@ const BOOK_DATA = {
       "illustrations": [
         {
           "src": "images/pdf_47_L_ill_1.png",
-          "alt": "Ilustrație pagina 98"
+          "alt": "Ilustrație pagina 98",
+          "dialogue": "Cetățeanul turmentat căutându-și scrisoarea pierdută: „Dar eu... eu pentru cine votez?”"
         }
       ],
       "work_id": "scrisoarea-pierduta"
@@ -1443,7 +1479,8 @@ const BOOK_DATA = {
       "illustrations": [
         {
           "src": "images/pdf_50_R_ill_1.png",
-          "alt": "Ilustrație pagina 105"
+          "alt": "Ilustrație pagina 105",
+          "dialogue": "Masa de la popotă: Ștefan Gheorghidiu dezbătând conceptul iubirii absolute cu ceilalți ofițeri."
         }
       ],
       "work_id": "ultima-noapte"
@@ -1462,7 +1499,8 @@ const BOOK_DATA = {
       "illustrations": [
         {
           "src": "images/pdf_51_L_ill_1.png",
-          "alt": "Ilustrație pagina 106"
+          "alt": "Ilustrație pagina 106",
+          "dialogue": "Excursia la Odobești: Ștefan observă flirtul Elei cu domnul G. și suferința geloziei devoratoare."
         }
       ],
       "work_id": "ultima-noapte"
@@ -1521,11 +1559,13 @@ const BOOK_DATA = {
       "illustrations": [
         {
           "src": "images/pdf_53_L_ill_1.png",
-          "alt": "Ilustrație pagina 110"
+          "alt": "Ilustrație pagina 110",
+          "dialogue": "Masa de la popotă: dezbaterea filozofică despre iubire și căsătorie."
         },
         {
           "src": "images/pdf_53_L_ill_2.png",
-          "alt": "Ilustrație pagina 110"
+          "alt": "Ilustrație pagina 110",
+          "dialogue": "Excursia la Odobești: trădarea percepută și prăbușirea idealului erotic."
         }
       ],
       "work_id": "ultima-noapte"
@@ -1586,7 +1626,8 @@ const BOOK_DATA = {
       "illustrations": [
         {
           "src": "images/pdf_55_L_ill_1.png",
-          "alt": "Ilustrație pagina 114"
+          "alt": "Ilustrație pagina 114",
+          "dialogue": "Pe frontul din Transilvania: asaltul, spaima și absurdul războiului trăit la intensitate maximă."
         }
       ],
       "work_id": "ultima-noapte"
@@ -1604,7 +1645,8 @@ const BOOK_DATA = {
       "illustrations": [
         {
           "src": "images/pdf_55_R_ill_1.png",
-          "alt": "Ilustrație pagina 115"
+          "alt": "Ilustrație pagina 115",
+          "dialogue": "Scena bombardamentului: „Nu mai e nimic omenesc în noi... suntem doar trupuri înghețate sub foc.”"
         }
       ],
       "work_id": "ultima-noapte"
@@ -1674,7 +1716,8 @@ const BOOK_DATA = {
       "illustrations": [
         {
           "src": "images/pdf_58_R_ill_1.png",
-          "alt": "Ilustrație pagina 121"
+          "alt": "Ilustrație pagina 121",
+          "dialogue": "Cina familiei Moromete: așezarea ierarhică la masa joasă rotundă pe tindă."
         }
       ],
       "work_id": "morometii"
@@ -1693,7 +1736,8 @@ const BOOK_DATA = {
       "illustrations": [
         {
           "src": "images/pdf_59_L_ill_1.png",
-          "alt": "Ilustrație pagina 122"
+          "alt": "Ilustrație pagina 122",
+          "dialogue": "Tăierea salcâmului: Nilă: „Salcâmul ăsta? De ce să-l tăiem? Cum o să-l tăiem? De ce?!” / Ilie Moromete: „Așa, ca să se mire proștii! Pune mâna, nu te mai uita, că se face ziuă.”"
         }
       ],
       "work_id": "morometii"
@@ -1752,7 +1796,8 @@ const BOOK_DATA = {
       "illustrations": [
         {
           "src": "images/pdf_61_L_ill_1.png",
-          "alt": "Ilustrație pagina 126"
+          "alt": "Ilustrație pagina 126",
+          "dialogue": "Cina familiei Moromete: autoritatea paternă a lui Ilie Moromete."
         }
       ],
       "work_id": "morometii"
@@ -1769,7 +1814,8 @@ const BOOK_DATA = {
       "illustrations": [
         {
           "src": "images/pdf_61_R_ill_1.png",
-          "alt": "Ilustrație pagina 127"
+          "alt": "Ilustrație pagina 127",
+          "dialogue": "Tăierea salcâmului: Nilă: „De ce să-l tăiem?!” / Moromete: „Așa, ca să se mire proștii! Pune mâna că se face ziuă.”"
         }
       ],
       "work_id": "morometii"
@@ -1818,7 +1864,8 @@ const BOOK_DATA = {
       "illustrations": [
         {
           "src": "images/pdf_63_L_ill_1.png",
-          "alt": "Ilustrație pagina 130"
+          "alt": "Ilustrație pagina 130",
+          "dialogue": "Poiana lui Iocan: adunarea țăranilor din sat, lectura ziarului „Mișcarea” și comentariile politice."
         }
       ],
       "work_id": "morometii"
@@ -1837,7 +1884,8 @@ const BOOK_DATA = {
       "illustrations": [
         {
           "src": "images/pdf_63_R_ill_1.png",
-          "alt": "Ilustrație pagina 131"
+          "alt": "Ilustrație pagina 131",
+          "dialogue": "Plecarea băieților cu oile la București: destrămarea treptată a familiei tradiționale."
         }
       ],
       "work_id": "morometii"
@@ -1909,7 +1957,8 @@ const BOOK_DATA = {
       "illustrations": [
         {
           "src": "images/pdf_66_R_ill_1.png",
-          "alt": "Ilustrație pagina 137"
+          "alt": "Ilustrație pagina 137",
+          "dialogue": "Vitoria Lipan și Gheorghiță pornind în căutarea lui Nechifor pe drumul Tarcăului."
         }
       ],
       "work_id": "baltagul"
@@ -1930,7 +1979,8 @@ const BOOK_DATA = {
       "illustrations": [
         {
           "src": "images/pdf_67_L_ill_1.png",
-          "alt": "Ilustrație pagina 138"
+          "alt": "Ilustrație pagina 138",
+          "dialogue": "Priveghiul și parastasul de la Suha: Vitoria îl încolțește pe Calistrat Bogza. Bogza: „Iartă-mă!” / Vitoria: „Dumnezeu să te ierte!”"
         }
       ],
       "work_id": "baltagul"
@@ -1984,7 +2034,8 @@ const BOOK_DATA = {
       "illustrations": [
         {
           "src": "images/pdf_68_R_ill_1.png",
-          "alt": "Ilustrație pagina 141"
+          "alt": "Ilustrație pagina 141",
+          "dialogue": "Vitoria Lipan la Mănăstirea Bistrița rugându-se la icoana Sfintei Ana."
         }
       ],
       "work_id": "baltagul"
@@ -2002,7 +2053,8 @@ const BOOK_DATA = {
       "illustrations": [
         {
           "src": "images/pdf_69_L_ill_1.png",
-          "alt": "Ilustrație pagina 142"
+          "alt": "Ilustrație pagina 142",
+          "dialogue": "Priveghiul și demascarea ucigașilor: Calistrat Bogza: „Iartă-mă!” / Vitoria: „Dumnezeu să te ierte!”"
         }
       ],
       "work_id": "baltagul"
@@ -2051,7 +2103,8 @@ const BOOK_DATA = {
       "illustrations": [
         {
           "src": "images/pdf_70_R_ill_1.png",
-          "alt": "Ilustrație pagina 145"
+          "alt": "Ilustrație pagina 145",
+          "dialogue": "Găsirea câinelui Lupu și descoperirea osemintelor lui Nechifor Lipan în râpa de la Crucea Talienilor."
         }
       ],
       "work_id": "baltagul"
@@ -2072,7 +2125,8 @@ const BOOK_DATA = {
       "illustrations": [
         {
           "src": "images/pdf_71_L_ill_1.png",
-          "alt": "Ilustrație pagina 146"
+          "alt": "Ilustrație pagina 146",
+          "dialogue": "Scena parastasului și mărturisirea crimei: Calistrat Bogza recunoaște fapta sub privirea neiertătoare a Vitoriei."
         }
       ],
       "work_id": "baltagul"
@@ -2132,7 +2186,8 @@ const BOOK_DATA = {
       "illustrations": [
         {
           "src": "images/pdf_73_R_ill_1.png",
-          "alt": "Ilustrație pagina 151"
+          "alt": "Ilustrație pagina 151",
+          "dialogue": "Iona pescuind pe gura chitului uriaș, nepăsător la pericolul iminent."
         }
       ],
       "work_id": "iona"
@@ -2149,7 +2204,8 @@ const BOOK_DATA = {
       "illustrations": [
         {
           "src": "images/pdf_74_L_ill_1.png",
-          "alt": "Ilustrație pagina 152"
+          "alt": "Ilustrație pagina 152",
+          "dialogue": "Iona închis în burta primului pește: meditația despre captivitate și solitudine absolută."
         }
       ],
       "work_id": "iona"
@@ -2196,7 +2252,8 @@ const BOOK_DATA = {
       "illustrations": [
         {
           "src": "images/pdf_75_R_ill_1.png",
-          "alt": "Ilustrație pagina 155"
+          "alt": "Ilustrație pagina 155",
+          "dialogue": "Iona încercând să despice burțile succesive: „Oricâte peșteri ai tăia, te afli tot într-o burtă de pește...”"
         }
       ],
       "work_id": "iona"
@@ -2214,7 +2271,8 @@ const BOOK_DATA = {
       "illustrations": [
         {
           "src": "images/pdf_76_L_ill_1.png",
-          "alt": "Ilustrație pagina 156"
+          "alt": "Ilustrație pagina 156",
+          "dialogue": "Finalul dramei: Iona găsește calea mântuirii orientându-se spre propriul sine: „Răzbim noi cumva la lumină!”"
         }
       ],
       "work_id": "iona"
