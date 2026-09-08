@@ -6,6 +6,8 @@
 [![Format PDF](https://img.shields.io/badge/Format-Original%20PDF-FF2D55?style=for-the-badge&logo=adobeacrobatreader)](https://github.com/o1tean/carte-romana-eseuri/raw/main/Carte_Romana_Eseuri_Original.pdf)
 
 > O ediție digitală modernă, exhaustivă și riguros redactată pentru pregătirea probei scrise de **Limba și Literatura Română** la examenul de Bacalaureat. Include toate eseurile structurate conform cerințelor oficiale, sinteze, scheme de caracterizare și **peste 50 de benzi desenate originale** pentru memorie vizuală.
+>
+> 🎓 **Made by Ruben. For all the students of LTNO.**
 
 ---
 
@@ -73,3 +75,10 @@ Pentru a deschide pagina web local:
 ```bash
 open index.html
 ```
+
+---
+
+<p align="center">
+  <b>Made by Ruben. For all the students of LTNO.</b>
+</p>
+
